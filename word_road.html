@@ -655,8 +655,8 @@
         id: 3, title: "Checkpoint 3: กู้คืนข้อความผิดพลาด", badge: "Text Specialist", pts: 1.0,
         mode: "choice",
         q: "ภารกิจ: ขณะพิมพ์รายงาน เผลอกดลบข้อความสำคัญหายไปทั้งย่อหน้า จะต้องกดคีย์ลัดคู่ใดเพื่อดึงข้อมูลกลับคืนมาทันที:",
-        target: "Ctrl + Z (Undo)",
-        opts: ["Ctrl + X", "Ctrl + Z", "Ctrl + Y ", "Ctrl + A "],
+        target: "Ctrl + Z",
+        opts: ["Ctrl + X", "Ctrl + Z", "Ctrl + Y", "Ctrl + A"],
         knTitle: "การยกเลิกคำสั่งล่าสุด (Undo)",
         knText: "เมื่อทำงานพลาดหรือเผลอลบข้อความ ให้ใช้คีย์ลัด <b>Ctrl + Z</b> เพื่อดึงข้อมูลเดิมกลับคืนมาทันที แต่หากต้องการทำซ้ำคำสั่งให้กด <b>Ctrl + Y (Redo)</b>"
       },
@@ -684,7 +684,7 @@
         mode: "choice",
         q: "ภารกิจ: เครื่องมือใดใช้สำหรับสร้างรายการข้อความที่มีลำดับ 1, 2, 3 ก่อนหลัง:",
         target: "Numbering",
-        opts: ["Bullets", "Numbering ", "Multilevel List"],
+        opts: ["Bullets", "Numbering", "Multilevel List"],
         knTitle: "เครื่องมือลำดับเลข (Numbering)",
         knText: "เมื่อข้อความมีขั้นตอนที่ต้องทำตามลำดับก่อนหลัง ให้ใช้คำสั่ง <b>Numbering (ลำดับเลข)</b> แต่หากเป็นรายการทั่วไปที่สลับลำดับได้ ให้ใช้ <b>Bullets (สัญลักษณ์จุด)</b>"
       },
@@ -693,7 +693,7 @@
         mode: "choice",
         q: "ภารกิจ: คำสั่ง Wrap Text รูปแบบใดทำให้ข้อความไหลล้อมรอบกรอบรูปภาพอย่างอิสระ:",
         target: "Square",
-        opts: ["In Line with Text ", "Square ", "Behind Text"],
+        opts: ["In Line with Text", "Square", "Behind Text"],
         knTitle: "การตัดข้อความล้อมรูปภาพ (Wrap Text)",
         knText: "การตั้งค่า <b>Wrap Text</b> เป็น <b>Square</b> จะช่วยให้ข้อความไหลล้อมรอบกรอบสี่เหลี่ยมของภาพ และทำให้สามารถเลื่อนตำแหน่งภาพได้อย่างอิสระ"
       },
@@ -709,7 +709,7 @@
         id: 9, title: "Checkpoint 9: การวางแนวกระดาษ", badge: "Layout Pilot", pts: 2.5,
         mode: "choice",
         q: "ภารกิจ: หากต้องการพิมพ์เอกสารที่มีตารางกว้าง ต้องตั้งค่าหน้ากระดาษแบบใดในเมนู Orientation:",
-        target: "แนวนอน (Landscape)",
+        target: "Landscape",
         opts: ["Portrait", "Landscape", "Columns"],
         knTitle: "การวางแนวกระดาษ (Page Orientation)",
         knText: "ในแท็บ <b>Layout (เค้าโครง)</b> คำสั่ง <b>Orientation</b> มี 2 แบบ: <b>Portrait (แนวตั้ง)</b> สำหรับเอกสารทั่วไป และ <b>Landscape (แนวนอน)</b> สำหรับตารางหรือรูปภาพขนาดกว้าง"
@@ -743,7 +743,6 @@
       }
     ];
 
-    // ปรับระบบเสียงเครื่องยนต์ใหม่: เสียงคำรามทุ้มแน่น นุ่มละมุน สไตล์สปอร์ต V8
     let audioCtx = null;
     let isMuted = false;
     let engineOsc = null;
@@ -756,7 +755,6 @@
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
-        // ตัวกรองความถี่ต่ำเพื่อตัดความแหลมคม
         engineFilter = audioCtx.createBiquadFilter();
         engineFilter.type = "lowpass";
         engineFilter.frequency.setValueAtTime(140, audioCtx.currentTime);
@@ -764,12 +762,10 @@
         engineGain = audioCtx.createGain();
         engineGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
 
-        // ออสซิลเลเตอร์หลักแบบ Triangle (เสียงทุ้มแน่น)
         engineOsc = audioCtx.createOscillator();
         engineOsc.type = "triangle";
         engineOsc.frequency.setValueAtTime(36, audioCtx.currentTime);
 
-        // ออสซิลเลเตอร์คลื่น Sine เพิ่มมวลเสียง Sub-bass
         engineSubOsc = audioCtx.createOscillator();
         engineSubOsc.type = "sine";
         engineSubOsc.frequency.setValueAtTime(18, audioCtx.currentTime);
@@ -790,12 +786,10 @@
       if (!audioCtx || isMuted || !engineOsc || !engineFilter) return;
       const absRatio = Math.min(1.0, Math.abs(speedRatio));
       
-      // ปรับความถี่รอบเครื่องยนต์ตามความเร็วรถ
       const targetFreq = 36 + absRatio * 44; 
       engineOsc.frequency.setTargetAtTime(targetFreq, audioCtx.currentTime, 0.1);
       engineSubOsc.frequency.setTargetAtTime(targetFreq * 0.5, audioCtx.currentTime, 0.1);
       
-      // เปิดฟิลเตอร์ให้เสียงดังขึ้นเมื่อเร่งเครื่อง
       const targetFilter = 140 + absRatio * 220;
       engineFilter.frequency.setTargetAtTime(targetFilter, audioCtx.currentTime, 0.1);
       engineGain.gain.setTargetAtTime(0.035 + absRatio * 0.045, audioCtx.currentTime, 0.1);
@@ -1400,9 +1394,9 @@
             <div style="height:5px; background:#e2e8f0; width:100%; border-radius:4px; margin-top:6px;"></div>
           </div>
           <div style="display:flex; gap:8px;">
-            <button class="ribbon-btn" onclick="applyAlignment('left', ${stageIdx})">left</button>
-            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center', ${stageIdx})">center</button>
-            <button class="ribbon-btn" onclick="applyAlignment('right', ${stageIdx})">right</button>
+            <button class="ribbon-btn" onclick="applyAlignment('left', ${stageIdx})">ชิดซ้าย</button>
+            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center', ${stageIdx})">กึ่งกลาง</button>
+            <button class="ribbon-btn" onclick="applyAlignment('right', ${stageIdx})">ชิดขวา</button>
           </div>
         `;
       }
@@ -1443,7 +1437,7 @@
           btn.style.padding = "12px 18px";
           btn.innerText = opt;
           btn.onclick = () => {
-            if (opt.includes(m.target)) submitCorrectTask(stageIdx);
+            if (opt.trim() === m.target.trim()) submitCorrectTask(stageIdx);
             else submitWrongTask(stageIdx);
           };
           choiceDiv.appendChild(btn);
