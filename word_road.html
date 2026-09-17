@@ -36,19 +36,45 @@
       width: 100% !important; height: 100% !important; display: block;
     }
 
+    /* ปรับแต่ง Top HUD แก้ชื่อเบียดและทับซ้อน */
     #top-hud {
       position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px);
+      background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(14px);
       border: 2px solid var(--border);
-      border-radius: 20px; padding: 8px 22px;
-      display: flex; align-items: center; gap: 18px; color: #fff; z-index: 45;
+      border-radius: 24px; padding: 8px 24px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; color: #fff; z-index: 45;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      max-width: 94vw;
+      white-space: nowrap;
     }
-    .hud-chip { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; }
-    .hud-icon { width: 18px; height: 18px; fill: #38bdf8; display: inline-block; vertical-align: middle; }
+    .hud-chip { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      font-size: 0.95rem; 
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .hud-chip.player-chip {
+      max-width: 220px;
+      overflow: hidden;
+    }
+    #hud-name {
+      display: inline-block;
+      max-width: 170px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 900;
+      color: #38bdf8;
+      letter-spacing: 0.3px;
+    }
+    .hud-icon { width: 18px; height: 18px; fill: #38bdf8; display: inline-block; vertical-align: middle; flex-shrink: 0; }
     .hud-pill {
       background: linear-gradient(135deg, #f59e0b, #d97706);
-      padding: 3px 12px; border-radius: 999px; font-weight: 800; font-family: 'Chakra Petch', sans-serif;
+      padding: 4px 12px; border-radius: 999px; font-weight: 800; font-family: 'Chakra Petch', sans-serif;
+      font-size: 0.88rem;
     }
 
     #minimap-card {
@@ -342,7 +368,6 @@
       justify-content: center; min-height: 140px; gap: 12px; margin-bottom: 14px;
     }
 
-    /* สไตล์สำหรับมินิเกมจับคู่ (Matching Challenge) */
     .match-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -438,9 +463,9 @@
   </div>
 
   <div id="top-hud">
-    <div class="hud-chip">
+    <div class="hud-chip player-chip">
       <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-      <span id="hud-name" style="font-weight:900; color:#38bdf8;">-</span>
+      <span id="hud-name">-</span>
     </div>
     <div class="hud-chip">
       <svg class="hud-icon" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>
@@ -532,7 +557,6 @@
     </div>
   </div>
 
-  <!-- Checkpoint Event Modal -->
   <div id="checkpoint-modal">
     <div class="cp-box">
       <div class="cp-top">
@@ -553,7 +577,6 @@
     </div>
   </div>
 
-  <!-- Knowledge Sheet Modal -->
   <div id="knowledge-modal">
     <div class="knowledge-card">
       <div class="kn-header">
@@ -584,7 +607,6 @@
     </div>
   </div>
 
-  <!-- Finish Screen -->
   <div id="finish-screen" class="overlay-screen" style="display:none;">
     <div class="modal-card">
       <div class="game-h1" style="-webkit-text-fill-color: #4ade80;">VICTORY LAP!</div>
@@ -609,7 +631,6 @@
   </div>
 
   <script>
-    // ปรับเปลี่ยนภารกิจด่าน 2, 3, 4 ให้เป็นมินิเกมจับคู่และการวิเคราะห์สถานการณ์ที่ท้าทายขึ้น
     const missions = [
       {
         id: 1, title: "Checkpoint 1: แถบ Ribbon", badge: "Word Beginner", pts: 1.0,
@@ -722,33 +743,62 @@
       }
     ];
 
+    // ปรับระบบเสียงเครื่องยนต์ใหม่: เสียงคำรามทุ้มแน่น นุ่มละมุน สไตล์สปอร์ต V8
     let audioCtx = null;
     let isMuted = false;
     let engineOsc = null;
+    let engineSubOsc = null;
+    let engineFilter = null;
     let engineGain = null;
     let bgmInterval = null;
 
     function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        engineOsc = audioCtx.createOscillator();
+        
+        // ตัวกรองความถี่ต่ำเพื่อตัดความแหลมคม
+        engineFilter = audioCtx.createBiquadFilter();
+        engineFilter.type = "lowpass";
+        engineFilter.frequency.setValueAtTime(140, audioCtx.currentTime);
+
         engineGain = audioCtx.createGain();
-        engineOsc.type = "sawtooth";
-        engineOsc.frequency.setValueAtTime(45, audioCtx.currentTime);
         engineGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        engineOsc.connect(engineGain);
+
+        // ออสซิลเลเตอร์หลักแบบ Triangle (เสียงทุ้มแน่น)
+        engineOsc = audioCtx.createOscillator();
+        engineOsc.type = "triangle";
+        engineOsc.frequency.setValueAtTime(36, audioCtx.currentTime);
+
+        // ออสซิลเลเตอร์คลื่น Sine เพิ่มมวลเสียง Sub-bass
+        engineSubOsc = audioCtx.createOscillator();
+        engineSubOsc.type = "sine";
+        engineSubOsc.frequency.setValueAtTime(18, audioCtx.currentTime);
+
+        engineOsc.connect(engineFilter);
+        engineSubOsc.connect(engineFilter);
+        engineFilter.connect(engineGain);
         engineGain.connect(audioCtx.destination);
+
         engineOsc.start();
+        engineSubOsc.start();
 
         startBGM();
       }
     }
 
     function updateEngineSound(speedRatio) {
-      if (!audioCtx || isMuted || !engineOsc) return;
-      const targetFreq = 45 + Math.abs(speedRatio) * 95;
-      engineOsc.frequency.setTargetAtTime(targetFreq, audioCtx.currentTime, 0.08);
-      engineGain.gain.setTargetAtTime(0.03 + Math.abs(speedRatio) * 0.05, audioCtx.currentTime, 0.08);
+      if (!audioCtx || isMuted || !engineOsc || !engineFilter) return;
+      const absRatio = Math.min(1.0, Math.abs(speedRatio));
+      
+      // ปรับความถี่รอบเครื่องยนต์ตามความเร็วรถ
+      const targetFreq = 36 + absRatio * 44; 
+      engineOsc.frequency.setTargetAtTime(targetFreq, audioCtx.currentTime, 0.1);
+      engineSubOsc.frequency.setTargetAtTime(targetFreq * 0.5, audioCtx.currentTime, 0.1);
+      
+      // เปิดฟิลเตอร์ให้เสียงดังขึ้นเมื่อเร่งเครื่อง
+      const targetFilter = 140 + absRatio * 220;
+      engineFilter.frequency.setTargetAtTime(targetFilter, audioCtx.currentTime, 0.1);
+      engineGain.gain.setTargetAtTime(0.035 + absRatio * 0.045, audioCtx.currentTime, 0.1);
     }
 
     function playCrashSound() {
@@ -868,6 +918,7 @@
       if (!nameVal) { alert("กรุณาพิมพ์ชื่อหรือเลขที่ก่อนเริ่มเล่นครับ!"); return; }
       playerName = nameVal;
       document.getElementById("hud-name").innerText = playerName;
+      document.getElementById("hud-name").title = playerName;
       document.getElementById("start-screen").style.display = "none";
 
       initAudio();
@@ -1273,7 +1324,6 @@
         const colRight = document.createElement("div");
         colRight.className = "match-col";
 
-        // สลับตำแหน่งการแสดงผลฝั่งคีย์ลัด
         const shuffledKeys = [...m.pairs].sort(() => Math.random() - 0.5);
 
         m.pairs.forEach(pair => {
