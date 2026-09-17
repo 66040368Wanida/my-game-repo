@@ -144,7 +144,6 @@
     }
     .rbx-green-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #00603d; }
 
-    /* START SCREEN: โทนสว่างสดใส สไตล์ Arcade ไม่ใช้อิโมจิ */
     #start-screen {
       background: radial-gradient(circle at 50% 40%, rgba(14, 165, 233, 0.45) 0%, rgba(15, 23, 42, 0.92) 80%);
       backdrop-filter: blur(12px);
@@ -343,15 +342,37 @@
       justify-content: center; min-height: 140px; gap: 12px; margin-bottom: 14px;
     }
 
-    .key-badge-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #ffffff; border: 3px solid #0284c7; border-radius: 14px;
-      padding: 12px 30px; font-family: 'Chakra Petch'; font-weight: 700;
-      font-size: 1.5rem; color: #0284c7; box-shadow: 0 5px 0 #bae6fd;
-      cursor: pointer; transition: all 0.15s ease;
+    /* สไตล์สำหรับมินิเกมจับคู่ (Matching Challenge) */
+    .match-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
     }
-    .key-badge-btn:hover { background: #f0f9ff; }
-    .key-badge-btn:active { transform: translateY(3px); box-shadow: none; }
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .match-card {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .match-card:hover { border-color: #38bdf8; background: #f0f9ff; }
+    .match-card.selected { border-color: #0284c7; background: #e0f2fe; color: #0284c7; font-weight: 800; }
+    .match-card.paired { border-color: #10b981; background: #ecfdf5; color: #059669; pointer-events: none; }
 
     .ribbon-bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
     .ribbon-btn {
@@ -467,7 +488,6 @@
     </div>
   </div>
 
-  <!-- START SCREEN: ไร้อิโมจิ 100% ใช้ SVG Vector Icons ทั้งหมด -->
   <div id="start-screen" class="overlay-screen">
     <div class="start-modal">
       
@@ -499,7 +519,7 @@
 
       <div class="rule-banner-single">
         <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
-        <div><b>วิธีปลดม่านเลเซอร์:</b> ขับรถชนม่านพลังงานแต่ละด่าน จากนั้นคลิกเลือกเมนูหรือกดคีย์ลัดจริงบนแป้นพิมพ์เพื่อเปิดทางไปต่อ!</div>
+        <div><b>วิธีปลดม่านเลเซอร์:</b> ขับรถชนม่านพลังงานแต่ละด่าน ทำภารกิจจับคู่และตอบคำถามให้ถูกต้องเพื่อเปิดทางไปต่อ!</div>
       </div>
 
       <input type="text" id="player-input" class="start-input" placeholder="พิมพ์ชื่อ - นามสกุล หรือ เลขที่..." autocomplete="off" />
@@ -528,7 +548,7 @@
 
       <div style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px 14px; border-radius: 12px; font-size: 0.88rem; color: #475569; display: flex; gap: 8px; align-items: center;">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="#64748b"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-        <span>แตะปุ่มบนหน้าจอ หรือกดแป้นพิมพ์คีย์ลัดจริงเพื่อปลดล็อกม่านเลเซอร์</span>
+        <span id="cp-footer-tip">แตะเลือกคำตอบหรือจับคู่ให้ถูกต้องเพื่อปลดล็อกม่านเลเซอร์</span>
       </div>
     </div>
   </div>
@@ -589,6 +609,7 @@
   </div>
 
   <script>
+    // ปรับเปลี่ยนภารกิจด่าน 2, 3, 4 ให้เป็นมินิเกมจับคู่และการวิเคราะห์สถานการณ์ที่ท้าทายขึ้น
     const missions = [
       {
         id: 1, title: "Checkpoint 1: แถบ Ribbon", badge: "Word Beginner", pts: 1.0,
@@ -599,28 +620,35 @@
         knText: "แถบ <b>หน้าแรก (Home)</b> เป็นศูนย์รวมคำสั่งพื้นฐานที่ใช้บ่อยที่สุด ได้แก่ การเปลี่ยนฟอนต์, ปรับขนาดอักษร, ทำตัวหนา/เอียง/ขีดเส้นใต้, และการจัดตำแหน่งย่อหน้า"
       },
       {
-        id: 2, title: "Checkpoint 2: บันทึกเอกสาร", badge: "Save Master", pts: 1.0,
-        mode: "shortcut",
-        q: "ภารกิจ: แตะที่ปุ่มด้านล่าง หรือกดบนคีย์บอร์ดจริงเพื่อ 'บันทึกเอกสาร (Save)':",
-        keyReq: "s", codeReq: "KeyS", displayKey: "Ctrl + S",
-        knTitle: "การบันทึกเอกสารด่วน (Save)",
-        knText: "การบันทึกเอกสารใช้คีย์ลัด <b>Ctrl + S</b> (ย่อมาจาก Save) เป็นปุ่มที่ควรหมั่นกดเป็นประจำเพื่อป้องกันข้อมูลสูญหาย"
+        id: 2, title: "Checkpoint 2: ภารกิจจับคู่คีย์ลัดงานเอกสาร", badge: "Shortcut Master", pts: 1.0,
+        mode: "matching",
+        q: "ภารกิจ: แตะจับคู่ 'คำสั่งจัดการเอกสาร' กับ 'คีย์ลัด' ให้ถูกต้องทั้ง 2 คู่:",
+        pairs: [
+          { action: "บันทึกเอกสาร (Save)", key: "Ctrl + S" },
+          { action: "สร้างเอกสารใหม่ (New)", key: "Ctrl + N" }
+        ],
+        knTitle: "คีย์ลัดการจัดการไฟล์เอกสาร",
+        knText: "<b>Ctrl + S</b> ใช้บันทึกเอกสารด่วนเพื่อกันข้อมูลสูญหาย และ <b>Ctrl + N</b> ใช้สร้างหน้าต่างเอกสารเปล่าแผ่นใหม่"
       },
       {
-        id: 3, title: "Checkpoint 3: ยกเลิกคำสั่งล่าสุด", badge: "Text Editor", pts: 1.0,
-        mode: "shortcut",
-        q: "ภารกิจ: แตะที่ปุ่มด้านล่าง หรือกดบนคีย์บอร์ดจริงเพื่อ 'ยกเลิกคำสั่งล่าสุด (Undo)':",
-        keyReq: "z", codeReq: "KeyZ", displayKey: "Ctrl + Z",
+        id: 3, title: "Checkpoint 3: กู้คืนข้อความผิดพลาด", badge: "Text Specialist", pts: 1.0,
+        mode: "choice",
+        q: "ภารกิจ: ขณะพิมพ์รายงาน เผลอกดลบข้อความสำคัญหายไปทั้งย่อหน้า จะต้องกดคีย์ลัดคู่ใดเพื่อดึงข้อมูลกลับคืนมาทันที:",
+        target: "Ctrl + Z (Undo)",
+        opts: ["Ctrl + X (Cut)", "Ctrl + Z (Undo)", "Ctrl + Y (Redo)", "Ctrl + A (Select All)"],
         knTitle: "การยกเลิกคำสั่งล่าสุด (Undo)",
-        knText: "เมื่อทำงานพลาดหรือเผลอลบข้อความ ให้ใช้คีย์ลัด <b>Ctrl + Z</b> เพื่อยกเลิกคำสั่งล่าสุด (Undo) ดึงข้อมูลเดิมกลับคืนมาทันที"
+        knText: "เมื่อทำงานพลาดหรือเผลอลบข้อความ ให้ใช้คีย์ลัด <b>Ctrl + Z (Undo)</b> เพื่อดึงข้อมูลเดิมกลับคืนมาทันที แต่หากต้องการทำซ้ำคำสั่งให้กด <b>Ctrl + Y (Redo)</b>"
       },
       {
-        id: 4, title: "Checkpoint 4: สไตล์ตัวอักษร", badge: "Format Master", pts: 1.0,
-        mode: "shortcut",
-        q: "ภารกิจ: แตะที่ปุ่มลัดด้านล่าง หรือกดบนแป้นพิมพ์เพื่อทำข้อความ 'ตัวหนา (Bold)':",
-        keyReq: "b", codeReq: "KeyB", displayKey: "Ctrl + B",
-        knTitle: "การเน้นข้อความตัวหนา (Bold)",
-        knText: "การปรับแต่งสไตล์ข้อความให้เป็นตัวหนาใช้ไอคอนตัว <b>B</b> (Bold) หรือกดคีย์ลัด <b>Ctrl + B</b> นิยมใช้สำหรับเน้นหัวข้อหรือคำสำคัญ"
+        id: 4, title: "Checkpoint 4: ภารกิจจับคู่สไตล์ตัวอักษร", badge: "Font Styler", pts: 1.0,
+        mode: "matching",
+        q: "ภารกิจ: แตะจับคู่ 'รูปแบบตัวอักษร' กับ 'คีย์ลัดคำสั่ง' ให้ถูกต้องครบทั้ง 2 คู่:",
+        pairs: [
+          { action: "ตัวหนา (Bold)", key: "Ctrl + B" },
+          { action: "ตัวเอียง (Italic)", key: "Ctrl + I" }
+        ],
+        knTitle: "คีย์ลัดปรับแต่งลักษณะตัวอักษร",
+        knText: "<b>Ctrl + B</b> ย่อมาจาก Bold ใช้ทำตัวหนาเพื่อเน้นหัวข้อ และ <b>Ctrl + I</b> ย่อมาจาก Italic ใช้ทำตัวเอียงสำหรับคำศัพท์เฉพาะ"
       },
       {
         id: 5, title: "Checkpoint 5: จัดตำแหน่งย่อหน้า", badge: "Paragraph Pro", pts: 1.5,
@@ -1093,10 +1121,7 @@
 
     function setupInputListeners() {
       window.addEventListener("keydown", e => {
-        if (isModalOpen) {
-          handleMinigameKeyboard(e);
-          return;
-        }
+        if (isModalOpen) return;
 
         const k = e.key.toLowerCase();
         if (k === "arrowup" || k === "w") keys.up = true;
@@ -1210,6 +1235,8 @@
     }
 
     let activeStageIdx = 0;
+    let selectedMatchAction = null;
+    let currentPairsSolved = 0;
 
     function openCheckpointModal(idx) {
       isModalOpen = true;
@@ -1233,14 +1260,72 @@
       const stageBox = document.getElementById("cp-minigame-area");
       stageBox.innerHTML = "";
 
-      if (m.mode === "shortcut") {
-        stageBox.innerHTML = `
-          <div style="text-align:center;">
-            <p style="color:#64748b; font-size:0.95rem; margin-bottom:12px;">แตะที่ปุ่มด้านล่าง หรือกดคีย์ลัดบนแป้นพิมพ์จริง:</p>
-            <button class="key-badge-btn" onclick="submitCorrectTask(${stageIdx})">${m.displayKey}</button>
-            <p style="margin-top:12px; font-weight:600; color:#0284c7; font-size:0.9rem;">แตะที่ปุ่ม [ ${m.displayKey} ] ได้ทันที</p>
-          </div>
-        `;
+      if (m.mode === "matching") {
+        selectedMatchAction = null;
+        currentPairsSolved = 0;
+
+        const container = document.createElement("div");
+        container.className = "match-container";
+
+        const colLeft = document.createElement("div");
+        colLeft.className = "match-col";
+
+        const colRight = document.createElement("div");
+        colRight.className = "match-col";
+
+        // สลับตำแหน่งการแสดงผลฝั่งคีย์ลัด
+        const shuffledKeys = [...m.pairs].sort(() => Math.random() - 0.5);
+
+        m.pairs.forEach(pair => {
+          const btnAction = document.createElement("div");
+          btnAction.className = "match-card";
+          btnAction.innerText = pair.action;
+          btnAction.dataset.match = pair.key;
+
+          btnAction.onclick = () => {
+            if (btnAction.classList.contains("paired")) return;
+            colLeft.querySelectorAll(".match-card").forEach(c => c.classList.remove("selected"));
+            btnAction.classList.add("selected");
+            selectedMatchAction = btnAction;
+          };
+          colLeft.appendChild(btnAction);
+        });
+
+        shuffledKeys.forEach(pair => {
+          const btnKey = document.createElement("div");
+          btnKey.className = "match-card";
+          btnKey.innerText = pair.key;
+          btnKey.dataset.key = pair.key;
+
+          btnKey.onclick = () => {
+            if (btnKey.classList.contains("paired")) return;
+            if (!selectedMatchAction) {
+              alert("กรุณาเลือกคำสั่งฝั่งซ้ายก่อนจับคู่ครับ");
+              return;
+            }
+
+            if (selectedMatchAction.dataset.match === btnKey.dataset.key) {
+              selectedMatchAction.classList.remove("selected");
+              selectedMatchAction.classList.add("paired");
+              btnKey.classList.add("paired");
+              selectedMatchAction = null;
+              currentPairsSolved++;
+
+              if (currentPairsSolved === m.pairs.length) {
+                setTimeout(() => submitCorrectTask(stageIdx), 300);
+              }
+            } else {
+              selectedMatchAction.classList.remove("selected");
+              selectedMatchAction = null;
+              submitWrongTask(stageIdx);
+            }
+          };
+          colRight.appendChild(btnKey);
+        });
+
+        container.appendChild(colLeft);
+        container.appendChild(colRight);
+        stageBox.appendChild(container);
       }
       else if (m.mode === "ribbon") {
         const tabs = ["ไฟล์ (File)", "หน้าแรก (Home)", "แทรก (Insert)", "เค้าโครง (Layout)"];
@@ -1332,20 +1417,6 @@
         setTimeout(() => submitCorrectTask(stageIdx), 250);
       } else {
         setTimeout(() => submitWrongTask(stageIdx), 250);
-      }
-    }
-
-    function handleMinigameKeyboard(e) {
-      const m = missions[activeStageIdx];
-      if (m.mode !== "shortcut") return;
-
-      const isCtrl = e.ctrlKey || e.metaKey;
-      const isTargetCode = e.code === m.codeReq;
-      const isTargetKey = e.key.toLowerCase() === m.keyReq;
-
-      if (isCtrl && (isTargetCode || isTargetKey)) {
-        e.preventDefault();
-        submitCorrectTask(activeStageIdx);
       }
     }
 
