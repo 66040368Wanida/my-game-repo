@@ -9,14 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
-    :root {
-      --primary: #00a2ff;
-      --yellow: #facc15;
-      --green: #00b06f;
-      --red: #ef4444;
-      --surface: #111827;
-      --border: rgba(255, 255, 255, 0.18);
-    }
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -32,7 +24,7 @@
       overflow: hidden;
       background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
       color: #f8fafc;
-      font-family: 'Kanit', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       position: fixed;
     }
     body {
@@ -43,13 +35,13 @@
     }
     .container {
       background: rgba(255, 255, 255, 0.96);
-      border: 2px solid rgba(56, 189, 248, 0.4);
+      border: 2px solid rgba(255, 117, 143, 0.4);
       border-radius: 28px;
       padding: clamp(16px, 3.5vw, 24px);
       max-width: 480px;
       width: min(90%, 480px);
       text-align: center;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 117, 143, 0.2);
       backdrop-filter: blur(20px);
       max-height: 88dvh;
       overflow-y: auto;
@@ -58,20 +50,20 @@
       color: #0f172a;
     }
     h1 {
-      color: #0284c7;
+      color: #e01e37;
       margin: 0 0 6px 0;
       font-size: clamp(20px, 5vw, 26px);
       letter-spacing: 0.5px;
       font-weight: 900;
     }
     h2 {
-      color: #0284c7;
+      color: #e01e37;
       font-weight: 800;
       font-size: clamp(18px, 4.5vw, 22px);
       margin: 0 0 10px 0;
     }
     .btn {
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
       color: white;
       border: none;
       padding: 13px;
@@ -81,7 +73,7 @@
       cursor: pointer;
       width: 100%;
       margin: 8px 0;
-      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -115,9 +107,9 @@
       padding: 12px 14px;
       margin: 5px 0 10px 0;
       border-radius: 16px;
-      border: 2px solid #cbd5e1;
-      background: #f8fafc;
-      color: #0f172a;
+      border: 2px solid #ffccd5;
+      background: #fff5f7;
+      color: #e01e37;
       text-align: center;
       font-size: 15px;
       font-weight: bold;
@@ -127,21 +119,20 @@
       transition: all 0.2s;
     }
     input:focus, select:focus {
-      border-color: #0284c7;
+      border-color: #ff4d6d;
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15);
     }
     .pin-display {
       font-size: clamp(32px, 8vw, 42px);
       letter-spacing: 6px;
       font-weight: 900;
-      color: #0284c7;
-      background: #f0f9ff;
+      color: #e01e37;
+      background: #ffe4e6;
       padding: 6px;
       border-radius: 18px;
       margin: 8px 0;
-      border: 2.5px dashed #38bdf8;
-      font-family: 'Chakra Petch', sans-serif;
+      border: 2.5px dashed #ff758f;
     }
     .qr-container {
       display: flex;
@@ -153,7 +144,7 @@
       width: fit-content;
       margin: 8px auto;
       box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      border: 1px solid #e2e8f0;
+      border: 1px solid #ffe4e6;
     }
     .badge-list {
       display: flex;
@@ -165,20 +156,20 @@
       overflow-y: auto;
     }
     .badge-player {
-      background: #f0f9ff;
-      border: 1.5px solid #38bdf8;
+      background: #ffe4e6;
+      border: 1.5px solid #ff758f;
       padding: 5px 10px;
       border-radius: 20px;
       font-size: 12px;
-      color: #0369a1;
+      color: #e01e37;
       font-weight: bold;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
+      box-shadow: 0 2px 6px rgba(255, 117, 143, 0.2);
     }
     .badge-kick-btn {
-      background: #ef4444;
+      background: #e11d48;
       color: white;
       border: none;
       border-radius: 50%;
@@ -196,28 +187,29 @@
     .badge-kick-btn:active { transform: scale(0.9); }
     .hidden { display: none !important; }
 
-    /* START SCREEN: กติกาและเริ่มเล่นสไตล์ Arcade แบบเวกเตอร์ 100% */
+    /* START SCREEN: สไตล์คู่มือสีชมพูแคนดี้ ไม่มีช่องกรอกชื่อ */
     #start-screen {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(14, 165, 233, 0.45) 0%, rgba(15, 23, 42, 0.94) 80%);
+      background: radial-gradient(circle at 50% 40%, rgba(255, 117, 143, 0.45) 0%, rgba(15, 23, 42, 0.95) 85%);
       backdrop-filter: blur(12px);
       z-index: 250;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 18px;
+      font-family: 'Kanit', sans-serif;
     }
     .start-modal {
-      background: rgba(255, 255, 255, 0.96);
-      border: 4px solid #38bdf8;
+      background: rgba(255, 255, 255, 0.98);
+      border: 4px solid #ff758f;
       border-radius: 32px;
       padding: 30px 24px;
       max-width: 530px;
       width: 92%;
       text-align: center;
       color: #0f172a;
-      box-shadow: 0 25px 60px rgba(2, 132, 199, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 25px 60px rgba(255, 77, 109, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.35);
       position: relative;
       overflow: hidden;
       animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -227,11 +219,11 @@
       to { transform: scale(1); opacity: 1; }
     }
     .hero-banner {
-      background: linear-gradient(135deg, #0284c7, #2563eb);
+      background: linear-gradient(135deg, #ff758f, #ff4d6d);
       margin: -30px -24px 20px -24px;
       padding: 24px 16px 18px;
       border-bottom: 4px solid #facc15;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
     }
     .game-logo-title {
       font-size: 2.1rem;
@@ -239,7 +231,7 @@
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1px;
-      text-shadow: 3px 3px 0px #0369a1, 0 0 18px rgba(250, 204, 21, 0.6);
+      text-shadow: 3px 3px 0px #e01e37, 0 0 18px rgba(250, 204, 21, 0.6);
       line-height: 1.1;
       font-family: 'Chakra Petch', 'Kanit', sans-serif;
     }
@@ -266,8 +258,8 @@
       text-align: left;
     }
     .rule-card {
-      background: #f0f9ff;
-      border: 2px solid #bae6fd;
+      background: #fff5f7;
+      border: 2px solid #fecdd3;
       border-radius: 16px;
       padding: 12px 14px;
       display: flex;
@@ -285,8 +277,8 @@
       align-items: center;
       gap: 6px;
     }
-    .rule-card .rule-header { color: #0284c7; }
-    .rule-card .rule-header svg { width: 18px; height: 18px; fill: #0284c7; flex-shrink: 0; }
+    .rule-card .rule-header { color: #e11d48; }
+    .rule-card .rule-header svg { width: 18px; height: 18px; fill: #e11d48; flex-shrink: 0; }
 
     .rule-card.points .rule-header { color: #ca8a04; }
     .rule-card.points .rule-header svg { width: 18px; height: 18px; fill: #ca8a04; flex-shrink: 0; }
@@ -298,8 +290,8 @@
       font-weight: 500;
     }
     .rule-banner-single {
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
+      background: #fff5f7;
+      border: 2px dashed #f43f5e;
       border-radius: 14px;
       padding: 11px 14px;
       font-size: 0.84rem;
@@ -311,30 +303,11 @@
       gap: 8px;
       line-height: 1.45;
     }
-    .rule-banner-single svg { width: 19px; height: 19px; fill: #0284c7; flex-shrink: 0; margin-top: 2px; }
+    .rule-banner-single svg { width: 19px; height: 19px; fill: #e11d48; flex-shrink: 0; margin-top: 2px; }
 
-    .start-input {
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      border: 3px solid #cbd5e1;
-      background: #f8fafc;
-      color: #0f172a;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-align: center;
-      outline: none;
-      transition: all 0.2s;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
-    }
-    .start-input:focus {
-      border-color: #0284c7;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
-    }
     .start-btn {
       width: 100%;
-      margin-top: 14px;
+      margin-top: 6px;
       padding: 15px;
       border-radius: 18px;
       border: none;
@@ -358,9 +331,10 @@
 
     #teacher-auth-modal {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -369,7 +343,7 @@
     }
     .teacher-auth-card {
       background: rgba(255, 255, 255, 0.98);
-      border: 2px solid rgba(56, 189, 248, 0.5);
+      border: 2px solid rgba(255, 117, 143, 0.5);
       border-radius: 24px;
       padding: 24px 20px;
       max-width: 360px;
@@ -462,15 +436,17 @@
       pointer-events: none;
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(14px);
-      border: 2px solid rgba(56, 189, 248, 0.45);
+      -webkit-backdrop-filter: blur(14px);
+      border: 2px solid rgba(255, 117, 143, 0.45);
       border-radius: 30px;
       padding: 6px 10px;
-      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 25px rgba(255, 117, 143, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
+      transition: all 0.3s ease;
     }
     .stat-pill {
       background: #ffffff;
-      border: 1.5px solid #bae6fd;
+      border: 1.5px solid #ffccd5;
       padding: 5px 8px;
       border-radius: 16px;
       font-weight: 800;
@@ -484,8 +460,9 @@
       flex-shrink: 0;
     }
     .stat-pill svg { width: 14px; height: 14px; fill: currentColor; }
+
     .btn-top-quiz {
-      background: linear-gradient(135deg, #0284c7, #0369a1);
+      background: linear-gradient(135deg, #ff758f, #ff4d6d);
       border: 1.5px solid #ffffff;
       color: white;
       padding: 6px 10px;
@@ -493,7 +470,7 @@
       font-weight: 900;
       font-size: clamp(11px, 2.7vw, 13px);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.35);
       pointer-events: auto;
       white-space: nowrap;
       flex-shrink: 0;
@@ -501,7 +478,7 @@
       align-items: center;
       gap: 4px;
     }
-    .btn-top-quiz svg { width: 14px; height: 14px; fill: #facc15; }
+    .btn-top-quiz svg { width: 14px; height: 14px; fill: #ffffff; }
 
     .btn-music-toggle {
       background: #ffffff;
@@ -560,6 +537,7 @@
     .touch-dpad-container {
       background: rgba(255, 255, 255, 0.82);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 2.5px solid rgba(255, 255, 255, 0.95);
       border-radius: 36px;
       padding: 8px;
@@ -641,16 +619,17 @@
     }
 
     .cheer-box {
-      background: #f0fdf4;
-      border: 2px dashed #86efac;
+      background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+      border: 2px dashed #ff758f;
       border-radius: 18px;
       padding: 12px;
       margin: 10px 0;
       font-size: 13px;
       line-height: 1.4;
-      color: #166534;
+      color: #9f1239;
       font-weight: bold;
     }
+
     .error-review-box {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -666,7 +645,7 @@
 
     #quiz-modal, #questionBankModal {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(10px);
       display: flex;
@@ -681,16 +660,16 @@
       border-radius: 24px;
       width: 100%;
       max-width: 440px;
-      border: 2.5px solid #38bdf8;
+      border: 2.5px solid #ff758f;
       text-align: center;
       box-shadow: 0 25px 50px rgba(0,0,0,0.25);
       max-height: 85dvh;
       overflow-y: auto;
     }
     .quiz-option {
-      background: #f8fafc;
-      border: 1.5px solid #cbd5e1;
-      color: #0f172a;
+      background: #fff5f7;
+      border: 1.5px solid #ffccd5;
+      color: #e01e37;
       padding: 10px 14px;
       border-radius: 14px;
       width: 100%;
@@ -701,7 +680,7 @@
       font-weight: 600;
       transition: all 0.15s;
     }
-    .quiz-option:active { background: #e0f2fe; border-color: #0284c7; color: #0284c7; }
+    .quiz-option:active { background: #ff758f; color: white; border-color: #ff758f; }
 
     .leaderboard-table, .host-table {
       width: 100%;
@@ -750,7 +729,7 @@
 
     .qb-modal-card {
       background: #ffffff;
-      border: 2.5px solid #38bdf8;
+      border: 2.5px solid #ff758f;
       border-radius: 24px;
       padding: 20px;
       max-width: 680px;
@@ -768,7 +747,7 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 10px;
-      border-bottom: 1.5px solid #e2e8f0;
+      border-bottom: 1.5px solid #ffe4e6;
       margin-bottom: 10px;
       flex-shrink: 0;
     }
@@ -784,17 +763,17 @@
       border-radius: 12px;
       font-size: 12px;
       font-weight: bold;
-      border: 1.5px solid #cbd5e1;
-      background: #f8fafc;
-      color: #0284c7;
+      border: 1.5px solid #ffccd5;
+      background: #fff5f7;
+      color: #e01e37;
       cursor: pointer;
       transition: all 0.15s;
     }
     .qb-tab-btn.active {
-      background: #0284c7;
+      background: #ff4d6d;
       color: white;
-      border-color: #0284c7;
-      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
+      border-color: #ff4d6d;
+      box-shadow: 0 3px 10px rgba(255, 77, 109, 0.3);
     }
     .qb-body-scroll {
       flex: 1;
@@ -803,7 +782,7 @@
     }
     .qb-question-card {
       background: #ffffff;
-      border: 1.5px solid #e2e8f0;
+      border: 1.5px solid #fecdd3;
       border-radius: 14px;
       padding: 12px;
       margin-bottom: 8px;
@@ -825,9 +804,9 @@
     }
     .qb-btn-edit:hover { background: #2563eb; color: white; }
     .qb-btn-delete {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #dc2626;
+      background: #fff1f2;
+      border: 1px solid #fda4af;
+      color: #e11d48;
       padding: 4px 10px;
       border-radius: 8px;
       font-weight: bold;
@@ -835,7 +814,7 @@
       cursor: pointer;
       flex-shrink: 0;
     }
-    .qb-btn-delete:hover { background: #dc2626; color: white; }
+    .qb-btn-delete:hover { background: #e11d48; color: white; }
     .qb-form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -860,7 +839,7 @@
 
   <div id="toast-msg">แจ้งเตือน</div>
 
-  <!-- START SCREEN: หน้าคู่มือการเล่น สไตล์เดียวกับ Word Road ไร้อีโมจิ 100% -->
+  <!-- START SCREEN: หน้าคู่มือการเล่น สไตล์สีชมพูแคนดี้ ไร้อิโมจิ และไม่มีช่องกรอกชื่อ -->
   <div id="start-screen">
     <div class="start-modal">
       <div class="hero-banner">
@@ -894,11 +873,9 @@
         <div><b>เป้าหมายภารกิจ:</b> กระโดดไต่แผ่นแพลตฟอร์มขึ้นไปให้สูงที่สุด แข่งขันความสูงกับเพื่อนแบบออนไลน์เรียลไทม์!</div>
       </div>
 
-      <input type="text" id="start-player-name" class="start-input" placeholder="พิมพ์ชื่อ - นามสกุล หรือ เลขที่..." autocomplete="off" />
-
-      <button class="start-btn" onclick="confirmStartScreen()">
+      <button class="start-btn" onclick="switchScreen('view-mode')">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        เข้าสู่ระบบการแข่งขัน (START MISSION)
+        เข้าสู่เกม (START MISSION)
       </button>
     </div>
   </div>
@@ -906,9 +883,9 @@
   <div id="teacher-auth-modal" class="hidden">
     <div class="teacher-auth-card">
       <div style="margin-bottom: 6px;">
-        <svg viewBox="0 0 24 24" width="38" height="38" fill="#0284c7"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+        <svg viewBox="0 0 24 24" width="38" height="38" fill="#e01e37"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
       </div>
-      <h3 style="margin: 0 0 6px 0; font-size: 18px; color: #0284c7; font-weight: 900;">ยืนยันตัวตนผู้สอน</h3>
+      <h3 style="margin: 0 0 6px 0; font-size: 18px; color: #e01e37; font-weight: 900;">ยืนยันตัวตนผู้สอน</h3>
       <p style="font-size: 12px; color: #64748b; margin: 0 0 14px 0;">กรุณากรอกรหัสผ่านสำหรับคุณครู (รหัสเริ่มต้น: 1234)</p>
       
       <input type="password" id="input-teacher-pwd" placeholder="รหัสผ่านคุณครู..." maxlength="10" style="margin-bottom: 12px; font-size: 16px;">
@@ -940,7 +917,7 @@
     
     <div class="qr-container">
       <div id="qrcode"></div>
-      <span style="color:#0284c7; font-size:11px; font-weight:bold; margin-top:4px;">สแกนเพื่อเข้าห้อง</span>
+      <span style="color:#e01e37; font-size:11px; font-weight:bold; margin-top:4px;">สแกนเพื่อเข้าห้อง</span>
     </div>
     
     <button class="btn" id="btn-copy-link" style="padding:9px; font-size:12px; margin:4px 0 10px 0;">
@@ -983,13 +960,13 @@
           ออกจากห้อง
         </button>
         <div style="text-align: left;">
-          <h2 style="font-size: 16px; font-weight: 900; color: #38bdf8; margin: 0; line-height: 1.2;">HOST DASHBOARD</h2>
-          <p style="font-size: 11px; color: #94a3b8; margin: 0;">ห้อง: <span id="live-room-pin" style="font-weight: 900; color: #7dd3fc;">------</span> | ออนไลน์: <span id="live-player-count" style="font-weight: 900; color: #34d399;">0</span> คน</p>
+          <h2 style="font-size: 16px; font-weight: 900; color: #fb7185; margin: 0; line-height: 1.2;">HOST DASHBOARD</h2>
+          <p style="font-size: 11px; color: #94a3b8; margin: 0;">ห้อง: <span id="live-room-pin" style="font-weight: 900; color: #fda4af;">------</span> | ออนไลน์: <span id="live-player-count" style="font-weight: 900; color: #34d399;">0</span> คน</p>
         </div>
       </div>
       
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button onclick="openQuestionBankModal()" style="padding: 7px 12px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);">
+        <button onclick="openQuestionBankModal()" style="padding: 7px 12px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
           จัดการคลังคำถาม (<span id="total-q-count">20</span>)
         </button>
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 12px; font-family: monospace; font-size: 17px; color: #fde047; font-weight: 900;">
@@ -1037,10 +1014,10 @@
     <div class="qb-modal-card">
       <div class="qb-header">
         <div>
-          <h2 style="font-size: 16px; font-weight: 900; color: #0284c7; margin: 0;">
+          <h2 style="font-size: 16px; font-weight: 900; color: #e01e37; margin: 0;">
             คลังข้อสอบ & จัดการคำถาม
           </h2>
-          <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #0284c7;">20</b> ข้อ</p>
+          <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #e01e37;">20</b> ข้อ</p>
         </div>
         <button onclick="closeQuestionBankModal()" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">ปิด</button>
       </div>
@@ -1056,9 +1033,9 @@
         </div>
 
         <div id="qb-panel-add" class="hidden">
-          <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: 18px; padding: 14px;">
+          <div style="background: #fff5f7; border: 1.5px solid #ffccd5; border-radius: 18px; padding: 14px;">
             <input type="hidden" id="edit-q-id" value="">
-            <label id="form-q-title" style="font-size: 12px; font-weight: bold; color: #0284c7; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
+            <label id="form-q-title" style="font-size: 12px; font-weight: bold; color: #e01e37; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
             <input id="new-q-text" type="text" placeholder="พิมพ์โจทย์คำถาม..." style="margin-bottom: 10px; text-align: left; padding: 10px;">
             
             <label style="font-size: 12px; font-weight: bold; color: #475569; display: block; margin-bottom: 4px;">ตัวเลือก 4 ข้อ:</label>
@@ -1090,7 +1067,7 @@
   </div>
 
   <div id="view-join" class="container hidden">
-    <h2>เข้าสู่สมรภูมิกระโดด</h2>
+    <h2>เข้าสู่สมรภูมิขนมหวาน</h2>
     <input type="text" id="input-pin" placeholder="รหัสห้อง 6 หลัก" maxlength="6" inputmode="numeric">
     <input type="text" id="input-name" placeholder="ชื่อเล่นของคุณ" maxlength="12">
     <button class="btn" id="btn-do-join">เข้าสู่ห้อง</button>
@@ -1099,7 +1076,7 @@
 
   <div id="view-waiting" class="container hidden">
     <h2>ห้องเตรียมพร้อม</h2>
-    <p>รหัสห้อง: <b id="wait-pin" style="color:#0284c7;"></b></p>
+    <p>รหัสห้อง: <b id="wait-pin" style="color:#e01e37;"></b></p>
     <p>ผู้เล่น: <b id="wait-name" style="color:#10b981;"></b></p>
     <p style="color: #f59e0b; margin-top:16px; font-size:14px; font-weight:bold;">รอสัญญาณปล่อยตัวจากผู้สอน...</p>
   </div>
@@ -1147,7 +1124,7 @@
 
     <div id="quiz-modal" class="hidden">
       <div class="quiz-card">
-        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#0284c7;">ตอบคำถาม (+5 พลังงาน)</h3>
+        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#e01e37;">ตอบคำถาม (+5 พลังงาน)</h3>
         <p id="quiz-q-text" style="font-weight:bold; font-size:13px; margin:10px 0; color:#0f172a; line-height:1.4; text-align: left;"></p>
         <div id="quiz-options-list"></div>
         <button class="btn hidden" id="btn-close-quiz" style="background:#64748b; margin-top:8px; padding:8px;">ปิดหน้าต่าง</button>
@@ -1204,16 +1181,6 @@
 
     const TEACHER_PASSWORD = "1234";
 
-    window.confirmStartScreen = function() {
-      const name = document.getElementById('start-player-name').value.trim();
-      if (!name) {
-        alert('กรุณากรอกชื่อ-นามสกุล หรือเลขที่ก่อนเริ่มครับ');
-        return;
-      }
-      document.getElementById('input-name').value = name;
-      switchScreen('view-mode');
-    };
-
     window.openTeacherModal = function() {
       document.getElementById('input-teacher-pwd').value = "";
       document.getElementById('teacher-auth-modal').classList.remove('hidden');
@@ -1241,12 +1208,14 @@
     });
 
     const SWEET_PALETTES = [
-      { main: '#0284c7', dark: '#0369a1', blush: '#38bdf8' },
-      { main: '#10b981', dark: '#047857', blush: '#34d399' },
-      { main: '#f59e0b', dark: '#b45309', blush: '#fcd34d' },
-      { main: '#8b5cf6', dark: '#6d28d9', blush: '#a78bfa' },
-      { main: '#06b6d4', dark: '#0e7490', blush: '#67e8f9' },
-      { main: '#64748b', dark: '#334155', blush: '#94a3b8' }
+      { main: '#ff758f', dark: '#e01e37', blush: '#ff4d6d' },
+      { main: '#38bdf8', dark: '#0284c7', blush: '#7dd3fc' },
+      { main: '#34d399', dark: '#059669', blush: '#6ee7b7' },
+      { main: '#fbbf24', dark: '#d97706', blush: '#fcd34d' },
+      { main: '#c084fc', dark: '#7c3aed', blush: '#d8b4fe' },
+      { main: '#f472b6', dark: '#db2777', blush: '#f9a8d4' },
+      { main: '#2dd4bf', dark: '#0d9488', blush: '#5eead4' },
+      { main: '#a3e635', dark: '#65a30d', blush: '#bef264' }
     ];
 
     let quizData = [
@@ -1803,7 +1772,7 @@
             <td style="font-weight: 800; color: white;">${p.name || 'Agent'}</td>
             <td style="text-align: center; font-family: monospace; font-weight: 900; color: #38bdf8; font-size: 14px;">${p.height || 0} m</td>
             <td style="text-align: center; font-weight: 800; color: #34d399;">${correct}</td>
-            <td style="text-align: center; font-weight: 800; color: #ef4444;">${wrong}</td>
+            <td style="text-align: center; font-weight: 800; color: #fb7185;">${wrong}</td>
             <td style="text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
                 <div style="width: 42px; height: 5px; background: #334155; border-radius: 4px; overflow: hidden;">
@@ -1851,7 +1820,7 @@
         let badge = `#${idx + 1}`;
         const isMe = (p.name === playerName);
         tbody.innerHTML += `
-          <tr style="${isMe ? 'background: #f0f9ff; font-weight:bold;' : ''}">
+          <tr style="${isMe ? 'background: #ffe4e6; font-weight:bold;' : ''}">
             <td>${badge} ${p.name} ${isMe ? '(คุณ)' : ''}</td>
             <td style="text-align:center; color:#0284c7;">${p.height || 0} m</td>
             <td style="text-align:center; color:#10b981;">${p.correct || 0}</td>
@@ -1870,7 +1839,7 @@
           wrongItemsCount++;
           const div = document.createElement('div');
           div.className = "mb-1.5 pb-1.5 border-b border-slate-200";
-          div.innerHTML = `[ผิด] <b>โจทย์:</b> ${q.q} <br><span style="color: #ef4444; font-weight: 600;">(รอบแรกตอบ: ไม่ถูกต้อง)</span>`;
+          div.innerHTML = `[ผิด] <b>โจทย์:</b> ${q.q} <br><span style="color: #e11d48; font-weight: 600;">(รอบแรกตอบ: ไม่ถูกต้อง)</span>`;
           reviewBox.appendChild(div);
         }
       });
@@ -1991,6 +1960,18 @@
       ctx.arc(x + 20 * scale, y + 8 * scale, 18 * scale, 0, Math.PI * 2);
       ctx.closePath();
       ctx.fill();
+
+      ctx.fillStyle = '#ff8fa3';
+      ctx.beginPath();
+      ctx.arc(x + 10 * scale, y + 2 * scale, 3 * scale, 0, Math.PI * 2);
+      ctx.arc(x + 30 * scale, y + 2 * scale, 3 * scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#64748b';
+      ctx.beginPath();
+      ctx.arc(x + 14 * scale, y - 2 * scale, 2.5 * scale, 0, Math.PI * 2);
+      ctx.arc(x + 26 * scale, y - 2 * scale, 2.5 * scale, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
     }
 
@@ -2033,6 +2014,11 @@
       ctx.arc(cx - 14, cy - r + 4, 7, 0, Math.PI * 2);
       ctx.arc(cx + 14, cy - r + 4, 7, 0, Math.PI * 2);
       ctx.fill();
+      ctx.fillStyle = '#ffb3c6';
+      ctx.beginPath();
+      ctx.arc(cx - 14, cy - r + 4, 4, 0, Math.PI * 2);
+      ctx.arc(cx + 14, cy - r + 4, 4, 0, Math.PI * 2);
+      ctx.fill();
 
       ctx.fillStyle = color.main;
       ctx.beginPath();
@@ -2041,6 +2027,12 @@
       ctx.lineWidth = 3;
       ctx.strokeStyle = '#ffffff';
       ctx.stroke();
+
+      ctx.fillStyle = color.blush;
+      ctx.beginPath();
+      ctx.arc(cx - 11, cy + 5, 4.5, 0, Math.PI * 2);
+      ctx.arc(cx + 11, cy + 5, 4.5, 0, Math.PI * 2);
+      ctx.fill();
 
       const eyeLook = (charFacing === 'left') ? -4 : 4;
 
@@ -2062,6 +2054,8 @@
         ctx.beginPath();
         ctx.arc(cx - 7 + eyeLook, cy - 3.5, 1.8, 0, Math.PI * 2);
         ctx.arc(cx + 5 + eyeLook, cy - 3.5, 1.8, 0, Math.PI * 2);
+        ctx.arc(cx - 5 + eyeLook, cy - 0.5, 0.9, 0, Math.PI * 2);
+        ctx.arc(cx + 7 + eyeLook, cy - 0.5, 0.9, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -2072,7 +2066,7 @@
       ctx.stroke();
 
       if (charName) {
-        ctx.fillStyle = '#0284c7';
+        ctx.fillStyle = '#e01e37';
         ctx.font = 'bold 11px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(charName, cx, cy - r - 8);
@@ -2109,6 +2103,15 @@
         ctx.strokeStyle = '#f97316';
         ctx.lineWidth = 2.5;
         ctx.stroke();
+
+        ctx.fillStyle = '#fef08a';
+        ctx.beginPath();
+        ctx.roundRect(px + p.w / 2 - 10, py - 5, 20, 9, 3);
+        ctx.fill();
+        ctx.strokeStyle = '#eab308';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
       } else if (p.type === 'jelly') {
         ctx.fillStyle = '#a7f3d0';
         ctx.beginPath();
@@ -2117,6 +2120,13 @@
         ctx.strokeStyle = '#10b981';
         ctx.lineWidth = 2.5;
         ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(px + 15, py + 8, 3, 0, Math.PI * 2);
+        ctx.arc(px + p.w - 18, py + 9, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
       } else if (p.type === 'ice') {
         ctx.fillStyle = '#cffafe';
         ctx.beginPath();
@@ -2125,6 +2135,12 @@
         ctx.strokeStyle = '#38bdf8';
         ctx.lineWidth = 2.5;
         ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(px + 6, py + 3, p.w - 12, 4, 2);
+        ctx.fill();
+
       } else if (p.type === 'disappear') {
         ctx.fillStyle = '#fbcfe8';
         ctx.beginPath();
@@ -2135,22 +2151,29 @@
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.setLineDash([]);
+
       } else if (p.type === 'cake') {
-        ctx.fillStyle = '#e0f2fe';
+        ctx.fillStyle = '#ffe4e6';
         ctx.beginPath();
         ctx.roundRect(px, py, p.w, p.h, 12);
         ctx.fill();
-        ctx.strokeStyle = '#0284c7';
+        ctx.fillStyle = '#fb7185';
+        ctx.beginPath();
+        ctx.roundRect(px, py, p.w, 7, [12, 12, 0, 0]);
+        ctx.fill();
+        ctx.strokeStyle = '#f43f5e';
         ctx.lineWidth = 2;
         ctx.stroke();
+
       } else {
-        ctx.fillStyle = '#cbd5e1';
+        ctx.fillStyle = '#b45309';
         ctx.beginPath();
         ctx.roundRect(px, py, p.w, p.h, 10);
         ctx.fill();
-        ctx.strokeStyle = '#64748b';
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        ctx.fillStyle = '#78350f';
+        for (let i = 8; i < p.w - 12; i += 20) {
+          ctx.fillRect(px + i, py + 4, 14, p.h - 8);
+        }
       }
 
       ctx.restore();
