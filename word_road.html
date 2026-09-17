@@ -645,8 +645,8 @@
         mode: "matching",
         q: "ภารกิจ: แตะจับคู่ 'คำสั่งจัดการเอกสาร' กับ 'คีย์ลัด' ให้ถูกต้องทั้ง 2 คู่:",
         pairs: [
-          { action: "บันทึกเอกสาร (Save)", key: "Ctrl + S" },
-          { action: "สร้างเอกสารใหม่ (New)", key: "Ctrl + N" }
+          { action: "บันทึกเอกสาร", key: "Ctrl + S" },
+          { action: "สร้างเอกสารใหม่", key: "Ctrl + N" }
         ],
         knTitle: "คีย์ลัดการจัดการไฟล์เอกสาร",
         knText: "<b>Ctrl + S</b> ใช้บันทึกเอกสารด่วนเพื่อกันข้อมูลสูญหาย และ <b>Ctrl + N</b> ใช้สร้างหน้าต่างเอกสารเปล่าแผ่นใหม่"
@@ -656,7 +656,7 @@
         mode: "choice",
         q: "ภารกิจ: ขณะพิมพ์รายงาน เผลอกดลบข้อความสำคัญหายไปทั้งย่อหน้า จะต้องกดคีย์ลัดคู่ใดเพื่อดึงข้อมูลกลับคืนมาทันที:",
         target: "Ctrl + Z (Undo)",
-        opts: ["Ctrl + X (Cut)", "Ctrl + Z (Undo)", "Ctrl + Y (Redo)", "Ctrl + A (Select All)"],
+        opts: ["Ctrl + X", "Ctrl + Z ", "Ctrl + Y ", "Ctrl + A "],
         knTitle: "การยกเลิกคำสั่งล่าสุด (Undo)",
         knText: "เมื่อทำงานพลาดหรือเผลอลบข้อความ ให้ใช้คีย์ลัด <b>Ctrl + Z (Undo)</b> เพื่อดึงข้อมูลเดิมกลับคืนมาทันที แต่หากต้องการทำซ้ำคำสั่งให้กด <b>Ctrl + Y (Redo)</b>"
       },
@@ -665,8 +665,8 @@
         mode: "matching",
         q: "ภารกิจ: แตะจับคู่ 'รูปแบบตัวอักษร' กับ 'คีย์ลัดคำสั่ง' ให้ถูกต้องครบทั้ง 2 คู่:",
         pairs: [
-          { action: "ตัวหนา (Bold)", key: "Ctrl + B" },
-          { action: "ตัวเอียง (Italic)", key: "Ctrl + I" }
+          { action: "ตัวหนา", key: "Ctrl + B" },
+          { action: "ตัวเอียง", key: "Ctrl + I" }
         ],
         knTitle: "คีย์ลัดปรับแต่งลักษณะตัวอักษร",
         knText: "<b>Ctrl + B</b> ย่อมาจาก Bold ใช้ทำตัวหนาเพื่อเน้นหัวข้อ และ <b>Ctrl + I</b> ย่อมาจาก Italic ใช้ทำตัวเอียงสำหรับคำศัพท์เฉพาะ"
@@ -684,7 +684,7 @@
         mode: "choice",
         q: "ภารกิจ: เครื่องมือใดใช้สำหรับสร้างรายการข้อความที่มีลำดับ 1, 2, 3 ก่อนหลัง:",
         target: "Numbering",
-        opts: ["Bullets (สัญลักษณ์จุด)", "Numbering (ลำดับเลข)", "Multilevel List (หลายระดับ)"],
+        opts: ["Bullets", "Numbering ", "Multilevel List"],
         knTitle: "เครื่องมือลำดับเลข (Numbering)",
         knText: "เมื่อข้อความมีขั้นตอนที่ต้องทำตามลำดับก่อนหลัง ให้ใช้คำสั่ง <b>Numbering (ลำดับเลข)</b> แต่หากเป็นรายการทั่วไปที่สลับลำดับได้ ให้ใช้ <b>Bullets (สัญลักษณ์จุด)</b>"
       },
@@ -693,7 +693,7 @@
         mode: "choice",
         q: "ภารกิจ: คำสั่ง Wrap Text รูปแบบใดทำให้ข้อความไหลล้อมรอบกรอบรูปภาพอย่างอิสระ:",
         target: "Square",
-        opts: ["In Line with Text (แนวเดียวกับข้อความ)", "Square (จัตุรัส)", "Behind Text (หลังข้อความ)"],
+        opts: ["In Line with Text ", "Square ", "Behind Text"],
         knTitle: "การตัดข้อความล้อมรูปภาพ (Wrap Text)",
         knText: "การตั้งค่า <b>Wrap Text</b> เป็น <b>Square</b> จะช่วยให้ข้อความไหลล้อมรอบกรอบสี่เหลี่ยมของภาพ และทำให้สามารถเลื่อนตำแหน่งภาพได้อย่างอิสระ"
       },
@@ -710,7 +710,7 @@
         mode: "choice",
         q: "ภารกิจ: หากต้องการพิมพ์เอกสารที่มีตารางกว้าง ต้องตั้งค่าหน้ากระดาษแบบใดในเมนู Orientation:",
         target: "แนวนอน (Landscape)",
-        opts: ["แนวตั้ง (Portrait)", "แนวนอน (Landscape)", "แนวแบ่งคอลัมน์ (Columns)"],
+        opts: ["Portrait", "Landscape", "Columns"],
         knTitle: "การวางแนวกระดาษ (Page Orientation)",
         knText: "ในแท็บ <b>Layout (เค้าโครง)</b> คำสั่ง <b>Orientation</b> มี 2 แบบ: <b>Portrait (แนวตั้ง)</b> สำหรับเอกสารทั่วไป และ <b>Landscape (แนวนอน)</b> สำหรับตารางหรือรูปภาพขนาดกว้าง"
       },
@@ -1400,9 +1400,9 @@
             <div style="height:5px; background:#e2e8f0; width:100%; border-radius:4px; margin-top:6px;"></div>
           </div>
           <div style="display:flex; gap:8px;">
-            <button class="ribbon-btn" onclick="applyAlignment('left', ${stageIdx})">ชิดซ้าย</button>
-            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center', ${stageIdx})">กึ่งกลาง</button>
-            <button class="ribbon-btn" onclick="applyAlignment('right', ${stageIdx})">ชิดขวา</button>
+            <button class="ribbon-btn" onclick="applyAlignment('left', ${stageIdx})">left</button>
+            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center', ${stageIdx})">center</button>
+            <button class="ribbon-btn" onclick="applyAlignment('right', ${stageIdx})">right</button>
           </div>
         `;
       }
