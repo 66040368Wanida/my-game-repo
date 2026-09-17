@@ -4,8 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Hunter Cyber Mission - Perfect Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
+    :root {
+      --primary: #00a2ff;
+      --yellow: #facc15;
+      --green: #00b06f;
+      --red: #ef4444;
+      --surface: #111827;
+      --border: rgba(255, 255, 255, 0.18);
+    }
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -21,7 +32,7 @@
       overflow: hidden;
       background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
       color: #f8fafc;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Kanit', sans-serif;
       position: fixed;
     }
     body {
@@ -32,13 +43,13 @@
     }
     .container {
       background: rgba(255, 255, 255, 0.96);
-      border: 2px solid rgba(255, 117, 143, 0.4);
+      border: 2px solid rgba(56, 189, 248, 0.4);
       border-radius: 28px;
       padding: clamp(16px, 3.5vw, 24px);
       max-width: 480px;
       width: min(90%, 480px);
       text-align: center;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 117, 143, 0.2);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
       backdrop-filter: blur(20px);
       max-height: 88dvh;
       overflow-y: auto;
@@ -47,20 +58,20 @@
       color: #0f172a;
     }
     h1 {
-      color: #e01e37;
+      color: #0284c7;
       margin: 0 0 6px 0;
       font-size: clamp(20px, 5vw, 26px);
       letter-spacing: 0.5px;
       font-weight: 900;
     }
     h2 {
-      color: #e01e37;
+      color: #0284c7;
       font-weight: 800;
       font-size: clamp(18px, 4.5vw, 22px);
       margin: 0 0 10px 0;
     }
     .btn {
-      background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       color: white;
       border: none;
       padding: 13px;
@@ -70,11 +81,16 @@
       cursor: pointer;
       width: 100%;
       margin: 8px 0;
-      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
-      display: block;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
       transition: all 0.15s ease;
     }
     .btn:active { transform: scale(0.97); }
+    .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
     .btn-sweet-green {
       background: linear-gradient(135deg, #34d399 0%, #059669 100%);
       color: white;
@@ -86,17 +102,22 @@
       width: 100%;
       box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
       transition: all 0.15s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
     }
     .btn-sweet-green:active { transform: scale(0.97); }
+    .btn-sweet-green svg { width: 18px; height: 18px; fill: currentColor; }
 
     input, select {
       width: 100%;
       padding: 12px 14px;
       margin: 5px 0 10px 0;
       border-radius: 16px;
-      border: 2px solid #ffccd5;
-      background: #fff5f7;
-      color: #e01e37;
+      border: 2px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
       text-align: center;
       font-size: 15px;
       font-weight: bold;
@@ -106,20 +127,21 @@
       transition: all 0.2s;
     }
     input:focus, select:focus {
-      border-color: #ff4d6d;
+      border-color: #0284c7;
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
     }
     .pin-display {
       font-size: clamp(32px, 8vw, 42px);
       letter-spacing: 6px;
       font-weight: 900;
-      color: #e01e37;
-      background: #ffe4e6;
+      color: #0284c7;
+      background: #f0f9ff;
       padding: 6px;
       border-radius: 18px;
       margin: 8px 0;
-      border: 2.5px dashed #ff758f;
+      border: 2.5px dashed #38bdf8;
+      font-family: 'Chakra Petch', sans-serif;
     }
     .qr-container {
       display: flex;
@@ -131,7 +153,7 @@
       width: fit-content;
       margin: 8px auto;
       box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      border: 1px solid #ffe4e6;
+      border: 1px solid #e2e8f0;
     }
     .badge-list {
       display: flex;
@@ -143,20 +165,20 @@
       overflow-y: auto;
     }
     .badge-player {
-      background: #ffe4e6;
-      border: 1.5px solid #ff758f;
+      background: #f0f9ff;
+      border: 1.5px solid #38bdf8;
       padding: 5px 10px;
       border-radius: 20px;
       font-size: 12px;
-      color: #e01e37;
+      color: #0369a1;
       font-weight: bold;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 6px rgba(255, 117, 143, 0.2);
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
     }
     .badge-kick-btn {
-      background: #e11d48;
+      background: #ef4444;
       color: white;
       border: none;
       border-radius: 50%;
@@ -174,12 +196,171 @@
     .badge-kick-btn:active { transform: scale(0.9); }
     .hidden { display: none !important; }
 
+    /* START SCREEN: กติกาและเริ่มเล่นสไตล์ Arcade แบบเวกเตอร์ 100% */
+    #start-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(14, 165, 233, 0.45) 0%, rgba(15, 23, 42, 0.94) 80%);
+      backdrop-filter: blur(12px);
+      z-index: 250;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+    }
+    .start-modal {
+      background: rgba(255, 255, 255, 0.96);
+      border: 4px solid #38bdf8;
+      border-radius: 32px;
+      padding: 30px 24px;
+      max-width: 530px;
+      width: 92%;
+      text-align: center;
+      color: #0f172a;
+      box-shadow: 0 25px 60px rgba(2, 132, 199, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .hero-banner {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      margin: -30px -24px 20px -24px;
+      padding: 24px 16px 18px;
+      border-bottom: 4px solid #facc15;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .game-logo-title {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0px #0369a1, 0 0 18px rgba(250, 204, 21, 0.6);
+      line-height: 1.1;
+      font-family: 'Chakra Petch', 'Kanit', sans-serif;
+    }
+    .game-sub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      background: #facc15;
+      color: #713f12;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      box-shadow: 0 3px 0 #ca8a04;
+    }
+    .game-sub-badge svg { width: 16px; height: 16px; fill: #713f12; }
+
+    .rule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .rule-card {
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .rule-card.points {
+      background: #fefce8;
+      border-color: #fde047;
+    }
+    .rule-header {
+      font-size: 0.9rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rule-card .rule-header { color: #0284c7; }
+    .rule-card .rule-header svg { width: 18px; height: 18px; fill: #0284c7; flex-shrink: 0; }
+
+    .rule-card.points .rule-header { color: #ca8a04; }
+    .rule-card.points .rule-header svg { width: 18px; height: 18px; fill: #ca8a04; flex-shrink: 0; }
+
+    .rule-card p {
+      font-size: 0.8rem;
+      color: #475569;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .rule-banner-single {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-size: 0.84rem;
+      color: #334155;
+      margin-bottom: 16px;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+    .rule-banner-single svg { width: 19px; height: 19px; fill: #0284c7; flex-shrink: 0; margin-top: 2px; }
+
+    .start-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 3px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+    .start-input:focus {
+      border-color: #0284c7;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
+    }
+    .start-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 15px;
+      border-radius: 18px;
+      border: none;
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #047857, 0 10px 18px rgba(16, 185, 129, 0.35);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .start-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #047857;
+    }
+    .start-btn svg { width: 22px; height: 22px; fill: #ffffff; }
+
     #teacher-auth-modal {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -188,7 +369,7 @@
     }
     .teacher-auth-card {
       background: rgba(255, 255, 255, 0.98);
-      border: 2px solid rgba(255, 117, 143, 0.5);
+      border: 2px solid rgba(56, 189, 248, 0.5);
       border-radius: 24px;
       padding: 24px 20px;
       max-width: 360px;
@@ -281,17 +462,15 @@
       pointer-events: none;
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 2px solid rgba(255, 117, 143, 0.45);
+      border: 2px solid rgba(56, 189, 248, 0.45);
       border-radius: 30px;
       padding: 6px 10px;
-      box-shadow: 0 10px 25px rgba(255, 117, 143, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
-      transition: all 0.3s ease;
     }
     .stat-pill {
       background: #ffffff;
-      border: 1.5px solid #ffccd5;
+      border: 1.5px solid #bae6fd;
       padding: 5px 8px;
       border-radius: 16px;
       font-weight: 800;
@@ -301,11 +480,12 @@
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 2px;
+      gap: 4px;
       flex-shrink: 0;
     }
+    .stat-pill svg { width: 14px; height: 14px; fill: currentColor; }
     .btn-top-quiz {
-      background: linear-gradient(135deg, #ff758f, #ff4d6d);
+      background: linear-gradient(135deg, #0284c7, #0369a1);
       border: 1.5px solid #ffffff;
       color: white;
       padding: 6px 10px;
@@ -313,11 +493,16 @@
       font-weight: 900;
       font-size: clamp(11px, 2.7vw, 13px);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.35);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
       pointer-events: auto;
       white-space: nowrap;
       flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
+    .btn-top-quiz svg { width: 14px; height: 14px; fill: #facc15; }
+
     .btn-music-toggle {
       background: #ffffff;
       border: 1.5px solid #bae6fd;
@@ -329,7 +514,11 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       white-space: nowrap;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .btn-music-toggle svg { width: 16px; height: 16px; fill: #0284c7; }
 
     @media (min-width: 768px) {
       .game-top-bar {
@@ -371,7 +560,6 @@
     .touch-dpad-container {
       background: rgba(255, 255, 255, 0.82);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       border: 2.5px solid rgba(255, 255, 255, 0.95);
       border-radius: 36px;
       padding: 8px;
@@ -390,18 +578,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: clamp(26px, 6vw, 32px);
-      font-weight: 900;
       box-shadow: 0 5px 0 #7dd3fc, 0 8px 16px rgba(2, 132, 199, 0.18);
       transition: all 0.08s ease;
       cursor: pointer;
       touch-action: none;
     }
+    .touch-btn-arrow svg { width: 30px; height: 30px; fill: #0284c7; }
     .touch-btn-arrow.active {
       transform: translateY(4px);
       box-shadow: 0 1px 0 #7dd3fc;
       background: #e0f2fe;
-      color: #0369a1;
     }
     .action-pad {
       pointer-events: auto;
@@ -424,9 +610,8 @@
       transition: all 0.08s ease;
       cursor: pointer;
       touch-action: none;
-      font-size: clamp(32px, 7.5vw, 40px);
-      line-height: 1;
     }
+    .touch-btn-jump svg { width: 38px; height: 38px; fill: #ffffff; }
     .touch-btn-jump.active {
       transform: translateY(5px);
       box-shadow: 0 2px 0 #047857;
@@ -456,17 +641,16 @@
     }
 
     .cheer-box {
-      background: linear-gradient(135deg, #fff1f2, #ffe4e6);
-      border: 2px dashed #ff758f;
+      background: #f0fdf4;
+      border: 2px dashed #86efac;
       border-radius: 18px;
       padding: 12px;
       margin: 10px 0;
       font-size: 13px;
       line-height: 1.4;
-      color: #9f1239;
+      color: #166534;
       font-weight: bold;
     }
-
     .error-review-box {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -482,7 +666,7 @@
 
     #quiz-modal, #questionBankModal {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(10px);
       display: flex;
@@ -497,16 +681,16 @@
       border-radius: 24px;
       width: 100%;
       max-width: 440px;
-      border: 2.5px solid #ff758f;
+      border: 2.5px solid #38bdf8;
       text-align: center;
       box-shadow: 0 25px 50px rgba(0,0,0,0.25);
       max-height: 85dvh;
       overflow-y: auto;
     }
     .quiz-option {
-      background: #fff5f7;
-      border: 1.5px solid #ffccd5;
-      color: #e01e37;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #0f172a;
       padding: 10px 14px;
       border-radius: 14px;
       width: 100%;
@@ -517,7 +701,7 @@
       font-weight: 600;
       transition: all 0.15s;
     }
-    .quiz-option:active { background: #ff758f; color: white; border-color: #ff758f; }
+    .quiz-option:active { background: #e0f2fe; border-color: #0284c7; color: #0284c7; }
 
     .leaderboard-table, .host-table {
       width: 100%;
@@ -566,7 +750,7 @@
 
     .qb-modal-card {
       background: #ffffff;
-      border: 2.5px solid #ff758f;
+      border: 2.5px solid #38bdf8;
       border-radius: 24px;
       padding: 20px;
       max-width: 680px;
@@ -584,7 +768,7 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 10px;
-      border-bottom: 1.5px solid #ffe4e6;
+      border-bottom: 1.5px solid #e2e8f0;
       margin-bottom: 10px;
       flex-shrink: 0;
     }
@@ -600,17 +784,17 @@
       border-radius: 12px;
       font-size: 12px;
       font-weight: bold;
-      border: 1.5px solid #ffccd5;
-      background: #fff5f7;
-      color: #e01e37;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0284c7;
       cursor: pointer;
       transition: all 0.15s;
     }
     .qb-tab-btn.active {
-      background: #ff4d6d;
+      background: #0284c7;
       color: white;
-      border-color: #ff4d6d;
-      box-shadow: 0 3px 10px rgba(255, 77, 109, 0.3);
+      border-color: #0284c7;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
     }
     .qb-body-scroll {
       flex: 1;
@@ -619,7 +803,7 @@
     }
     .qb-question-card {
       background: #ffffff;
-      border: 1.5px solid #fecdd3;
+      border: 1.5px solid #e2e8f0;
       border-radius: 14px;
       padding: 12px;
       margin-bottom: 8px;
@@ -641,9 +825,9 @@
     }
     .qb-btn-edit:hover { background: #2563eb; color: white; }
     .qb-btn-delete {
-      background: #fff1f2;
-      border: 1px solid #fda4af;
-      color: #e11d48;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
       padding: 4px 10px;
       border-radius: 8px;
       font-weight: bold;
@@ -651,7 +835,7 @@
       cursor: pointer;
       flex-shrink: 0;
     }
-    .qb-btn-delete:hover { background: #e11d48; color: white; }
+    .qb-btn-delete:hover { background: #dc2626; color: white; }
     .qb-form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -663,7 +847,7 @@
   </style>
   <script>
     function switchScreen(id) {
-      ['view-mode', 'view-host', 'view-host-live', 'view-join', 'view-waiting', 'game-wrapper', 'view-result'].forEach(function(v) {
+      ['start-screen', 'view-mode', 'view-host', 'view-host-live', 'view-join', 'view-waiting', 'game-wrapper', 'view-result'].forEach(function(v) {
         var el = document.getElementById(v);
         if (el) el.classList.add('hidden');
       });
@@ -676,10 +860,55 @@
 
   <div id="toast-msg">แจ้งเตือน</div>
 
+  <!-- START SCREEN: หน้าคู่มือการเล่น สไตล์เดียวกับ Word Road ไร้อีโมจิ 100% -->
+  <div id="start-screen">
+    <div class="start-modal">
+      <div class="hero-banner">
+        <div class="game-logo-title">HUNTER CYBER</div>
+        <div class="game-sub-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.59L16.59 13 18 14.41 12 20.41l-6-6L7.41 13 11 16.59V4h2v12.59z" transform="rotate(180 12 12)"/></svg>
+          <span>ภารกิจกระโดดชิงความสูง พิชิต Microsoft Word ม.1</span>
+        </div>
+      </div>
+
+      <div class="rule-grid">
+        <div class="rule-card">
+          <div class="rule-header">
+            <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            <span>วิธีการบังคับ</span>
+          </div>
+          <p>• ใช้ปุ่มซ้าย-ขวา / ปุ่ม A-D เคลื่อนที่<br>• กดปุ่มลูกศรขึ้น / Spacebar เพื่อกระโดด</p>
+        </div>
+
+        <div class="rule-card points">
+          <div class="rule-header">
+            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+            <span>พลังงานและคำถาม</span>
+          </div>
+          <p>• กระโดดแต่ละครั้งใช้พลังงาน 1 หน่วย<br>• พลังงานหมดหรือติดกับดัก ตอบคำถามเพื่อชาร์จ</p>
+        </div>
+      </div>
+
+      <div class="rule-banner-single">
+        <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+        <div><b>เป้าหมายภารกิจ:</b> กระโดดไต่แผ่นแพลตฟอร์มขึ้นไปให้สูงที่สุด แข่งขันความสูงกับเพื่อนแบบออนไลน์เรียลไทม์!</div>
+      </div>
+
+      <input type="text" id="start-player-name" class="start-input" placeholder="พิมพ์ชื่อ - นามสกุล หรือ เลขที่..." autocomplete="off" />
+
+      <button class="start-btn" onclick="confirmStartScreen()">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        เข้าสู่ระบบการแข่งขัน (START MISSION)
+      </button>
+    </div>
+  </div>
+
   <div id="teacher-auth-modal" class="hidden">
     <div class="teacher-auth-card">
-      <div style="font-size: 38px; margin-bottom: 6px;">👑</div>
-      <h3 style="margin: 0 0 6px 0; font-size: 18px; color: #e01e37; font-weight: 900;">ยืนยันตัวตนผู้สอน</h3>
+      <div style="margin-bottom: 6px;">
+        <svg viewBox="0 0 24 24" width="38" height="38" fill="#0284c7"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+      </div>
+      <h3 style="margin: 0 0 6px 0; font-size: 18px; color: #0284c7; font-weight: 900;">ยืนยันตัวตนผู้สอน</h3>
       <p style="font-size: 12px; color: #64748b; margin: 0 0 14px 0;">กรุณากรอกรหัสผ่านสำหรับคุณครู (รหัสเริ่มต้น: 1234)</p>
       
       <input type="password" id="input-teacher-pwd" placeholder="รหัสผ่านคุณครู..." maxlength="10" style="margin-bottom: 12px; font-size: 16px;">
@@ -691,11 +920,17 @@
     </div>
   </div>
 
-  <div id="view-mode" class="container">
+  <div id="view-mode" class="container hidden">
     <h1>HUNTER CYBER MISSION</h1>
     <p style="color: #64748b; font-size:14px; margin-bottom: 20px;">เกมตอบคำถามชิงความสูง (Word Master)</p>
-    <button class="btn" id="btn-mode-host" onclick="openTeacherModal()">👑 คุณครู / ผู้สอน (Host)</button>
-    <button class="btn" id="btn-mode-join" style="background:#475569;" onclick="switchScreen('view-join')">🎮 นักเรียน / ผู้เรียน (Join)</button>
+    <button class="btn" id="btn-mode-host" onclick="openTeacherModal()">
+      <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+      <span>คุณครู / ผู้สอน (Host)</span>
+    </button>
+    <button class="btn" id="btn-mode-join" style="background:#475569;" onclick="switchScreen('view-join')">
+      <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      <span>นักเรียน / ผู้เรียน (Join)</span>
+    </button>
   </div>
 
   <div id="view-host" class="container hidden">
@@ -705,23 +940,26 @@
     
     <div class="qr-container">
       <div id="qrcode"></div>
-      <span style="color:#e01e37; font-size:11px; font-weight:bold; margin-top:4px;">สแกนเพื่อเข้าห้อง</span>
+      <span style="color:#0284c7; font-size:11px; font-weight:bold; margin-top:4px;">สแกนเพื่อเข้าห้อง</span>
     </div>
     
-    <button class="btn" id="btn-copy-link" style="padding:9px; font-size:12px; margin:4px 0 10px 0;">📋 คัดลอกลิงก์ส่งให้นักเรียน</button>
+    <button class="btn" id="btn-copy-link" style="padding:9px; font-size:12px; margin:4px 0 10px 0;">
+      <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <span>คัดลอกลิงก์ส่งให้นักเรียน</span>
+    </button>
 
     <div style="text-align: left; margin-top: 6px;">
-      <label style="color:#64748b; font-size:13px; font-weight:bold;">⚡ ค่าพลังงานเริ่มต้น:</label>
+      <label style="color:#64748b; font-size:13px; font-weight:bold;">ค่าพลังงานเริ่มต้น:</label>
       <select id="select-energy">
-        <option value="3">3 ⚡ (ท้าทายสุดๆ)</option>
-        <option value="5" selected>5 ⚡ (มาตรฐาน)</option>
-        <option value="8">8 ⚡ (ปานกลาง)</option>
-        <option value="10">10 ⚡ (ง่าย)</option>
-        <option value="15">15 ⚡ (สบายๆ)</option>
-        <option value="20">20 ⚡ (กระโดดรัว)</option>
+        <option value="3">3 หน่วย (ท้าทายสุดๆ)</option>
+        <option value="5" selected>5 หน่วย (มาตรฐาน)</option>
+        <option value="8">8 หน่วย (ปานกลาง)</option>
+        <option value="10">10 หน่วย (ง่าย)</option>
+        <option value="15">15 หน่วย (สบายๆ)</option>
+        <option value="20">20 หน่วย (กระโดดรัว)</option>
       </select>
 
-      <label style="color:#64748b; font-size:13px; font-weight:bold;">⏱️ ระยะเวลาแข่งขัน:</label>
+      <label style="color:#64748b; font-size:13px; font-weight:bold;">ระยะเวลาแข่งขัน:</label>
       <select id="select-duration">
         <option value="1">1 นาที (ทดสอบ)</option>
         <option value="3" selected>3 นาที</option>
@@ -732,37 +970,40 @@
 
     <p style="margin: 10px 0 4px 0; font-size:13px; color:#64748b;">ผู้เล่นในห้อง (<span id="player-count">0</span> คน):</p>
     <div id="host-players" class="badge-list"></div>
-    <button id="btn-start" class="btn btn-sweet-green" disabled>🚀 เริ่มการแข่งขัน</button>
+    <button id="btn-start" class="btn btn-sweet-green" disabled>
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <span>เริ่มการแข่งขัน</span>
+    </button>
   </div>
 
   <div id="view-host-live" class="hidden">
     <div class="host-header-card">
       <div style="display: flex; align-items: center; gap: 10px;">
         <button onclick="location.reload()" style="padding: 7px 12px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer;">
-          🔙 ออกจากห้อง
+          ออกจากห้อง
         </button>
         <div style="text-align: left;">
-          <h2 style="font-size: 16px; font-weight: 900; color: #fb7185; margin: 0; line-height: 1.2;">👑 HOST DASHBOARD</h2>
-          <p style="font-size: 11px; color: #94a3b8; margin: 0;">ห้อง: <span id="live-room-pin" style="font-weight: 900; color: #fda4af;">------</span> | ออนไลน์: <span id="live-player-count" style="font-weight: 900; color: #34d399;">0</span> คน</p>
+          <h2 style="font-size: 16px; font-weight: 900; color: #38bdf8; margin: 0; line-height: 1.2;">HOST DASHBOARD</h2>
+          <p style="font-size: 11px; color: #94a3b8; margin: 0;">ห้อง: <span id="live-room-pin" style="font-weight: 900; color: #7dd3fc;">------</span> | ออนไลน์: <span id="live-player-count" style="font-weight: 900; color: #34d399;">0</span> คน</p>
         </div>
       </div>
       
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button onclick="openQuestionBankModal()" style="padding: 7px 12px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
-          📝 จัดการคลังคำถาม (<span id="total-q-count">20</span>)
+        <button onclick="openQuestionBankModal()" style="padding: 7px 12px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);">
+          จัดการคลังคำถาม (<span id="total-q-count">20</span>)
         </button>
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 12px; font-family: monospace; font-size: 17px; color: #fde047; font-weight: 900;">
-          ⏱️ <span id="host-timer-text">03:00</span>
+          <span id="host-timer-text">03:00</span>
         </div>
         <button onclick="exportDataCSV()" class="btn-sweet-green" style="width: auto; padding: 7px 14px; margin: 0; font-size: 11px;">
-          📥 Excel (.csv)
+          Excel (.csv)
         </button>
       </div>
     </div>
 
     <div class="host-leader-bar">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="font-size: 26px;">👑</span>
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="#facc15"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
         <div style="text-align: left;">
           <div style="font-size: 10px; color: #fcd34d; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">ผู้นำอันดับ 1</div>
           <div id="leader-name" style="font-size: 16px; font-weight: 900; color: white;">รอเริ่มกระโดด...</div>
@@ -796,17 +1037,17 @@
     <div class="qb-modal-card">
       <div class="qb-header">
         <div>
-          <h2 style="font-size: 16px; font-weight: 900; color: #e01e37; margin: 0;">
-            📝 คลังข้อสอบ & จัดการคำถาม
+          <h2 style="font-size: 16px; font-weight: 900; color: #0284c7; margin: 0;">
+            คลังข้อสอบ & จัดการคำถาม
           </h2>
-          <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #e01e37;">20</b> ข้อ</p>
+          <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #0284c7;">20</b> ข้อ</p>
         </div>
-        <button onclick="closeQuestionBankModal()" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">✕ ปิด</button>
+        <button onclick="closeQuestionBankModal()" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">ปิด</button>
       </div>
 
       <div class="qb-tabs">
-        <button id="qb-tab-view" class="qb-tab-btn active" onclick="switchQbTab('view')">📋 รายการข้อสอบ</button>
-        <button id="qb-tab-add" class="qb-tab-btn" onclick="prepareAddQuestion()">➕ เพิ่ม / แก้ไขข้อสอบ</button>
+        <button id="qb-tab-view" class="qb-tab-btn active" onclick="switchQbTab('view')">รายการข้อสอบ</button>
+        <button id="qb-tab-add" class="qb-tab-btn" onclick="prepareAddQuestion()">เพิ่ม / แก้ไขข้อสอบ</button>
       </div>
 
       <div class="qb-body-scroll">
@@ -815,9 +1056,9 @@
         </div>
 
         <div id="qb-panel-add" class="hidden">
-          <div style="background: #fff5f7; border: 1.5px solid #ffccd5; border-radius: 18px; padding: 14px;">
+          <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: 18px; padding: 14px;">
             <input type="hidden" id="edit-q-id" value="">
-            <label id="form-q-title" style="font-size: 12px; font-weight: bold; color: #e01e37; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
+            <label id="form-q-title" style="font-size: 12px; font-weight: bold; color: #0284c7; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
             <input id="new-q-text" type="text" placeholder="พิมพ์โจทย์คำถาม..." style="margin-bottom: 10px; text-align: left; padding: 10px;">
             
             <label style="font-size: 12px; font-weight: bold; color: #475569; display: block; margin-bottom: 4px;">ตัวเลือก 4 ข้อ:</label>
@@ -839,7 +1080,7 @@
                 </select>
               </div>
               <button onclick="saveQuestionItem()" class="btn-sweet-green" style="width: auto; padding: 8px 18px; margin: 0; font-size: 12px;" id="btn-save-question">
-                บันทึกข้อสอบ ➕
+                บันทึกข้อสอบ
               </button>
             </div>
           </div>
@@ -849,7 +1090,7 @@
   </div>
 
   <div id="view-join" class="container hidden">
-    <h2>เข้าสู่สมรภูมิขนมหวาน</h2>
+    <h2>เข้าสู่สมรภูมิกระโดด</h2>
     <input type="text" id="input-pin" placeholder="รหัสห้อง 6 หลัก" maxlength="6" inputmode="numeric">
     <input type="text" id="input-name" placeholder="ชื่อเล่นของคุณ" maxlength="12">
     <button class="btn" id="btn-do-join">เข้าสู่ห้อง</button>
@@ -858,35 +1099,55 @@
 
   <div id="view-waiting" class="container hidden">
     <h2>ห้องเตรียมพร้อม</h2>
-    <p>รหัสห้อง: <b id="wait-pin" style="color:#e01e37;"></b></p>
+    <p>รหัสห้อง: <b id="wait-pin" style="color:#0284c7;"></b></p>
     <p>ผู้เล่น: <b id="wait-name" style="color:#10b981;"></b></p>
-    <p style="color: #f59e0b; margin-top:16px; font-size:14px; font-weight:bold;">⏳ รอสัญญาณปล่อยตัวจากผู้สอน...</p>
+    <p style="color: #f59e0b; margin-top:16px; font-size:14px; font-weight:bold;">รอสัญญาณปล่อยตัวจากผู้สอน...</p>
   </div>
 
   <div id="game-wrapper" class="hidden">
     <canvas id="gameCanvas"></canvas>
 
     <div class="game-top-bar">
-      <div class="stat-pill">⚡ <span id="ui-energy" style="color:#d97706;">5</span></div>
-      <button class="btn-top-quiz" id="btn-open-quiz">⚡ คำถาม (+5)</button>
-      <div class="stat-pill">⏱️ <span id="ui-timer">00:00</span></div>
-      <div class="stat-pill">🎯 <span id="ui-height" style="color:#0284c7;">0</span>m</div>
-      <button class="btn-music-toggle" id="btn-toggle-music">🔊</button>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+        <span id="ui-energy" style="color:#d97706;">5</span>
+      </div>
+      <button class="btn-top-quiz" id="btn-open-quiz">
+        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+        <span>คำถาม (+5)</span>
+      </button>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        <span id="ui-timer">00:00</span>
+      </div>
+      <div class="stat-pill">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.59L16.59 13 18 14.41 12 20.41l-6-6L7.41 13 11 16.59V4h2v12.59z" transform="rotate(180 12 12)"/></svg>
+        <span id="ui-height" style="color:#0284c7;">0</span>m
+      </div>
+      <button class="btn-music-toggle" id="btn-toggle-music" title="เปิด/ปิดเสียง">
+        <svg id="music-svg-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      </button>
     </div>
 
     <div class="controls-bar">
       <div class="touch-dpad-container">
-        <div class="touch-btn-arrow" id="btn-left">◀</div>
-        <div class="touch-btn-arrow" id="btn-right">▶</div>
+        <div class="touch-btn-arrow" id="btn-left">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </div>
+        <div class="touch-btn-arrow" id="btn-right">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
       </div>
       <div class="action-pad">
-        <div class="touch-btn-jump" id="btn-jump">▲</div>
+        <div class="touch-btn-jump" id="btn-jump">
+          <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+        </div>
       </div>
     </div>
 
     <div id="quiz-modal" class="hidden">
       <div class="quiz-card">
-        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#e01e37;">⚡ ตอบคำถาม (+5 ⚡)</h3>
+        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#0284c7;">ตอบคำถาม (+5 พลังงาน)</h3>
         <p id="quiz-q-text" style="font-weight:bold; font-size:13px; margin:10px 0; color:#0f172a; line-height:1.4; text-align: left;"></p>
         <div id="quiz-options-list"></div>
         <button class="btn hidden" id="btn-close-quiz" style="background:#64748b; margin-top:8px; padding:8px;">ปิดหน้าต่าง</button>
@@ -895,14 +1156,14 @@
   </div>
 
   <div id="view-result" class="container hidden">
-    <h2 style="color:#d97706; margin-bottom:4px;">🏁 หมดเวลาการแข่งขัน!</h2>
+    <h2 style="color:#d97706; margin-bottom:4px;">หมดเวลาการแข่งขัน!</h2>
     <p style="color:#64748b; font-size:12px; margin:0 0 6px 0;">ตารางสรุปคะแนนและสถิติการเรียนรู้</p>
     
     <div id="cheer-message" class="cheer-box">
-      🌟 ยอดเยี่ยมมากทุกคน! ไม่ว่าจะอยู่อันดับไหน ความพยายามในการเรียนรู้และฝึกฝนในวันนี้คือพัฒนาการที่ดีเยี่ยม ก้าวต่อไปนะ! 💖
+      ยอดเยี่ยมมากทุกคน! ไม่ว่าจะอยู่อันดับไหน ความพยายามในการเรียนรู้และฝึกฝนในวันนี้คือพัฒนาการที่ดีเยี่ยม ก้าวต่อไปนะ!
     </div>
 
-    <div style="font-weight: bold; font-size: 12px; color: #1e293b; text-align: left; margin-top: 8px;">📝 รายการข้อสอบที่ควรทบทวน:</div>
+    <div style="font-weight: bold; font-size: 12px; color: #1e293b; text-align: left; margin-top: 8px;">รายการข้อสอบที่ควรทบทวน:</div>
     <div id="student-error-review" class="error-review-box">
       กำลังประมวลผลสถิติ...
     </div>
@@ -912,15 +1173,15 @@
         <tr>
           <th>อันดับ/ผู้เล่น</th>
           <th style="text-align:center;">ความสูง</th>
-          <th style="text-align:center;">ถูก (⚡)</th>
+          <th style="text-align:center;">ถูก (พลังงาน)</th>
           <th style="text-align:center;">ผิด</th>
         </tr>
       </thead>
       <tbody id="result-leaderboard-body"></tbody>
     </table>
 
-    <button class="btn btn-excel hidden" id="btn-export-excel">📥 บันทึกคะแนนลงใน Excel (.csv)</button>
-    <button class="btn" id="btn-play-again" style="margin-top:8px; background:#475569;">🔄 เริ่มเกมใหม่</button>
+    <button class="btn btn-excel hidden" id="btn-export-excel">บันทึกคะแนนลงใน Excel (.csv)</button>
+    <button class="btn" id="btn-play-again" style="margin-top:8px; background:#475569;">เริ่มเกมใหม่</button>
   </div>
 
   <script type="module">
@@ -943,6 +1204,16 @@
 
     const TEACHER_PASSWORD = "1234";
 
+    window.confirmStartScreen = function() {
+      const name = document.getElementById('start-player-name').value.trim();
+      if (!name) {
+        alert('กรุณากรอกชื่อ-นามสกุล หรือเลขที่ก่อนเริ่มครับ');
+        return;
+      }
+      document.getElementById('input-name').value = name;
+      switchScreen('view-mode');
+    };
+
     window.openTeacherModal = function() {
       document.getElementById('input-teacher-pwd').value = "";
       document.getElementById('teacher-auth-modal').classList.remove('hidden');
@@ -959,7 +1230,7 @@
         closeTeacherModal();
         window.onHostClick();
       } else {
-        alert("❌ รหัสผ่านไม่ถูกต้อง เฉพาะคุณครูเท่านั้นครับ");
+        alert("รหัสผ่านไม่ถูกต้อง เฉพาะคุณครูเท่านั้นครับ");
         document.getElementById('input-teacher-pwd').value = "";
         document.getElementById('input-teacher-pwd').focus();
       }
@@ -970,14 +1241,12 @@
     });
 
     const SWEET_PALETTES = [
-      { main: '#ff758f', dark: '#e01e37', blush: '#ff4d6d' },
-      { main: '#38bdf8', dark: '#0284c7', blush: '#7dd3fc' },
-      { main: '#34d399', dark: '#059669', blush: '#6ee7b7' },
-      { main: '#fbbf24', dark: '#d97706', blush: '#fcd34d' },
-      { main: '#c084fc', dark: '#7c3aed', blush: '#d8b4fe' },
-      { main: '#f472b6', dark: '#db2777', blush: '#f9a8d4' },
-      { main: '#2dd4bf', dark: '#0d9488', blush: '#5eead4' },
-      { main: '#a3e635', dark: '#65a30d', blush: '#bef264' }
+      { main: '#0284c7', dark: '#0369a1', blush: '#38bdf8' },
+      { main: '#10b981', dark: '#047857', blush: '#34d399' },
+      { main: '#f59e0b', dark: '#b45309', blush: '#fcd34d' },
+      { main: '#8b5cf6', dark: '#6d28d9', blush: '#a78bfa' },
+      { main: '#06b6d4', dark: '#0e7490', blush: '#67e8f9' },
+      { main: '#64748b', dark: '#334155', blush: '#94a3b8' }
     ];
 
     let quizData = [
@@ -1074,7 +1343,6 @@
         audioCtx.resume();
       }
       isMusicPlaying = true;
-      document.getElementById('btn-toggle-music').innerText = "🔊";
       if (musicInterval) clearInterval(musicInterval);
       musicInterval = setInterval(() => {
         if (!isMusicPlaying) return;
@@ -1089,7 +1357,7 @@
       initMusic();
       if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
       isMusicPlaying = !isMusicPlaying;
-      document.getElementById('btn-toggle-music').innerText = isMusicPlaying ? "🔊" : "🔇";
+      document.getElementById('music-svg-icon').style.fill = isMusicPlaying ? "#0284c7" : "#94a3b8";
     };
 
     function showToast(text) {
@@ -1144,7 +1412,7 @@
     window.prepareAddQuestion = function() {
       document.getElementById('edit-q-id').value = "";
       document.getElementById('form-q-title').innerText = "โจทย์คำถามใหม่:";
-      document.getElementById('btn-save-question').innerText = "บันทึกข้อสอบ ➕";
+      document.getElementById('btn-save-question').innerText = "บันทึกข้อสอบ";
       document.getElementById('new-q-text').value = "";
       document.getElementById('new-q-a1').value = "";
       document.getElementById('new-q-a2').value = "";
@@ -1160,7 +1428,7 @@
 
       document.getElementById('edit-q-id').value = item.id;
       document.getElementById('form-q-title').innerText = `แก้ไขโจทย์คำถาม (ข้อ ID: ${item.id}):`;
-      document.getElementById('btn-save-question').innerText = "อัปเดตข้อสอบ 💾";
+      document.getElementById('btn-save-question').innerText = "อัปเดตข้อสอบ";
 
       document.getElementById('new-q-text').value = item.q;
       document.getElementById('new-q-a1').value = item.c[0] || "";
@@ -1192,7 +1460,7 @@
           quizData[itemIdx].q = qText;
           quizData[itemIdx].c = [a1, a2, a3, a4];
           quizData[itemIdx].a = correctIdx;
-          showToast('💾 อัปเดตข้อสอบเรียบร้อย!');
+          showToast('อัปเดตข้อสอบเรียบร้อย');
         }
       } else {
         const newId = quizData.length > 0 ? Math.max(...quizData.map(q => q.id)) + 1 : 1;
@@ -1203,7 +1471,7 @@
           a: correctIdx
         });
         myQuizAnswers[newId] = { firstResult: null };
-        showToast('➕ บันทึกข้อสอบใหม่สำเร็จ!');
+        showToast('บันทึกข้อสอบใหม่สำเร็จ');
       }
 
       renderQuestionBankList();
@@ -1228,7 +1496,7 @@
               ${item.c.map((c, i) => `
                 <div style="margin-bottom: 2px;">
                   <span style="${i === item.a ? 'color: #059669; font-weight: 800; background: #ecfdf5; padding: 1px 6px; border-radius: 6px;' : ''}">
-                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '✓' : ''}
+                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '[ถูกต้อง]' : ''}
                   </span>
                 </div>
               `).join('')}
@@ -1249,13 +1517,13 @@
       }
       quizData = quizData.filter(q => q.id !== id);
       renderQuestionBankList();
-      showToast('🗑️ ลบคำถามเรียบร้อย');
+      showToast('ลบคำถามเรียบร้อย');
     };
 
     window.kickPlayer = function(pid) {
       if (!currentPin || !isHost) return;
       remove(ref(db, `rooms/${currentPin}/players/${pid}`));
-      showToast('เตะผู้เล่นออกจากห้องแล้ว');
+      showToast('นำผู้เล่นออกจากห้องแล้ว');
     };
 
     window.onHostClick = function() {
@@ -1274,7 +1542,7 @@
 
       document.getElementById('btn-copy-link').onclick = () => {
         navigator.clipboard.writeText(joinUrl);
-        showToast('📋 คัดลอกลิงก์เรียบร้อย');
+        showToast('คัดลอกลิงก์เรียบร้อย');
       };
 
       set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
@@ -1365,13 +1633,13 @@
       if (!room) return alert('ไม่พบห้องนี้');
 
       if (room.status !== 'waiting') {
-        return alert('⚠️ การแข่งขันเริ่มต้นไปแล้วหรือสิ้นสุดแล้ว ไม่สามารถเข้าร่วมได้ในขณะนี้');
+        return alert('การแข่งขันเริ่มต้นไปแล้วหรือสิ้นสุดแล้ว ไม่สามารถเข้าร่วมได้ในขณะนี้');
       }
 
       const existingPlayers = room.players || {};
       const isNameTaken = Object.values(existingPlayers).some(p => p.name && p.name.trim().toLowerCase() === name.toLowerCase());
       if (isNameTaken) {
-        return alert('⚠️ ชื่อนี้มีผู้เล่นคนอื่นใช้ในห้องแล้ว กรุณาตั้งชื่อใหม่');
+        return alert('ชื่อนี้มีผู้เล่นคนอื่นใช้ในห้องแล้ว กรุณาตั้งชื่อใหม่');
       }
 
       playerName = name;
@@ -1476,7 +1744,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `คะแนนเกม_ผลรอบแรก_${currentPin || 'SweetWord'}.csv`);
+      link.setAttribute("download", `คะแนนเกม_ผลรอบแรก_${currentPin || 'HunterWord'}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -1528,13 +1796,6 @@
         const accuracy = total > 0 ? accuracyNum.toFixed(0) + "%" : "0%";
 
         let rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:#334155; color:#cbd5e1; font-weight:800; font-size:11px;">${idx + 1}</span>`;
-        if (idx === 0) {
-          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #facc15, #ca8a04); color:#78350f; font-weight:900; font-size:12px; box-shadow:0 0 10px rgba(250, 204, 21, 0.5);">🥇</span>`;
-        } else if (idx === 1) {
-          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #f1f5f9, #94a3b8); color:#1e293b; font-weight:900; font-size:12px; box-shadow:0 0 10px rgba(203, 213, 225, 0.4);">🥈</span>`;
-        } else if (idx === 2) {
-          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #fdba74, #ea580c); color:#431407; font-weight:900; font-size:12px; box-shadow:0 0 10px rgba(249, 115, 22, 0.4);">🥉</span>`;
-        }
 
         tbody.innerHTML += `
           <tr style="transition: transform 0.15s ease;">
@@ -1542,7 +1803,7 @@
             <td style="font-weight: 800; color: white;">${p.name || 'Agent'}</td>
             <td style="text-align: center; font-family: monospace; font-weight: 900; color: #38bdf8; font-size: 14px;">${p.height || 0} m</td>
             <td style="text-align: center; font-weight: 800; color: #34d399;">${correct}</td>
-            <td style="text-align: center; font-weight: 800; color: #fb7185;">${wrong}</td>
+            <td style="text-align: center; font-weight: 800; color: #ef4444;">${wrong}</td>
             <td style="text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
                 <div style="width: 42px; height: 5px; background: #334155; border-radius: 4px; overflow: hidden;">
@@ -1551,7 +1812,7 @@
                 <span style="color: #cbd5e1; font-size: 11px; font-weight: bold; width: 32px;">${accuracy}</span>
               </div>
             </td>
-            <td style="text-align: center; font-weight: 800; color: #fde047;">⚡ ${p.energy !== undefined ? p.energy : energy}</td>
+            <td style="text-align: center; font-weight: 800; color: #fde047;">${p.energy !== undefined ? p.energy : energy}</td>
           </tr>
         `;
       });
@@ -1588,14 +1849,10 @@
 
       sorted.forEach((p, idx) => {
         let badge = `#${idx + 1}`;
-        if (idx === 0) badge = "🥇 1";
-        else if (idx === 1) badge = "🥈 2";
-        else if (idx === 2) badge = "🥉 3";
-
         const isMe = (p.name === playerName);
         tbody.innerHTML += `
-          <tr style="${isMe ? 'background: #ffe4e6; font-weight:bold;' : ''}">
-            <td>${badge} 🍬 ${p.name} ${isMe ? '(คุณ)' : ''}</td>
+          <tr style="${isMe ? 'background: #f0f9ff; font-weight:bold;' : ''}">
+            <td>${badge} ${p.name} ${isMe ? '(คุณ)' : ''}</td>
             <td style="text-align:center; color:#0284c7;">${p.height || 0} m</td>
             <td style="text-align:center; color:#10b981;">${p.correct || 0}</td>
             <td style="text-align:center; color:#ef4444;">${p.wrong || 0}</td>
@@ -1613,23 +1870,23 @@
           wrongItemsCount++;
           const div = document.createElement('div');
           div.className = "mb-1.5 pb-1.5 border-b border-slate-200";
-          div.innerHTML = `❌ <b>โจทย์:</b> ${q.q} <br><span style="color: #e11d48; font-weight: 600;">(รอบแรกตอบ: ผิด)</span>`;
+          div.innerHTML = `[ผิด] <b>โจทย์:</b> ${q.q} <br><span style="color: #ef4444; font-weight: 600;">(รอบแรกตอบ: ไม่ถูกต้อง)</span>`;
           reviewBox.appendChild(div);
         }
       });
 
       if (wrongItemsCount === 0) {
-        reviewBox.innerHTML = "🎉 สุดยอดมาก! คุณตอบคำถามถูกต้องหมดทุกข้อโดยไม่มีข้อผิดพลาดเลย!";
+        reviewBox.innerHTML = "ยอดเยี่ยมมาก! คุณตอบคำถามถูกต้องหมดทุกข้อโดยไม่มีข้อผิดพลาดเลย";
       }
 
       const myRank = sorted.findIndex(p => p.name === playerName);
       const cheerEl = document.getElementById('cheer-message');
       if (myRank === 0) {
-        cheerEl.innerHTML = "🏆 ยอดเยี่ยมที่สุด! คุณคว้าอันดับ 1 มาครองได้อย่างสง่างาม ทั้งทักษะการกระโดดและความรู้ Word สุดยอดมากๆ! 🌟";
+        cheerEl.innerHTML = "ยอดเยี่ยมที่สุด! คุณคว้าอันดับ 1 มาครองได้อย่างสมบูรณ์แบบ ทั้งทักษะการกระโดดและความรู้ Word สุดยอดมากๆ";
       } else if (myRank >= 1 && myRank <= 2) {
-        cheerEl.innerHTML = "🎉 เก่งมากๆ! คุณติด Top 3 บนโพเดียม เก่งและมีความพยายามสูงมาก ภูมิใจในตัวเองได้เลย! 💖";
+        cheerEl.innerHTML = "เก่งมากๆ! คุณติด 3 อันดับแรก มีความพยายามและทำคะแนนได้ยอดเยี่ยมมาก";
       } else {
-        cheerEl.innerHTML = "🌟 ยอดเยี่ยมมาก! ทุกความสูงและทุกคำถามที่ตอบ คือก้าวสำคัญของการเรียนรู้ ฝึกฝนต่อไปเรื่อยๆ คุณทำได้ดียิ่งขึ้นแน่นอน สู้ๆ นะ! 💪✨";
+        cheerEl.innerHTML = "ยอดเยี่ยมมาก! ทุกระดับความสูงและทุกคำถามที่ตอบ คือก้าวสำคัญของการเรียนรู้ ฝึกฝนต่อไปเรื่อยๆ นะครับ";
       }
 
       const btnExcel = document.getElementById('btn-export-excel');
@@ -1653,14 +1910,14 @@
       const modalTitle = document.getElementById('quiz-title');
 
       if (fromTrap) {
-        modalTitle.innerText = "🚨 ติดกับดัก! ตอบให้ถูกเพื่อปลดปล่อย";
+        modalTitle.innerText = "ติดกับดัก! ตอบให้ถูกเพื่อปลดล็อก";
         modalTitle.style.color = "#ef4444";
       } else if (energy <= 0) {
-        modalTitle.innerText = "⚠️ พลังงานหมด! ตอบให้ถูกเพื่อชาร์จ (+5 ⚡)";
+        modalTitle.innerText = "พลังงานหมด! ตอบให้ถูกเพื่อชาร์จ (+5 หน่วย)";
         modalTitle.style.color = "#d97706";
       } else {
-        modalTitle.innerText = "⚡ ตอบคำถามชาร์จพลังงาน (+5 ⚡)";
-        modalTitle.style.color = "#e01e37";
+        modalTitle.innerText = "ตอบคำถามชาร์จพลังงาน (+5 หน่วย)";
+        modalTitle.style.color = "#0284c7";
       }
 
       q.c.forEach((choice, idx) => {
@@ -1670,7 +1927,6 @@
         b.onclick = () => {
           const isCorrect = (idx === q.a);
 
-          // นับและบันทึกลง Excel เฉพาะ 20 ข้อแรกเท่านั้น
           if (totalAnsweredCount < 20) {
             if (!myQuizAnswers[q.id]) {
               myQuizAnswers[q.id] = { firstResult: null };
@@ -1687,12 +1943,12 @@
               isTrapped = false;
               trapImmunity = 100;
               if (releaseFromTrapCallback) releaseFromTrapCallback();
-              showToast('🔓 ถูกต้อง! ปลดล็อกกับดักแล้ว');
+              showToast('ถูกต้อง! ปลดล็อกกับดักแล้ว');
             } else {
               energy += 5;
               correctCount += 1;
               document.getElementById('ui-energy').innerText = energy;
-              showToast('🎉 ถูกต้อง! +5 ⚡');
+              showToast('ถูกต้อง! +5 พลังงาน');
             }
             currentQ++;
 
@@ -1705,7 +1961,7 @@
               });
             }
           } else {
-            showToast('❌ ผิด! ลองตอบข้อนี้ดู');
+            showToast('คำตอบยังไม่ถูกต้อง ลองข้อถัดไป');
             if (!fromTrap) {
               wrongCount += 1;
               if (currentPin && myPlayerId) {
@@ -1734,18 +1990,6 @@
       ctx.arc(x + 40 * scale, y, 20 * scale, 0, Math.PI * 2);
       ctx.arc(x + 20 * scale, y + 8 * scale, 18 * scale, 0, Math.PI * 2);
       ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle = '#ff8fa3';
-      ctx.beginPath();
-      ctx.arc(x + 10 * scale, y + 2 * scale, 3 * scale, 0, Math.PI * 2);
-      ctx.arc(x + 30 * scale, y + 2 * scale, 3 * scale, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#64748b';
-      ctx.beginPath();
-      ctx.arc(x + 14 * scale, y - 2 * scale, 2.5 * scale, 0, Math.PI * 2);
-      ctx.arc(x + 26 * scale, y - 2 * scale, 2.5 * scale, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
@@ -1789,11 +2033,6 @@
       ctx.arc(cx - 14, cy - r + 4, 7, 0, Math.PI * 2);
       ctx.arc(cx + 14, cy - r + 4, 7, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = '#ffb3c6';
-      ctx.beginPath();
-      ctx.arc(cx - 14, cy - r + 4, 4, 0, Math.PI * 2);
-      ctx.arc(cx + 14, cy - r + 4, 4, 0, Math.PI * 2);
-      ctx.fill();
 
       ctx.fillStyle = color.main;
       ctx.beginPath();
@@ -1802,12 +2041,6 @@
       ctx.lineWidth = 3;
       ctx.strokeStyle = '#ffffff';
       ctx.stroke();
-
-      ctx.fillStyle = color.blush;
-      ctx.beginPath();
-      ctx.arc(cx - 11, cy + 5, 4.5, 0, Math.PI * 2);
-      ctx.arc(cx + 11, cy + 5, 4.5, 0, Math.PI * 2);
-      ctx.fill();
 
       const eyeLook = (charFacing === 'left') ? -4 : 4;
 
@@ -1829,8 +2062,6 @@
         ctx.beginPath();
         ctx.arc(cx - 7 + eyeLook, cy - 3.5, 1.8, 0, Math.PI * 2);
         ctx.arc(cx + 5 + eyeLook, cy - 3.5, 1.8, 0, Math.PI * 2);
-        ctx.arc(cx - 5 + eyeLook, cy - 0.5, 0.9, 0, Math.PI * 2);
-        ctx.arc(cx + 7 + eyeLook, cy - 0.5, 0.9, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -1841,17 +2072,17 @@
       ctx.stroke();
 
       if (charName) {
-        ctx.fillStyle = '#e01e37';
+        ctx.fillStyle = '#0284c7';
         ctx.font = 'bold 11px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(`🍓 ${charName}`, cx, cy - r - 8);
+        ctx.fillText(charName, cx, cy - r - 8);
       }
 
       if (charTrapped) {
         ctx.fillStyle = '#ef4444';
         ctx.font = 'bold 10px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('⚠️ ติดกับดัก!', cx, cy - r - 20);
+        ctx.fillText('[ติดกับดัก]', cx, cy - r - 20);
       }
 
       ctx.restore();
@@ -1878,15 +2109,6 @@
         ctx.strokeStyle = '#f97316';
         ctx.lineWidth = 2.5;
         ctx.stroke();
-
-        ctx.fillStyle = '#fef08a';
-        ctx.beginPath();
-        ctx.roundRect(px + p.w / 2 - 10, py - 5, 20, 9, 3);
-        ctx.fill();
-        ctx.strokeStyle = '#eab308';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
       } else if (p.type === 'jelly') {
         ctx.fillStyle = '#a7f3d0';
         ctx.beginPath();
@@ -1895,13 +2117,6 @@
         ctx.strokeStyle = '#10b981';
         ctx.lineWidth = 2.5;
         ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(px + 15, py + 8, 3, 0, Math.PI * 2);
-        ctx.arc(px + p.w - 18, py + 9, 3.5, 0, Math.PI * 2);
-        ctx.fill();
-
       } else if (p.type === 'ice') {
         ctx.fillStyle = '#cffafe';
         ctx.beginPath();
@@ -1910,12 +2125,6 @@
         ctx.strokeStyle = '#38bdf8';
         ctx.lineWidth = 2.5;
         ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.roundRect(px + 6, py + 3, p.w - 12, 4, 2);
-        ctx.fill();
-
       } else if (p.type === 'disappear') {
         ctx.fillStyle = '#fbcfe8';
         ctx.beginPath();
@@ -1926,29 +2135,22 @@
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.setLineDash([]);
-
       } else if (p.type === 'cake') {
-        ctx.fillStyle = '#ffe4e6';
+        ctx.fillStyle = '#e0f2fe';
         ctx.beginPath();
         ctx.roundRect(px, py, p.w, p.h, 12);
         ctx.fill();
-        ctx.fillStyle = '#fb7185';
-        ctx.beginPath();
-        ctx.roundRect(px, py, p.w, 7, [12, 12, 0, 0]);
-        ctx.fill();
-        ctx.strokeStyle = '#f43f5e';
+        ctx.strokeStyle = '#0284c7';
         ctx.lineWidth = 2;
         ctx.stroke();
-
       } else {
-        ctx.fillStyle = '#b45309';
+        ctx.fillStyle = '#cbd5e1';
         ctx.beginPath();
         ctx.roundRect(px, py, p.w, p.h, 10);
         ctx.fill();
-        ctx.fillStyle = '#78350f';
-        for (let i = 8; i < p.w - 12; i += 20) {
-          ctx.fillRect(px + i, py + 4, 14, p.h - 8);
-        }
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 2;
+        ctx.stroke();
       }
 
       ctx.restore();
@@ -2333,8 +2535,6 @@
           ctx.beginPath();
           ctx.roundRect(b.x, dy, b.w, b.h, 4);
           ctx.fill();
-          ctx.fillStyle = '#34d399';
-          ctx.fillRect(b.x + 4, dy + 2, b.w - 8, 2);
         });
 
         traps.forEach(t => {
