@@ -36,7 +36,7 @@
       width: 100% !important; height: 100% !important; display: block;
     }
 
-    /* Top HUD ปรับปรุงเพิ่ม Progress % */
+    /* Top HUD */
     #top-hud {
       position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(14px);
@@ -426,11 +426,12 @@
     }
     .table-cell.selected { background: #38bdf8; border-color: #0284c7; }
 
-    /* UI สไตล์ใหม่สำหรับคำถามรูปภาพ */
+    /* UI สำหรับคำถามรูปภาพ */
     .image-q-preview {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       background: #ffffff; border: 2px solid #cbd5e1; border-radius: 14px;
-      padding: 14px 20px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      width: 100%; max-width: 420px;
     }
     .image-choices-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%;
@@ -443,6 +444,38 @@
     .img-choice-btn:hover { border-color: #0284c7; background: #f0f9ff; transform: translateY(-2px); }
     .img-choice-btn svg { width: 44px; height: 44px; }
     .img-choice-btn span { font-size: 0.88rem; font-weight: 700; color: #334155; }
+
+    /* กล่องจำลองหน้า Word พิเศษสำหรับข้อ 13 และ 18 */
+    .word-sim-sheet {
+      width: 100%; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;
+      padding: 16px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative;
+      text-align: center;
+    }
+    .wavy-underline-blue {
+      text-decoration: underline wavy #0284c7;
+      text-underline-offset: 7px;
+      text-decoration-thickness: 2.5px;
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: #0f172a;
+      letter-spacing: 1px;
+    }
+    .wrap-behind-demo {
+      position: relative; width: 100%; height: 95px; display: flex;
+      align-items: center; justify-content: center; overflow: hidden;
+      background: #f8fafc; border: 1px dashed #94a3b8; border-radius: 8px;
+    }
+    .wrap-behind-box {
+      position: absolute; width: 140px; height: 65px;
+      background: linear-gradient(135deg, #fde047, #f59e0b);
+      border: 2px solid #d97706; border-radius: 10px; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .wrap-behind-text {
+      position: relative; z-index: 2; font-size: 1.25rem; font-weight: 900;
+      color: #0f172a; text-shadow: 0 0 4px #ffffff, 0 0 8px #ffffff;
+    }
 
     #knowledge-modal {
       position: fixed; inset: 0;
@@ -542,7 +575,6 @@
 
   <div id="start-screen" class="overlay-screen">
     <div class="start-modal">
-      
       <div class="hero-banner">
         <div class="game-logo-title">WORD ROAD 3D</div>
         <div class="game-sub-badge">
@@ -565,7 +597,7 @@
             <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
             <span>ระบบคิดคะแนน (20 ข้อ)</span>
           </div>
-          <p>• รวม 20 ข้อ คะแนนเต็ม 20 คะแนน<br>• มีคำถามรูปภาพไอคอนและสถานการณ์จำลอง</p>
+          <p>• ข้อละ 1 คะแนนเต็ม 20 คะแนน<br>• มีคำถามรูปภาพไอคอนและสถานการณ์จำลอง</p>
         </div>
       </div>
 
@@ -580,7 +612,6 @@
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         เข้าสู่สนามแข่ง (START MISSION)
       </button>
-
     </div>
   </div>
 
@@ -658,9 +689,9 @@
   </div>
 
   <script>
-    // รวม 20 ข้อใน 12 ด่าน (รวม 20 คะแนนเต็ม)
+    // รวม 20 ข้อ ข้อละ 1 คะแนนเต็ม รวม 20 คะแนน
     const questionsPool = [
-      // ด่าน 1 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 1 (2 ข้อ = 2 คะแนน)
       {
         qId: 1, stage: 1, pts: 1.0, mode: "ribbon",
         q: "ข้อที่ 1/20: เลือกแท็บเมนู Ribbon ที่ใช้เปลี่ยนแบบฟอนต์และขนาดตัวอักษร:",
@@ -682,7 +713,7 @@
         knText: "ไอคอนรูป <b>แปรงทาสี (Format Painter)</b> ใช้คัดลอกรูปแบบฟอนต์ ขนาด และสีจากข้อความต้นแบบ ไปทาใส่ข้อความอื่นได้อย่างรวดเร็ว"
       },
 
-      // ด่าน 2 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 2 (2 ข้อ = 2 คะแนน)
       {
         qId: 3, stage: 2, pts: 1.0, mode: "matching",
         q: "ข้อที่ 3/20: แตะจับคู่ 'คำสั่งจัดการเอกสาร' กับ 'คีย์ลัด' ให้ถูกต้องทั้ง 2 คู่:",
@@ -702,7 +733,7 @@
         knText: "<b>Ctrl + O (Open)</b> ใช้เปิดไฟล์เอกสารเดิมที่บันทึกไว้ในคอมพิวเตอร์"
       },
 
-      // ด่าน 3 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 3 (2 ข้อ = 2 คะแนน)
       {
         qId: 5, stage: 3, pts: 1.0, mode: "choice",
         q: "ข้อที่ 5/20: พิมพ์ข้อความผิดแล้วเผลอลบหายไป จะกดคีย์ลัดใดเพื่อกู้คืนข้อความกลับมาทันที (Undo):",
@@ -720,7 +751,7 @@
         knText: "<b>Ctrl + Y (Redo)</b> ใช้ทำซ้ำคำสั่งล่าสุด หรือดึงการกระทำที่กด Undo ผิดกลับคืนมา"
       },
 
-      // ด่าน 4 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 4 (2 ข้อ = 2 คะแนน)
       {
         qId: 7, stage: 4, pts: 1.0, mode: "matching",
         q: "ข้อที่ 7/20: แตะจับคู่ 'สไตล์ฟอนต์' กับ 'คีย์ลัดคำสั่ง' ให้ถูกต้องครบทั้ง 2 คู่:",
@@ -734,23 +765,27 @@
       {
         qId: 8, stage: 4, pts: 1.0, mode: "image_query",
         q: "ข้อที่ 8/20: จากรูปภาพไอคอนด้านล่างนี้ มีหน้าที่สั่งการทำงานใดใน Word?",
-        imageSvg: `<svg viewBox="0 0 24 24" width="70" height="70" fill="#0284c7"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>`,
+        customHtml: `
+          <div style="padding:10px;">
+            <svg viewBox="0 0 24 24" width="70" height="70" fill="#0284c7"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>
+          </div>
+        `,
         target: "ขีดเส้นใต้ข้อความ (Underline)",
         opts: ["ขีดเส้นใต้ข้อความ (Underline)", "ตัวเอียง (Italic)", "ตัวยก (Superscript)", "เน้นสีข้อความ (Highlight)"],
         knTitle: "คำสั่งขีดเส้นใต้ (Underline)",
         knText: "ไอคอนรูปตัว <b>U ขีดเส้นใต้</b> คือคำสั่ง Underline (Ctrl + U) ใช้ขีดเส้นใต้ข้อความ"
       },
 
-      // ด่าน 5 (1 ข้อ, 1.5 คะแนน)
+      // ด่าน 5 (1 ข้อ = 1 คะแนน)
       {
-        qId: 9, stage: 5, pts: 1.5, mode: "align",
+        qId: 9, stage: 5, pts: 1.0, mode: "align",
         q: "ข้อที่ 9/20: กดปุ่มจัดตำแหน่งเอกสาร เพื่อวางข้อความให้อยู่ 'กึ่งกลางหน้ากระดาษ':",
         target: "center",
         knTitle: "การจัดแนวย่อหน้า (Paragraph Alignment)",
         knText: "ปุ่ม <b>กึ่งกลาง (Center)</b> หรือ Ctrl + E ใช้วางข้อความตรงกลางกระดาษ"
       },
 
-      // ด่าน 6 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 6 (2 ข้อ = 2 คะแนน)
       {
         qId: 10, stage: 6, pts: 1.0, mode: "choice",
         q: "ข้อที่ 10/20: เครื่องมือใดใช้สร้างรายการที่มีลำดับ 1, 2, 3 ตามลำดับก่อนหลัง:",
@@ -773,7 +808,7 @@
         knText: "คำสั่ง <b>Bullets</b> จะแสดงสัญลักษณ์จุดนำหน้าข้อความ เหมาะสำหรับรายการที่ไม่จำเป็นต้องเรียงลำดับ"
       },
 
-      // ด่าน 7 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 7 (2 ข้อ = 2 คะแนน)
       {
         qId: 12, stage: 7, pts: 1.0, mode: "choice",
         q: "ข้อที่ 12/20: คำสั่ง Wrap Text รูปแบบใดทำให้ข้อความไหลล้อมรอบกรอบรูปภาพเป็นสี่เหลี่ยมพอดี:",
@@ -784,24 +819,34 @@
       },
       {
         qId: 13, stage: 7, pts: 1.0, mode: "image_query",
-        q: "ข้อที่ 13/20: ภาพการจัดวางภาพซ้อนอยู่ใต้ตัวหนังสือแบบนี้ ตรงกับการตัดข้อความ (Wrap Text) ชนิดใด?",
-        imageSvg: `<svg viewBox="0 0 160 80"><rect width="160" height="80" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/><rect x="45" y="15" width="70" height="50" rx="6" fill="#fde047" opacity="0.6"/><text x="80" y="45" font-family="Kanit" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle">ข้อความทับรูปภาพ</text></svg>`,
+        q: "ข้อที่ 13/20: ภาพจำลองเอกสารด้านล่าง (รูปภาพอยู่ด้านหลัง ตัวหนังสือพิมพ์ลอยทับด้านบน) ตรงกับคำสั่ง Wrap Text ชนิดใด?",
+        customHtml: `
+          <div class="word-sim-sheet">
+            <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:8px; font-weight:800;">จำลองหน้ากระดาษ Word</div>
+            <div class="wrap-behind-demo">
+              <div class="wrap-behind-box">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#713f12" opacity="0.4"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+              </div>
+              <div class="wrap-behind-text">ข้อความลอยทับรูปภาพ</div>
+            </div>
+          </div>
+        `,
         target: "Behind Text (อยู่ข้างหลังข้อความ)",
         opts: ["In Front of Text (ข้างหน้าข้อความ)", "Behind Text (อยู่ข้างหลังข้อความ)", "Top and Bottom (บนและล่าง)", "Through (ทะลุผ่าน)"],
         knTitle: "Behind Text (อยู่ข้างหลังข้อความ)",
         knText: "คำสั่ง <b>Behind Text</b> จะส่งรูปภาพลงไปอยู่ชั้นล่างสุด ทำให้ข้อความลอยทับอยู่บนรูปภาพได้"
       },
 
-      // ด่าน 8 (1 ข้อ, 1.5 คะแนน)
+      // ด่าน 8 (1 ข้อ = 1 คะแนน)
       {
-        qId: 14, stage: 8, pts: 1.5, mode: "table_grid",
+        qId: 14, stage: 8, pts: 1.0, mode: "table_grid",
         q: "ข้อที่ 14/20: กำหนดขนาดสร้างตารางข้อมูลจำนวน '3 คอลัมน์ x 2 แถว' ให้ถูกต้อง:",
         targetCols: 3, targetRows: 2,
         knTitle: "โครงสร้างตาราง (Table Dimension)",
         knText: "การสร้างตารางนับจาก <b>คอลัมน์ (แนวตั้ง)</b> x <b>แถว (แนวนอน)</b> ตารางขนาด 3 x 2 จึงมี 3 คอลัมน์ และ 2 แถว"
       },
 
-      // ด่าน 9 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 9 (2 ข้อ = 2 คะแนน)
       {
         qId: 15, stage: 9, pts: 1.0, mode: "choice",
         q: "ข้อที่ 15/20: พิมพ์ตารางกว้าง ต้องตั้งค่าหน้ากระดาษแบบใดในเมนู Orientation:",
@@ -824,7 +869,7 @@
         knText: "<b>Margins</b> ใช้กำหนดระยะเว้นว่างรอบขอบกระดาษ เช่น ปกติ แคบ หรือกว้าง"
       },
 
-      // ด่าน 10 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      // ด่าน 10 (2 ข้อ = 2 คะแนน)
       {
         qId: 17, stage: 10, pts: 1.0, mode: "choice",
         q: "ข้อที่ 17/20: ในโปรแกรม Word การตรวจพบคำที่สะกดผิดจะแจ้งเตือนด้วยสัญลักษณ์ใดใต้คำ:",
@@ -835,17 +880,25 @@
       },
       {
         qId: 18, stage: 10, pts: 1.0, mode: "image_query",
-        q: "ข้อที่ 18/20: เส้นหยักสีน้ำเงิน/ฟ้าใต้ข้อความดังภาพ บ่งบอกถึงข้อผิดพลาดประเภทใด?",
-        imageSvg: `<svg viewBox="0 0 180 60"><text x="90" y="32" font-family="Kanit" font-size="20" font-weight="700" fill="#0f172a" text-anchor="middle">สวัสดี  ครับผม</text><path d="M 30 42 Q 35 38 40 42 T 50 42 T 60 42 T 70 42 T 80 42 T 90 42 T 100 42 T 110 42 T 120 42 T 130 42 T 140 42 T 150 42" fill="none" stroke="#0284c7" stroke-width="2.5"/></svg>`,
+        q: "ข้อที่ 18/20: เส้นหยักสีฟ้าใต้ข้อความดังภาพ บ่งบอกถึงข้อผิดพลาดประเภทใด?",
+        customHtml: `
+          <div class="word-sim-sheet">
+            <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:10px; font-weight:800;">จำลองการพิมพ์ใน Microsoft Word</div>
+            <div style="padding:14px 6px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+              <span class="wavy-underline-blue">สวัสดี&nbsp;&nbsp;&nbsp;&nbsp;ครับผม</span>
+            </div>
+            <div style="font-size:0.8rem; color:#64748b; margin-top:8px;">(สังเกต: มีเส้นหยักสีฟ้าปรากฏใต้ข้อความ)</div>
+          </div>
+        `,
         target: "ไวยากรณ์หรือการเคาะเว้นวรรคผิดพลาด",
         opts: ["สะกดคำผิด", "ไวยากรณ์หรือการเคาะเว้นวรรคผิดพลาด", "ไม่ได้บันทึกไฟล์", "ฟอนต์ไม่รองรับภาษาไทย"],
         knTitle: "เส้นหยักสีฟ้า (Grammar & Spacing)",
         knText: "เส้นหยักสีฟ้าแสดงถึง <b>ข้อผิดพลาดด้านไวยากรณ์ การใช้คำ หรือการเคาะเว้นวรรคซ้ำซ้อน</b>"
       },
 
-      // ด่าน 11 (1 ข้อ, 1.5 คะแนน)
+      // ด่าน 11 (1 ข้อ = 1 คะแนน)
       {
-        qId: 19, stage: 11, pts: 1.5, mode: "choice",
+        qId: 19, stage: 11, pts: 1.0, mode: "choice",
         q: "ข้อที่ 19/20: การเตรียมหัวข้อเพื่อสร้างสารบัญอัตโนมัติ (Table of Contents) ต้องกำหนดสไตล์ใดให้กับหัวข้อหลัก:",
         target: "Heading 1 (หัวเรื่อง 1)",
         opts: ["Title (ชื่อเรื่อง)", "Heading 1 (หัวเรื่อง 1)", "Normal (ปกติ)"],
@@ -853,9 +906,9 @@
         knText: "โปรแกรม Word จะดึงรายการสารบัญจากข้อความที่กำหนดสไตล์เป็น <b>Heading 1</b> หรือ Heading 2"
       },
 
-      // ด่าน 12 (1 ข้อ, 1.5 คะแนน)
+      // ด่าน 12 (1 ข้อ = 1 คะแนน)
       {
-        qId: 20, stage: 12, pts: 1.5, mode: "choice",
+        qId: 20, stage: 12, pts: 1.0, mode: "choice",
         q: "ข้อที่ 20/20: ส่งออกไฟล์ชนิดใดที่ล็อกการจัดหน้ากระดาษและฟอนต์ได้แน่นอนที่สุดเมื่อนำไปพิมพ์งาน:",
         target: ".pdf",
         opts: [".docx", ".txt", ".pdf"],
@@ -995,8 +1048,8 @@
     let obstacles = [];
     let playerName = "Player";
     let score = 0;
-    let currentStage = 0; // 0 to 11 (ด่าน 1 ถึง 12)
-    let solvedQuestionsCount = 0; // 0 ถึง 20
+    let currentStage = 0; 
+    let solvedQuestionsCount = 0; 
     let isModalOpen = false;
     let isGameOver = false;
 
@@ -1591,7 +1644,6 @@
         stageBox.appendChild(choiceDiv);
       }
       else if (m.mode === "image_choice") {
-        // ตัวเลือกเป็นรูปภาพ
         const imgGrid = document.createElement("div");
         imgGrid.className = "image-choices-grid";
 
@@ -1608,10 +1660,10 @@
         stageBox.appendChild(imgGrid);
       }
       else if (m.mode === "image_query") {
-        // โจทย์เป็นรูปภาพ และมีตัวเลือกข้อความ
+        // ส่วนแสดงผลคำถามรูปภาพ/พรีวิว
         const imgPreview = document.createElement("div");
         imgPreview.className = "image-q-preview";
-        imgPreview.innerHTML = m.imageSvg;
+        imgPreview.innerHTML = m.customHtml;
         stageBox.appendChild(imgPreview);
 
         const choiceDiv = document.createElement("div");
