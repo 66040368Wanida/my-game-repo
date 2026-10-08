@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Hunter Cyber Mission - Stable Edition</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@700;800&display=swap" rel="stylesheet">
+  <title>Hunter Cyber Mission - Perfect Edition</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     * {
@@ -24,7 +21,7 @@
       overflow: hidden;
       background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
       color: #f8fafc;
-      font-family: 'Kanit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       position: fixed;
     }
     body {
@@ -74,16 +71,10 @@
       width: 100%;
       margin: 8px 0;
       box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+      display: block;
       transition: all 0.15s ease;
-      font-family: inherit;
     }
     .btn:active { transform: scale(0.97); }
-    .btn svg { width: 18px; height: 18px; fill: currentColor; }
-
     .btn-sweet-green {
       background: linear-gradient(135deg, #34d399 0%, #059669 100%);
       color: white;
@@ -95,20 +86,33 @@
       width: 100%;
       box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
       transition: all 0.15s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      font-family: inherit;
     }
     .btn-sweet-green:active { transform: scale(0.97); }
-    .btn-sweet-green:disabled {
-      background: #94a3b8;
-      box-shadow: none;
-      cursor: not-allowed;
-      transform: none;
+
+    .btn-excel-luxury {
+      background: linear-gradient(135deg, #10b981 0%, #047857 50%, #064e3b 100%);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      padding: 11px 20px;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .btn-sweet-green svg { width: 18px; height: 18px; fill: currentColor; }
+    .btn-excel-luxury:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    .btn-excel-luxury:active {
+      transform: translateY(1px) scale(0.98);
+    }
 
     input, select {
       width: 100%;
@@ -125,7 +129,6 @@
       user-select: auto;
       -webkit-user-select: auto;
       transition: all 0.2s;
-      font-family: inherit;
     }
     input:focus, select:focus {
       border-color: #ff4d6d;
@@ -196,170 +199,6 @@
     .badge-kick-btn:active { transform: scale(0.9); }
     .hidden { display: none !important; }
 
-    #start-screen {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(255, 117, 143, 0.45) 0%, rgba(15, 23, 42, 0.95) 85%);
-      backdrop-filter: blur(12px);
-      z-index: 250;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 18px;
-    }
-    .start-modal {
-      background: rgba(255, 255, 255, 0.98);
-      border: 4px solid #ff758f;
-      border-radius: 32px;
-      padding: 30px 24px;
-      max-width: 530px;
-      width: 92%;
-      text-align: center;
-      color: #0f172a;
-      box-shadow: 0 25px 60px rgba(255, 77, 109, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.35);
-      position: relative;
-      overflow: hidden;
-      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .hero-banner {
-      background: linear-gradient(135deg, #ff758f, #ff4d6d);
-      margin: -30px -24px 20px -24px;
-      padding: 24px 16px 18px;
-      border-bottom: 4px solid #facc15;
-      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
-    }
-    .game-logo-title {
-      font-size: 2.1rem;
-      font-weight: 900;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 3px 3px 0px #e01e37, 0 0 18px rgba(250, 204, 21, 0.6);
-      line-height: 1.1;
-      font-family: 'Chakra Petch', sans-serif;
-    }
-    .game-sub-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
-      background: #facc15;
-      color: #713f12;
-      font-size: 0.85rem;
-      font-weight: 800;
-      padding: 4px 14px;
-      border-radius: 999px;
-      box-shadow: 0 3px 0 #ca8a04;
-    }
-    .game-sub-badge svg { width: 16px; height: 16px; fill: #713f12; }
-
-    .rule-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 14px;
-      text-align: left;
-    }
-    .rule-card {
-      background: #fff5f7;
-      border: 2px solid #fecdd3;
-      border-radius: 16px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .rule-card.points {
-      background: #fefce8;
-      border-color: #fde047;
-    }
-    .rule-header {
-      font-size: 0.9rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .rule-card .rule-header { color: #e11d48; }
-    .rule-card .rule-header svg { width: 18px; height: 18px; fill: #e11d48; flex-shrink: 0; }
-    .rule-card.points .rule-header { color: #ca8a04; }
-    .rule-card.points .rule-header svg { width: 18px; height: 18px; fill: #ca8a04; flex-shrink: 0; }
-    .rule-card p {
-      font-size: 0.8rem;
-      color: #475569;
-      line-height: 1.45;
-      font-weight: 500;
-      margin: 0;
-    }
-    .rule-banner-single {
-      background: #fff5f7;
-      border: 2px dashed #f43f5e;
-      border-radius: 14px;
-      padding: 11px 14px;
-      font-size: 0.84rem;
-      color: #334155;
-      margin-bottom: 16px;
-      text-align: left;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.45;
-    }
-    .rule-banner-single svg { width: 19px; height: 19px; fill: #e11d48; flex-shrink: 0; margin-top: 2px; }
-
-    .start-btn {
-      width: 100%;
-      margin-top: 6px;
-      padding: 15px;
-      border-radius: 18px;
-      border: none;
-      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      font-size: 1.25rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #047857, 0 10px 18px rgba(16, 185, 129, 0.35);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      transition: transform 0.1s, box-shadow 0.1s;
-      font-family: inherit;
-    }
-    .start-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 #047857;
-    }
-    .start-btn svg { width: 22px; height: 22px; fill: #ffffff; }
-
-    #teacher-auth-modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 300;
-      padding: 16px;
-    }
-    .teacher-auth-card {
-      background: rgba(255, 255, 255, 0.98);
-      border: 2px solid rgba(255, 117, 143, 0.5);
-      border-radius: 24px;
-      padding: 24px 20px;
-      max-width: 360px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
-      color: #0f172a;
-    }
-
     #view-host-live {
       position: fixed;
       top: 0; left: 0;
@@ -408,7 +247,9 @@
       padding: 8px 12px;
       box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
     }
-    .host-table-wrapper::-webkit-scrollbar { width: 6px; }
+    .host-table-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
     .host-table-wrapper::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
@@ -432,109 +273,56 @@
     .game-top-bar {
       position: absolute;
       top: max(env(safe-area-inset-top, 8px), 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(95%, 480px);
+      left: max(env(safe-area-inset-left, 10px), 10px);
+      right: max(env(safe-area-inset-right, 10px), 10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       z-index: 70;
       pointer-events: none;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 2px solid rgba(255, 117, 143, 0.45);
-      border-radius: 30px;
-      padding: 6px 10px;
-      box-shadow: 0 10px 25px rgba(255, 117, 143, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
-      box-sizing: border-box;
     }
     .stat-pill {
-      background: #ffffff;
-      border: 1.5px solid #ffccd5;
-      padding: 5px 8px;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(255, 117, 143, 0.4);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 20px;
       font-weight: 800;
-      font-size: clamp(11px, 2.7vw, 13px);
+      font-size: 13px;
       color: #0f172a;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
       white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
     }
-    .stat-pill svg { width: 14px; height: 14px; fill: currentColor; }
-
     .btn-top-quiz {
       background: linear-gradient(135deg, #ff758f, #ff4d6d);
       border: 1.5px solid #ffffff;
       color: white;
-      padding: 6px 10px;
-      border-radius: 16px;
+      padding: 7px 15px;
+      border-radius: 20px;
       font-weight: 900;
-      font-size: clamp(11px, 2.7vw, 13px);
+      font-size: 13px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.35);
+      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.4);
       pointer-events: auto;
       white-space: nowrap;
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-family: inherit;
     }
-    .btn-top-quiz svg { width: 14px; height: 14px; fill: #ffffff; }
-
     .btn-music-toggle {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.95);
       border: 1.5px solid #bae6fd;
-      border-radius: 16px;
-      padding: 5px 8px;
-      font-size: clamp(12px, 2.8vw, 14px);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
       cursor: pointer;
       pointer-events: auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      white-space: nowrap;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn-music-toggle svg { width: 16px; height: 16px; fill: #0284c7; }
-
-    @media (min-width: 768px) {
-      .game-top-bar {
-        top: 20px;
-        width: auto;
-        min-width: 650px;
-        padding: 8px 20px;
-        border-radius: 32px;
-        gap: 16px;
-      }
-      .stat-pill {
-        font-size: 15px;
-        padding: 8px 18px;
-        border-radius: 18px;
-      }
-      .btn-top-quiz {
-        font-size: 15px;
-        padding: 8px 22px;
-        border-radius: 18px;
-      }
-      .btn-music-toggle {
-        font-size: 16px;
-        padding: 8px 16px;
-        border-radius: 18px;
-      }
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
 
     .controls-bar {
       position: absolute;
-      bottom: max(env(safe-area-inset-bottom, 12px), 16px);
-      left: max(env(safe-area-inset-left, 12px), 14px);
-      right: max(env(safe-area-inset-right, 12px), 14px);
+      bottom: max(env(safe-area-inset-bottom, 16px), 20px);
+      left: max(env(safe-area-inset-left, 16px), 16px);
+      right: max(env(safe-area-inset-right, 16px), 16px);
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -542,37 +330,39 @@
       pointer-events: none;
     }
     .touch-dpad-container {
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 2.5px solid rgba(255, 255, 255, 0.95);
-      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 3px solid rgba(255, 255, 255, 0.95);
+      border-radius: 40px;
       padding: 8px;
-      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.22);
+      box-shadow: 0 12px 35px rgba(2, 132, 199, 0.25);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       pointer-events: auto;
     }
     .touch-btn-arrow {
-      width: clamp(64px, 15vw, 76px);
-      height: clamp(64px, 15vw, 76px);
-      border-radius: 24px;
+      width: clamp(68px, 16vw, 84px);
+      height: clamp(68px, 16vw, 84px);
+      border-radius: 28px;
       background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
       border: 2.5px solid #bae6fd;
       color: #0284c7;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 5px 0 #7dd3fc, 0 8px 16px rgba(2, 132, 199, 0.18);
+      font-size: clamp(28px, 7vw, 36px);
+      font-weight: 900;
+      box-shadow: 0 6px 0 #7dd3fc, 0 8px 18px rgba(2, 132, 199, 0.2);
       transition: all 0.08s ease;
       cursor: pointer;
       touch-action: none;
     }
-    .touch-btn-arrow svg { width: 30px; height: 30px; fill: #0284c7; }
     .touch-btn-arrow.active {
       transform: translateY(4px);
-      box-shadow: 0 1px 0 #7dd3fc;
+      box-shadow: 0 2px 0 #7dd3fc;
       background: #e0f2fe;
+      color: #0369a1;
     }
     .action-pad {
       pointer-events: auto;
@@ -582,24 +372,25 @@
       justify-content: center;
     }
     .touch-btn-jump {
-      width: clamp(78px, 18vw, 92px);
-      height: clamp(78px, 18vw, 92px);
+      width: clamp(86px, 20vw, 104px);
+      height: clamp(86px, 20vw, 104px);
       border-radius: 50%;
       background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-      border: 4px solid #ffffff;
+      border: 4.5px solid #ffffff;
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 7px 0 #047857, 0 12px 24px rgba(16, 185, 129, 0.38);
+      box-shadow: 0 8px 0 #047857, 0 14px 28px rgba(16, 185, 129, 0.4);
       transition: all 0.08s ease;
       cursor: pointer;
       touch-action: none;
+      font-size: clamp(34px, 8vw, 44px);
+      line-height: 1;
     }
-    .touch-btn-jump svg { width: 38px; height: 38px; fill: #ffffff; }
     .touch-btn-jump.active {
       transform: translateY(5px);
-      box-shadow: 0 2px 0 #047857;
+      box-shadow: 0 3px 0 #047857;
       background: #059669;
     }
 
@@ -650,7 +441,7 @@
       color: #334155;
     }
 
-    #quiz-modal, #questionBankModal {
+    #quiz-modal, #questionBankModal, #teacherAuthModal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(15, 23, 42, 0.75);
@@ -686,7 +477,6 @@
       font-size: 13px;
       font-weight: 600;
       transition: all 0.15s;
-      font-family: inherit;
     }
     .quiz-option:active { background: #ff758f; color: white; border-color: #ff758f; }
 
@@ -776,7 +566,6 @@
       color: #e01e37;
       cursor: pointer;
       transition: all 0.15s;
-      font-family: inherit;
     }
     .qb-tab-btn.active {
       background: #ff4d6d;
@@ -800,127 +589,91 @@
       align-items: flex-start;
       gap: 8px;
     }
+    .qb-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex-shrink: 0;
+    }
     .qb-btn-edit {
       background: #eff6ff;
-      border: 1px solid #bfdbfe;
+      border: 1px solid #93c5fd;
       color: #2563eb;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 8px;
       font-weight: bold;
       font-size: 11px;
       cursor: pointer;
-      flex-shrink: 0;
-      font-family: inherit;
+      display: inline-block;
+      text-align: center;
     }
-    .qb-btn-edit:hover { background: #2563eb; color: white; }
+    .qb-btn-edit:hover {
+      background: #2563eb;
+      color: white;
+    }
     .qb-btn-delete {
       background: #fff1f2;
       border: 1px solid #fda4af;
       color: #e11d48;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 8px;
       font-weight: bold;
       font-size: 11px;
       cursor: pointer;
-      flex-shrink: 0;
-      font-family: inherit;
+      display: inline-block;
+      text-align: center;
     }
-    .qb-btn-delete:hover { background: #e11d48; color: white; }
+    .qb-btn-delete:hover {
+      background: #e11d48;
+      color: white;
+    }
     .qb-form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
     }
     @media (max-width: 520px) {
-      .qb-form-grid { grid-template-columns: 1fr; }
+      .qb-form-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
   <script>
-    window.switchScreen = function(id) {
-      ['start-screen', 'view-mode', 'view-host', 'view-host-live', 'view-join', 'view-waiting', 'game-wrapper', 'view-result'].forEach(function(v) {
+    function switchScreen(id) {
+      ['view-mode', 'view-host', 'view-host-live', 'view-join', 'view-waiting', 'game-wrapper', 'view-result'].forEach(function(v) {
         var el = document.getElementById(v);
         if (el) el.classList.add('hidden');
       });
       var target = document.getElementById(id);
       if (target) target.classList.remove('hidden');
-    };
+    }
   </script>
 </head>
 <body>
 
   <div id="toast-msg">แจ้งเตือน</div>
 
-  <!-- START SCREEN -->
-  <div id="start-screen">
-    <div class="start-modal">
-      <div class="hero-banner">
-        <div class="game-logo-title">HUNTER CYBER</div>
-        <div class="game-sub-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.59L16.59 13 18 14.41 12 20.41l-6-6L7.41 13 11 16.59V4h2v12.59z" transform="rotate(180 12 12)"/></svg>
-          <span>ภารกิจกระโดดชิงความสูง พิชิต Microsoft Word ม.1</span>
-        </div>
-      </div>
-
-      <div class="rule-grid">
-        <div class="rule-card">
-          <div class="rule-header">
-            <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            <span>วิธีการบังคับ</span>
-          </div>
-          <p>• ใช้ปุ่มซ้าย-ขวา / ปุ่ม A-D เคลื่อนที่<br>• กดปุ่มลูกศรขึ้น / Spacebar เพื่อกระโดด</p>
-        </div>
-
-        <div class="rule-card points">
-          <div class="rule-header">
-            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
-            <span>พลังงานและคำถาม</span>
-          </div>
-          <p>• กระโดดแต่ละครั้งใช้พลังงาน 1 หน่วย<br>• พลังงานหมดหรือติดกับดัก ตอบคำถามเพื่อชาร์จ</p>
-        </div>
-      </div>
-
-      <div class="rule-banner-single">
-        <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
-        <div><b>เป้าหมายภารกิจ:</b> กระโดดไต่แผ่นแพลตฟอร์มขึ้นไปให้สูงที่สุด แข่งขันความสูงกับเพื่อนแบบออนไลน์เรียลไทม์!</div>
-      </div>
-
-      <button id="btn-start-mission" class="start-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        เข้าสู่เกม (START MISSION)
-      </button>
-    </div>
-  </div>
-
-  <div id="teacher-auth-modal" class="hidden">
-    <div class="teacher-auth-card">
-      <div style="margin-bottom: 6px;">
-        <svg viewBox="0 0 24 24" width="38" height="38" fill="#e01e37"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-      </div>
-      <h3 style="margin: 0 0 6px 0; font-size: 18px; color: #e01e37; font-weight: 900;">ยืนยันตัวตนผู้สอน</h3>
-      <p style="font-size: 12px; color: #64748b; margin: 0 0 14px 0;">กรุณากรอกรหัสผ่านสำหรับคุณครู (รหัสเริ่มต้น: 1234)</p>
-      
-      <input type="password" id="input-teacher-pwd" placeholder="รหัสผ่านคุณครู..." maxlength="10" style="margin-bottom: 12px; font-size: 16px;">
-      
-      <div style="display: flex; gap: 8px;">
-        <button id="btn-cancel-teacher-modal" class="btn" style="background: #94a3b8; margin: 0; padding: 10px;">ยกเลิก</button>
-        <button id="btn-submit-teacher-modal" class="btn btn-sweet-green" style="margin: 0; padding: 10px;">เข้าสู่ระบบ</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-mode" class="container hidden">
+  <!-- 1. หน้าแรก -->
+  <div id="view-mode" class="container">
     <h1>HUNTER CYBER MISSION</h1>
     <p style="color: #64748b; font-size:14px; margin-bottom: 20px;">เกมตอบคำถามชิงความสูง (Word Master)</p>
-    <button class="btn" id="btn-mode-host">
-      <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-      <span>คุณครู / ผู้สอน (Host)</span>
-    </button>
-    <button class="btn" id="btn-mode-join" style="background:#475569;">
-      <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-      <span>นักเรียน / ผู้เรียน (Join)</span>
-    </button>
+    <button class="btn" id="btn-mode-host" onclick="openTeacherAuthModal()">👑 ผู้สอน (Host สร้างห้อง)</button>
+    <button class="btn" id="btn-mode-join" style="background:#475569;" onclick="switchScreen('view-join')">🎮 ผู้เรียน (Join เข้าเล่น)</button>
   </div>
 
+  <!-- Modal ตรวจสอบรหัสผ่านผู้สอน -->
+  <div id="teacherAuthModal" class="hidden">
+    <div class="quiz-card" style="max-width: 360px;">
+      <h3 style="color:#e01e37; margin:0 0 8px 0; font-size:18px;">🔐 ยืนยันสิทธิ์ผู้สอน</h3>
+      <p style="font-size:13px; color:#64748b; margin: 0 0 12px 0;">กรุณาใส่รหัสผ่านสำหรับคุณครูผู้สร้างห้อง</p>
+      <input type="password" id="teacher-pass-input" placeholder="ใส่รหัสผ่าน (PIN)" maxlength="10" style="font-size: 20px; letter-spacing: 4px;">
+      <p style="font-size: 11px; color: #94a3b8; margin: -4px 0 12px 0;">💡 คำใบ้รหัสผ่าน: <b style="color:#e01e37;">1234</b></p>
+      <button class="btn" onclick="verifyTeacherPassword()" style="margin: 4px 0;">เข้าสู่ระบบโฮสต์</button>
+      <button class="btn" style="background:#64748b; margin-top:4px; padding:10px;" onclick="closeTeacherAuthModal()">ยกเลิก</button>
+    </div>
+  </div>
+
+  <!-- 2. โฮสต์สร้างห้อง -->
   <div id="view-host" class="container hidden">
     <h2>ห้องควบคุมโฮสต์</h2>
     <p style="margin-bottom:2px; font-size:13px; color:#64748b;">รหัสเข้าห้อง (Room PIN):</p>
@@ -931,23 +684,20 @@
       <span style="color:#e01e37; font-size:11px; font-weight:bold; margin-top:4px;">สแกนเพื่อเข้าห้อง</span>
     </div>
     
-    <button class="btn" id="btn-copy-link" style="padding:9px; font-size:12px; margin:4px 0 10px 0;">
-      <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-      <span>คัดลอกลิงก์ส่งให้นักเรียน</span>
-    </button>
+    <button class="btn" id="btn-copy-link" style="padding:9px; font-size:12px; margin:4px 0 10px 0;">📋 คัดลอกลิงก์ส่งให้นักเรียน</button>
 
     <div style="text-align: left; margin-top: 6px;">
-      <label style="color:#64748b; font-size:13px; font-weight:bold;">ค่าพลังงานเริ่มต้น:</label>
+      <label style="color:#64748b; font-size:13px; font-weight:bold;">⚡ ค่าพลังงานเริ่มต้น:</label>
       <select id="select-energy">
-        <option value="3">3 หน่วย (ท้าทายสุดๆ)</option>
-        <option value="5" selected>5 หน่วย (มาตรฐาน)</option>
-        <option value="8">8 หน่วย (ปานกลาง)</option>
-        <option value="10">10 หน่วย (ง่าย)</option>
-        <option value="15">15 หน่วย (สบายๆ)</option>
-        <option value="20">20 หน่วย (กระโดดรัว)</option>
+        <option value="3">3 ⚡ (ท้าทายสุดๆ)</option>
+        <option value="5" selected>5 ⚡ (มาตรฐาน)</option>
+        <option value="8">8 ⚡ (ปานกลาง)</option>
+        <option value="10">10 ⚡ (ง่าย)</option>
+        <option value="15">15 ⚡ (สบายๆ)</option>
+        <option value="20">20 ⚡ (กระโดดรัว)</option>
       </select>
 
-      <label style="color:#64748b; font-size:13px; font-weight:bold;">ระยะเวลาแข่งขัน:</label>
+      <label style="color:#64748b; font-size:13px; font-weight:bold;">⏱️ ระยะเวลาแข่งขัน:</label>
       <select id="select-duration">
         <option value="1">1 นาที (ทดสอบ)</option>
         <option value="3" selected>3 นาที</option>
@@ -958,40 +708,38 @@
 
     <p style="margin: 10px 0 4px 0; font-size:13px; color:#64748b;">ผู้เล่นในห้อง (<span id="player-count">0</span> คน):</p>
     <div id="host-players" class="badge-list"></div>
-    <button id="btn-start" class="btn btn-sweet-green" disabled>
-      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <span>เริ่มการแข่งขัน</span>
-    </button>
+    <button id="btn-start" class="btn btn-sweet-green" disabled>🚀 เริ่มการแข่งขัน</button>
   </div>
 
+  <!-- 3. หน้าจอหลักของ Host / Admin (Live Monitor) -->
   <div id="view-host-live" class="hidden">
     <div class="host-header-card">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <button id="btn-host-exit" style="padding: 7px 12px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer;">
-          ออกจากห้อง
+        <button onclick="location.reload()" style="padding: 7px 12px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer;">
+          🔙 ออกจากห้อง
         </button>
         <div style="text-align: left;">
-          <h2 style="font-size: 16px; font-weight: 900; color: #fb7185; margin: 0; line-height: 1.2;">HOST DASHBOARD</h2>
+          <h2 style="font-size: 16px; font-weight: 900; color: #fb7185; margin: 0; line-height: 1.2;">👑 HOST DASHBOARD</h2>
           <p style="font-size: 11px; color: #94a3b8; margin: 0;">ห้อง: <span id="live-room-pin" style="font-weight: 900; color: #fda4af;">------</span> | ออนไลน์: <span id="live-player-count" style="font-weight: 900; color: #34d399;">0</span> คน</p>
         </div>
       </div>
       
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button id="btn-host-qb" style="padding: 7px 12px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
-          จัดการคลังคำถาม (<span id="total-q-count">20</span>)
+        <button onclick="openQuestionBankModal()" style="padding: 7px 14px; background: #4f46e5; color: white; border: none; border-radius: 14px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
+          📝 คลังคำถาม (<span id="total-q-count">20</span>)
         </button>
-        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 12px; font-family: monospace; font-size: 17px; color: #fde047; font-weight: 900;">
-          <span id="host-timer-text">03:00</span>
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 5px 14px; border-radius: 14px; font-family: monospace; font-size: 18px; color: #fde047; font-weight: 900;">
+          ⏱️ <span id="host-timer-text">03:00</span>
         </div>
-        <button id="btn-host-export" class="btn-sweet-green" style="width: auto; padding: 7px 14px; margin: 0; font-size: 11px;">
-          Excel (.csv)
+        <button onclick="exportDataCSV()" class="btn-excel-luxury">
+          <span>📥</span> ส่งออก Excel (.csv)
         </button>
       </div>
     </div>
 
     <div class="host-leader-bar">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="#facc15"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+        <span style="font-size: 26px;">👑</span>
         <div style="text-align: left;">
           <div style="font-size: 10px; color: #fcd34d; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">ผู้นำอันดับ 1</div>
           <div id="leader-name" style="font-size: 16px; font-weight: 900; color: white;">รอเริ่มกระโดด...</div>
@@ -1021,21 +769,22 @@
     </div>
   </div>
 
+  <!-- 4. Modal คลังข้อสอบ -->
   <div id="questionBankModal" class="hidden">
     <div class="qb-modal-card">
       <div class="qb-header">
         <div>
           <h2 style="font-size: 16px; font-weight: 900; color: #e01e37; margin: 0;">
-            คลังข้อสอบ & จัดการคำถาม
+            📝 คลังข้อสอบ & จัดการคำถาม
           </h2>
           <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #e01e37;">20</b> ข้อ</p>
         </div>
-        <button id="btn-close-qb-modal" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">ปิด</button>
+        <button onclick="closeQuestionBankModal()" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">✕ ปิด</button>
       </div>
 
       <div class="qb-tabs">
-        <button id="qb-tab-view" class="qb-tab-btn active">รายการข้อสอบ</button>
-        <button id="qb-tab-add" class="qb-tab-btn">เพิ่ม / แก้ไขข้อสอบ</button>
+        <button id="qb-tab-view" class="qb-tab-btn active" onclick="switchQbTab('view')">📋 รายการข้อสอบ</button>
+        <button id="qb-tab-add" class="qb-tab-btn" onclick="prepareAddQuestion()">➕ เพิ่มข้อใหม่</button>
       </div>
 
       <div class="qb-body-scroll">
@@ -1046,7 +795,9 @@
         <div id="qb-panel-add" class="hidden">
           <div style="background: #fff5f7; border: 1.5px solid #ffccd5; border-radius: 18px; padding: 14px;">
             <input type="hidden" id="edit-q-id" value="">
-            <label id="form-q-title" style="font-size: 12px; font-weight: bold; color: #e01e37; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
+            <div id="form-mode-title" style="font-size: 13px; font-weight: 900; color: #e01e37; margin-bottom: 8px;">➕ เพิ่มคำถามข้อใหม่</div>
+
+            <label style="font-size: 12px; font-weight: bold; color: #e01e37; display: block; margin-bottom: 4px;">โจทย์คำถาม:</label>
             <input id="new-q-text" type="text" placeholder="พิมพ์โจทย์คำถาม..." style="margin-bottom: 10px; text-align: left; padding: 10px;">
             
             <label style="font-size: 12px; font-weight: bold; color: #475569; display: block; margin-bottom: 4px;">ตัวเลือก 4 ข้อ:</label>
@@ -1059,16 +810,16 @@
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 6px;">
-                <span style="font-size: 12px; font-weight: bold; color: #0f172a;">เฉลย:</span>
+                <span style="font-size: 12px; font-weight: bold; color: #0f172a;">เฉลยข้อถูก:</span>
                 <select id="new-q-correct" style="width: auto; margin: 0; padding: 6px 10px; font-size: 13px;">
-                  <option value="0">A</option>
-                  <option value="1">B</option>
-                  <option value="2">C</option>
-                  <option value="3">D</option>
+                  <option value="0">ตัวเลือก A</option>
+                  <option value="1">ตัวเลือก B</option>
+                  <option value="2">ตัวเลือก C</option>
+                  <option value="3">ตัวเลือก D</option>
                 </select>
               </div>
-              <button class="btn-sweet-green" style="width: auto; padding: 8px 18px; margin: 0; font-size: 12px;" id="btn-save-question">
-                บันทึกข้อสอบ
+              <button id="btn-save-question" onclick="saveQuestionHandler()" class="btn-sweet-green" style="width: auto; padding: 9px 20px; margin: 0; font-size: 12px;">
+                บันทึกข้อสอบ ➕
               </button>
             </div>
           </div>
@@ -1077,65 +828,49 @@
     </div>
   </div>
 
+  <!-- 5. หน้าเข้าห้องผู้เรียน -->
   <div id="view-join" class="container hidden">
     <h2>เข้าสู่สมรภูมิขนมหวาน</h2>
     <input type="text" id="input-pin" placeholder="รหัสห้อง 6 หลัก" maxlength="6" inputmode="numeric">
     <input type="text" id="input-name" placeholder="ชื่อเล่นของคุณ" maxlength="12">
     <button class="btn" id="btn-do-join">เข้าสู่ห้อง</button>
-    <button class="btn" id="btn-join-back" style="background:#64748b; padding:10px;">ย้อนกลับ</button>
+    <button class="btn" style="background:#64748b; padding:10px;" onclick="switchScreen('view-mode')">ย้อนกลับ</button>
   </div>
 
+  <!-- 6. ผู้เรียนรอเริ่ม -->
   <div id="view-waiting" class="container hidden">
     <h2>ห้องเตรียมพร้อม</h2>
     <p>รหัสห้อง: <b id="wait-pin" style="color:#e01e37;"></b></p>
     <p>ผู้เล่น: <b id="wait-name" style="color:#10b981;"></b></p>
-    <p style="color: #f59e0b; margin-top:16px; font-size:14px; font-weight:bold;">รอสัญญาณปล่อยตัวจากผู้สอน...</p>
+    <p style="color: #f59e0b; margin-top:16px; font-size:14px; font-weight:bold;">⏳ รอสัญญาณปล่อยตัวจากผู้สอน...</p>
   </div>
 
+  <!-- 7. หน้าจอเล่นเกม Canvas -->
   <div id="game-wrapper" class="hidden">
     <canvas id="gameCanvas"></canvas>
 
     <div class="game-top-bar">
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-        <span id="ui-energy" style="color:#d97706;">5</span>
-      </div>
-      <button class="btn-top-quiz" id="btn-open-quiz">
-        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-        <span>คำถาม (+5)</span>
-      </button>
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-        <span id="ui-timer">00:00</span>
-      </div>
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.59L16.59 13 18 14.41 12 20.41l-6-6L7.41 13 11 16.59V4h2v12.59z" transform="rotate(180 12 12)"/></svg>
-        <span id="ui-height" style="color:#0284c7;">0</span>m
-      </div>
-      <button class="btn-music-toggle" id="btn-toggle-music" title="เปิด/ปิดเสียง">
-        <svg id="music-svg-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-      </button>
+      <div class="stat-pill">⚡ <span id="ui-energy" style="color:#d97706;">5</span></div>
+      <button class="btn-top-quiz" id="btn-open-quiz">⚡ คำถาม (+5)</button>
+      <div class="stat-pill">⏱️ <span id="ui-timer">00:00</span></div>
+      <div class="stat-pill">🎯 <span id="ui-height" style="color:#0284c7;">0</span>m</div>
+      <button class="btn-music-toggle" id="btn-toggle-music">🔊</button>
     </div>
 
+    <!-- แผงปุ่มสัมผัสขนาดใหญ่ -->
     <div class="controls-bar">
       <div class="touch-dpad-container">
-        <div class="touch-btn-arrow" id="btn-left">
-          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </div>
-        <div class="touch-btn-arrow" id="btn-right">
-          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </div>
+        <div class="touch-btn-arrow" id="btn-left">◀</div>
+        <div class="touch-btn-arrow" id="btn-right">▶</div>
       </div>
       <div class="action-pad">
-        <div class="touch-btn-jump" id="btn-jump">
-          <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-        </div>
+        <div class="touch-btn-jump" id="btn-jump">▲</div>
       </div>
     </div>
 
     <div id="quiz-modal" class="hidden">
       <div class="quiz-card">
-        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#e01e37;">ตอบคำถาม (+5 พลังงาน)</h3>
+        <h3 id="quiz-title" style="margin:0 0 10px 0; font-size:16px; color:#e01e37;">⚡ ตอบคำถาม (+5 ⚡)</h3>
         <p id="quiz-q-text" style="font-weight:bold; font-size:13px; margin:10px 0; color:#0f172a; line-height:1.4; text-align: left;"></p>
         <div id="quiz-options-list"></div>
         <button class="btn hidden" id="btn-close-quiz" style="background:#64748b; margin-top:8px; padding:8px;">ปิดหน้าต่าง</button>
@@ -1143,15 +878,16 @@
     </div>
   </div>
 
+  <!-- 8. สรุปผลการแข่งขัน -->
   <div id="view-result" class="container hidden">
-    <h2 style="color:#d97706; margin-bottom:4px;">หมดเวลาการแข่งขัน!</h2>
+    <h2 style="color:#d97706; margin-bottom:4px;">🏁 หมดเวลาการแข่งขัน!</h2>
     <p style="color:#64748b; font-size:12px; margin:0 0 6px 0;">ตารางสรุปคะแนนและสถิติการเรียนรู้</p>
     
     <div id="cheer-message" class="cheer-box">
-      ยอดเยี่ยมมากทุกคน! ไม่ว่าจะอยู่อันดับไหน ความพยายามในการเรียนรู้และฝึกฝนในวันนี้คือพัฒนาการที่ดีเยี่ยม ก้าวต่อไปนะ!
+      🌟 ยอดเยี่ยมมากทุกคน! ไม่ว่าจะอยู่อันดับไหน ความพยายามในการเรียนรู้และฝึกฝนในวันนี้คือพัฒนาการที่ดีเยี่ยม ก้าวต่อไปนะ! 💖
     </div>
 
-    <div style="font-weight: bold; font-size: 12px; color: #1e293b; text-align: left; margin-top: 8px;">รายการข้อสอบที่ควรทบทวน:</div>
+    <div style="font-weight: bold; font-size: 12px; color: #1e293b; text-align: left; margin-top: 8px;">📝 รายการข้อสอบที่ควรทบทวน:</div>
     <div id="student-error-review" class="error-review-box">
       กำลังประมวลผลสถิติ...
     </div>
@@ -1161,106 +897,43 @@
         <tr>
           <th>อันดับ/ผู้เล่น</th>
           <th style="text-align:center;">ความสูง</th>
-          <th style="text-align:center;">ถูก (พลังงาน)</th>
+          <th style="text-align:center;">ถูก (⚡)</th>
           <th style="text-align:center;">ผิด</th>
         </tr>
       </thead>
       <tbody id="result-leaderboard-body"></tbody>
     </table>
 
-    <button class="btn btn-sweet-green hidden" id="btn-export-excel" style="margin-top: 10px;">บันทึกคะแนนลงใน Excel (.csv)</button>
-    <button class="btn" id="btn-play-again" style="margin-top:8px; background:#475569;">เริ่มเกมใหม่</button>
+    <button class="btn btn-excel-luxury hidden" id="btn-export-excel" style="width: 100%; margin-top: 10px;">
+      <span>📥</span> ดาวน์โหลดรายงานผลลัพธ์ Excel (.csv)
+    </button>
+    <button class="btn" id="btn-play-again" style="margin-top:8px; background:#475569;">🔄 เริ่มเกมใหม่</button>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-    import { getDatabase, ref, set, update, onValue, push, remove, get } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+  <script>
+    // --- Local State Engine (ทดแทน Firebase โดยสมบูรณ์) ---
+    const TEACHER_PASS = "1234";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA9RMnSd0hFU1g3dySplJI1wEkKZxERsc0",
-      authDomain: "hunter-cyber-mission.firebaseapp.com",
-      databaseURL: "https://hunter-cyber-mission-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "hunter-cyber-mission",
-      storageBucket: "hunter-cyber-mission.firebasestorage.app",
-      messagingSenderId: "1039291880413",
-      appId: "1:1039291880413:web:fe7815591317e09ad91c34",
-      measurementId: "G-HC5E16JK92"
+    window.openTeacherAuthModal = function() {
+      document.getElementById('teacher-pass-input').value = "";
+      document.getElementById('teacherAuthModal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('teacher-pass-input').focus(), 150);
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getDatabase(app);
+    window.closeTeacherAuthModal = function() {
+      document.getElementById('teacherAuthModal').classList.add('hidden');
+    };
 
-    // GitHub Pages ใช้ Firebase แบบ Client-side จึงให้ผู้เล่นยืนยันตัวตนแบบ Anonymous
-    // ก่อนอ่าน/เขียน Realtime Database เพื่อป้องกันปัญหา PERMISSION_DENIED
-    const firebaseReady = signInAnonymously(auth)
-      .then(() => {
-        console.log("Firebase Anonymous Authentication: OK");
-        return true;
-      })
-      .catch((err) => {
-        console.error("Firebase Authentication Error:", err);
-        throw err;
-      });
-
-    async function ensureFirebaseReady() {
-      try {
-        await firebaseReady;
-        return true;
-      } catch (err) {
-        const code = err?.code || "unknown";
-        const message = err?.message || "ไม่ทราบสาเหตุ";
-        alert(
-          "เชื่อมต่อ Firebase ไม่สำเร็จ\\n\\n" +
-          "รหัสข้อผิดพลาด: " + code + "\\n" +
-          "รายละเอียด: " + message + "\\n\\n" +
-          "กรุณาตรวจสอบ Firebase Authentication > Sign-in method > Anonymous"
-        );
-        throw err;
-      }
-    }
-
-    const TEACHER_PASSWORD = "1234";
-
-    function showToast(text) {
-      const el = document.getElementById('toast-msg');
-      el.innerText = text;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 2000);
-    }
-
-    function openTeacherModal() {
-      document.getElementById('input-teacher-pwd').value = "";
-      document.getElementById('teacher-auth-modal').classList.remove('hidden');
-      setTimeout(() => document.getElementById('input-teacher-pwd').focus(), 150);
-    }
-
-    function closeTeacherModal() {
-      document.getElementById('teacher-auth-modal').classList.add('hidden');
-    }
-
-    function verifyTeacherPassword() {
-      const pwd = document.getElementById('input-teacher-pwd').value;
-      if (pwd === TEACHER_PASSWORD) {
-        closeTeacherModal();
-        startHostLobby();
+    window.verifyTeacherPassword = function() {
+      const input = document.getElementById('teacher-pass-input').value.trim();
+      if (input === TEACHER_PASS) {
+        closeTeacherAuthModal();
+        if (window.onHostClick) window.onHostClick();
       } else {
-        alert("รหัสผ่านไม่ถูกต้อง เฉพาะคุณครูเท่านั้นครับ");
-        document.getElementById('input-teacher-pwd').value = "";
-        document.getElementById('input-teacher-pwd').focus();
+        alert('❌ รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง');
+        document.getElementById('teacher-pass-input').value = "";
       }
-    }
-
-    document.getElementById('btn-start-mission').onclick = () => window.switchScreen('view-mode');
-    document.getElementById('btn-mode-host').onclick = openTeacherModal;
-    document.getElementById('btn-mode-join').onclick = () => window.switchScreen('view-join');
-    document.getElementById('btn-join-back').onclick = () => window.switchScreen('view-mode');
-    document.getElementById('btn-cancel-teacher-modal').onclick = closeTeacherModal;
-    document.getElementById('btn-submit-teacher-modal').onclick = verifyTeacherPassword;
-    document.getElementById('input-teacher-pwd').addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') verifyTeacherPassword();
-    });
+    };
 
     const SWEET_PALETTES = [
       { main: '#ff758f', dark: '#e01e37', blush: '#ff4d6d' },
@@ -1296,10 +969,10 @@
       { id: 20, q: "หากต้องการใส่หมายเลขหน้าให้กับเอกสาร ควรเลือกคำสั่งใด?", c: ["Insert → Page Number", "Home → Numbering", "Layout → Margins", "Review → Track Changes"], a: 0 }
     ];
 
-    quizData.sort((a, b) => a.id - b.id);
+    quizData.sort(() => Math.random() - 0.5);
 
-    let currentPin = null;
-    let myPlayerId = null;
+    let currentPin = "888888";
+    let myPlayerId = "p_me";
     let playerName = "Agent";
     let isHost = false;
     let energy = 5;
@@ -1307,9 +980,7 @@
     let correctCount = 0;
     let wrongCount = 0;
     let currentQ = 0;
-    let totalAnsweredCount = 0;
     let isGameOver = false;
-    let isGameRunning = false;
     let timerInterval = null;
     let allPlayersData = {};
     let isTrapped = false;
@@ -1319,7 +990,7 @@
 
     let myQuizAnswers = {};
     quizData.forEach(q => {
-      myQuizAnswers[q.id] = { firstResult: null };
+      myQuizAnswers[q.id] = { correct: false, wrongAttempts: 0 };
     });
 
     const smoothPositions = {};
@@ -1367,7 +1038,7 @@
         audioCtx.resume();
       }
       isMusicPlaying = true;
-      document.getElementById('music-svg-icon').style.fill = "#0284c7";
+      document.getElementById('btn-toggle-music').innerText = "🔊";
       if (musicInterval) clearInterval(musicInterval);
       musicInterval = setInterval(() => {
         if (!isMusicPlaying) return;
@@ -1382,8 +1053,15 @@
       initMusic();
       if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
       isMusicPlaying = !isMusicPlaying;
-      document.getElementById('music-svg-icon').style.fill = isMusicPlaying ? "#0284c7" : "#94a3b8";
+      document.getElementById('btn-toggle-music').innerText = isMusicPlaying ? "🔊" : "🔇";
     };
+
+    function showToast(text) {
+      const el = document.getElementById('toast-msg');
+      el.innerText = text;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2000);
+    }
 
     const clouds = [
       { x: 50,  y: 100, scale: 0.9, speed: 0.3 },
@@ -1398,7 +1076,17 @@
       return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    function switchQbTab(tab) {
+    window.openQuestionBankModal = function() {
+      switchQbTab('view');
+      renderQuestionBankList();
+      document.getElementById('questionBankModal').classList.remove('hidden');
+    }
+
+    window.closeQuestionBankModal = function() {
+      document.getElementById('questionBankModal').classList.add('hidden');
+    }
+
+    window.switchQbTab = function(tab) {
       const tabView = document.getElementById('qb-tab-view');
       const tabAdd = document.getElementById('qb-tab-add');
       const panelView = document.getElementById('qb-panel-view');
@@ -1417,43 +1105,36 @@
       }
     }
 
-    function prepareAddQuestion() {
+    window.prepareAddQuestion = function() {
       document.getElementById('edit-q-id').value = "";
-      document.getElementById('form-q-title').innerText = "โจทย์คำถามใหม่:";
-      document.getElementById('btn-save-question').innerText = "บันทึกข้อสอบ";
+      document.getElementById('form-mode-title').innerText = "➕ เพิ่มคำถามข้อใหม่";
       document.getElementById('new-q-text').value = "";
       document.getElementById('new-q-a1').value = "";
       document.getElementById('new-q-a2').value = "";
       document.getElementById('new-q-a3').value = "";
       document.getElementById('new-q-a4').value = "";
       document.getElementById('new-q-correct').value = "0";
+      document.getElementById('btn-save-question').innerText = "บันทึกข้อสอบ ➕";
       switchQbTab('add');
-    }
+    };
 
-    function prepareEditQuestion(id) {
-      const item = quizData.find(q => q.id === id);
-      if (!item) return;
+    window.prepareEditQuestion = function(id) {
+      const qItem = quizData.find(q => q.id === id);
+      if (!qItem) return;
 
-      document.getElementById('edit-q-id').value = item.id;
-      document.getElementById('form-q-title').innerText = `แก้ไขโจทย์คำถาม (ข้อ ID: ${item.id}):`;
-      document.getElementById('btn-save-question').innerText = "อัปเดตข้อสอบ";
-      document.getElementById('new-q-text').value = item.q;
-      document.getElementById('new-q-a1').value = item.c[0] || "";
-      document.getElementById('new-q-a2').value = item.c[1] || "";
-      document.getElementById('new-q-a3').value = item.c[2] || "";
-      document.getElementById('new-q-a4').value = item.c[3] || "";
-      document.getElementById('new-q-correct').value = item.a;
+      document.getElementById('edit-q-id').value = qItem.id;
+      document.getElementById('form-mode-title').innerText = "✏️ แก้ไขข้อสอบข้อที่ " + (quizData.findIndex(q => q.id === id) + 1);
+      document.getElementById('new-q-text').value = qItem.q;
+      document.getElementById('new-q-a1').value = qItem.c[0] || "";
+      document.getElementById('new-q-a2').value = qItem.c[1] || "";
+      document.getElementById('new-q-a3').value = qItem.c[2] || "";
+      document.getElementById('new-q-a4').value = qItem.c[3] || "";
+      document.getElementById('new-q-correct').value = qItem.a;
+      document.getElementById('btn-save-question').innerText = "💾 บันทึกการแก้ไข";
       switchQbTab('add');
-    }
+    };
 
-    function deleteQuestion(id) {
-      if (quizData.length <= 3) return alert('ต้องมีข้อสอบอย่างน้อย 3 ข้อครับ');
-      quizData = quizData.filter(q => q.id !== id);
-      renderQuestionBankList();
-      showToast('ลบคำถามเรียบร้อย');
-    }
-
-    function renderQuestionBankList() {
+    window.renderQuestionBankList = function() {
       const listEl = document.getElementById('questionBankList');
       document.getElementById('total-q-count').innerText = quizData.length;
       document.getElementById('bank-q-count').innerText = quizData.length;
@@ -1463,7 +1144,7 @@
         const div = document.createElement('div');
         div.className = "qb-question-card";
         div.innerHTML = `
-          <div style="flex: 1;">
+          <div style="flex:1;">
             <div style="font-weight: 800; font-size: 12px; color: #0f172a; line-height: 1.4;">
               ${index + 1}. ${item.q}
             </div>
@@ -1471,42 +1152,23 @@
               ${item.c.map((c, i) => `
                 <div style="margin-bottom: 2px;">
                   <span style="${i === item.a ? 'color: #059669; font-weight: 800; background: #ecfdf5; padding: 1px 6px; border-radius: 6px;' : ''}">
-                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '[ถูกต้อง]' : ''}
+                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '✓' : ''}
                   </span>
                 </div>
               `).join('')}
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <button class="qb-btn-edit btn-edit-item" data-id="${item.id}">แก้ไข</button>
-            <button class="qb-btn-delete btn-del-item" data-id="${item.id}">ลบ</button>
+          <div class="qb-actions">
+            <button type="button" onclick="prepareEditQuestion(${item.id})" class="qb-btn-edit">✏️ แก้ไข</button>
+            <button type="button" onclick="deleteQuestion(${item.id})" class="qb-btn-delete">ลบ</button>
           </div>
         `;
         listEl.appendChild(div);
       });
-
-      document.querySelectorAll('.btn-edit-item').forEach(b => {
-        b.onclick = (e) => prepareEditQuestion(parseInt(e.target.dataset.id));
-      });
-      document.querySelectorAll('.btn-del-item').forEach(b => {
-        b.onclick = (e) => deleteQuestion(parseInt(e.target.dataset.id));
-      });
-    }
-
-    document.getElementById('btn-host-qb').onclick = () => {
-      switchQbTab('view');
-      renderQuestionBankList();
-      document.getElementById('questionBankModal').classList.remove('hidden');
     };
-    document.getElementById('btn-close-qb-modal').onclick = () => {
-      document.getElementById('questionBankModal').classList.add('hidden');
-    };
-    document.getElementById('qb-tab-view').onclick = () => switchQbTab('view');
-    document.getElementById('qb-tab-add').onclick = prepareAddQuestion;
-    document.getElementById('btn-host-exit').onclick = () => location.reload();
 
-    document.getElementById('btn-save-question').onclick = () => {
-      const editId = document.getElementById('edit-q-id').value;
+    window.saveQuestionHandler = function() {
+      const editIdStr = document.getElementById('edit-q-id').value;
       const qText = document.getElementById('new-q-text').value.trim();
       const a1 = document.getElementById('new-q-a1').value.trim();
       const a2 = document.getElementById('new-q-a2').value.trim();
@@ -1518,14 +1180,14 @@
         return alert('กรุณากรอกโจทย์และตัวเลือกให้ครบทั้ง 4 ข้อครับ');
       }
 
-      if (editId) {
-        const idNum = parseInt(editId);
-        const itemIdx = quizData.findIndex(q => q.id === idNum);
-        if (itemIdx !== -1) {
-          quizData[itemIdx].q = qText;
-          quizData[itemIdx].c = [a1, a2, a3, a4];
-          quizData[itemIdx].a = correctIdx;
-          showToast('อัปเดตข้อสอบเรียบร้อย');
+      if (editIdStr) {
+        const editId = parseInt(editIdStr);
+        const qIdx = quizData.findIndex(q => q.id === editId);
+        if (qIdx !== -1) {
+          quizData[qIdx].q = qText;
+          quizData[qIdx].c = [a1, a2, a3, a4];
+          quizData[qIdx].a = correctIdx;
+          showToast('💾 แก้ไขข้อสอบสำเร็จ!');
         }
       } else {
         const newId = quizData.length > 0 ? Math.max(...quizData.map(q => q.id)) + 1 : 1;
@@ -1535,52 +1197,48 @@
           c: [a1, a2, a3, a4],
           a: correctIdx
         });
-        myQuizAnswers[newId] = { firstResult: null };
-        showToast('บันทึกข้อสอบใหม่สำเร็จ');
+        myQuizAnswers[newId] = { correct: false, wrongAttempts: 0 };
+        showToast('➕ บันทึกข้อสอบใหม่สำเร็จ!');
       }
 
       renderQuestionBankList();
       switchQbTab('view');
     };
 
-    function kickPlayer(pid) {
-      if (!currentPin || !isHost) return;
-      remove(ref(db, `rooms/${currentPin}/players/${pid}`));
-      showToast('นำผู้เล่นออกจากห้องแล้ว');
-    }
+    window.deleteQuestion = function(id) {
+      if (quizData.length <= 3) {
+        return alert('ต้องมีข้อสอบอย่างน้อย 3 ข้อครับ');
+      }
+      quizData = quizData.filter(q => q.id !== id);
+      renderQuestionBankList();
+      showToast('🗑️ ลบคำถามเรียบร้อย');
+    };
 
-    function renderHostPlayers() {
+    window.kickPlayer = function(pid) {
+      delete allPlayersData[pid];
+      updateHostLobbyUI();
+      renderHostLiveTable();
+      showToast('นำผู้เล่นออกจากห้องแล้ว');
+    };
+
+    function updateHostLobbyUI() {
       const keys = Object.keys(allPlayersData);
       document.getElementById('live-player-count').innerText = keys.length;
       document.getElementById('player-count').innerText = keys.length;
-      
       const list = document.getElementById('host-players');
       list.innerHTML = "";
       keys.forEach(k => {
         const b = document.createElement('div');
         b.className = 'badge-player';
-        b.innerHTML = `<span>${allPlayersData[k].name}</span>`;
-        const kickBtn = document.createElement('button');
-        kickBtn.className = 'badge-kick-btn';
-        kickBtn.innerText = '✕';
-        kickBtn.title = 'ลบออกจากห้อง';
-        kickBtn.onclick = () => kickPlayer(k);
-        b.appendChild(kickBtn);
+        b.innerHTML = `<span>${allPlayersData[k].name}</span><button class="badge-kick-btn" onclick="kickPlayer('${k}')" title="ลบออกจากห้อง">✕</button>`;
         list.appendChild(b);
       });
       document.getElementById('btn-start').disabled = keys.length === 0;
-      renderHostLiveTable();
     }
 
-    async function startHostLobby() {
-      try {
-        await ensureFirebaseReady();
-      } catch (err) {
-        return;
-      }
-
+    window.onHostClick = function() {
       isHost = true;
-      window.switchScreen('view-host');
+      switchScreen('view-host');
       currentPin = Math.floor(100000 + Math.random() * 900000).toString();
       document.getElementById('host-pin').innerText = currentPin;
 
@@ -1594,219 +1252,87 @@
 
       document.getElementById('btn-copy-link').onclick = () => {
         navigator.clipboard.writeText(joinUrl);
-        showToast('คัดลอกลิงก์เรียบร้อย');
+        showToast('📋 คัดลอกลิงก์เรียบร้อย');
       };
 
-      try {
-        await set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
-      } catch (err) {
-        console.error("สร้างห้องไม่สำเร็จ:", err);
-        alert(
-          "สร้างห้องไม่สำเร็จ\\n\\n" +
-          "รหัสข้อผิดพลาด: " + (err?.code || "unknown") + "\\n" +
-          "รายละเอียด: " + (err?.message || "ไม่ทราบสาเหตุ") +
-          "\\n\\nตรวจสอบ Realtime Database Rules ว่าอนุญาต auth != null"
-        );
-        return;
-      }
+      // จำลองผู้เล่นในห้องพร้อมชื่อเริ่มต้น
+      allPlayersData = {
+        'p1': { name: 'Player-1', height: 0, correct: 0, wrong: 0, energy: 5, styleIndex: 1 },
+        'p2': { name: 'Player-2', height: 0, correct: 0, wrong: 0, energy: 5, styleIndex: 2 }
+      };
+      updateHostLobbyUI();
+    };
 
-      onValue(ref(db, `rooms/${currentPin}/players`), (snap) => {
-        allPlayersData = snap.val() || {};
-        renderHostPlayers();
-      }, (err) => {
-        console.error("อ่านรายชื่อผู้เล่นไม่สำเร็จ:", err);
-        showToast("อ่านข้อมูลผู้เล่นไม่สำเร็จ");
-      });
-
-      onValue(ref(db, `rooms/${currentPin}/status`), (snap) => {
-        const currentStatus = snap.val();
-        if (currentStatus === 'ended') {
-          showFinalLeaderboard();
-        } else if (currentStatus === 'waiting' && !isHost) {
-          isGameOver = false;
-          isGameRunning = false;
-          currentMeters = 0;
-          correctCount = 0;
-          wrongCount = 0;
-          currentQ = 0;
-          totalAnsweredCount = 0;
-          window.switchScreen('view-waiting');
-        }
-      });
-    }
-
-    document.getElementById('btn-start').onclick = async () => {
-      try {
-        await ensureFirebaseReady();
-      } catch (err) {
-        return;
-      }
-
+    document.getElementById('btn-start').onclick = () => {
       const minutes = parseInt(document.getElementById('select-duration').value) || 3;
       const initialEnergy = parseInt(document.getElementById('select-energy').value) || 5;
-      const endTime = Date.now() + (minutes * 60 * 1000);
+      const durationSec = minutes * 60;
 
-      quizData.sort((a, b) => a.id - b.id);
-
-      const playerUpdates = {};
+      quizData.sort(() => Math.random() - 0.5);
       Object.keys(allPlayersData).forEach(pid => {
-        playerUpdates[`players/${pid}/height`] = 0;
-        playerUpdates[`players/${pid}/correct`] = 0;
-        playerUpdates[`players/${pid}/wrong`] = 0;
+        allPlayersData[pid].height = 0;
+        allPlayersData[pid].correct = 0;
+        allPlayersData[pid].wrong = 0;
+        allPlayersData[pid].energy = initialEnergy;
       });
 
-      try {
-        await update(ref(db, `rooms/${currentPin}`), {
-          status: 'playing',
-          endTime: endTime,
-          initialEnergy: initialEnergy,
-          ...playerUpdates
-        });
-      } catch (err) {
-        console.error("เริ่มการแข่งขันไม่สำเร็จ:", err);
-        alert(
-          "เริ่มการแข่งขันไม่สำเร็จ\\n\\n" +
-          "รหัสข้อผิดพลาด: " + (err?.code || "unknown") + "\\n" +
-          "รายละเอียด: " + (err?.message || "ไม่ทราบสาเหตุ")
-        );
-        return;
-      }
-
       document.getElementById('live-room-pin').innerText = currentPin;
-      window.switchScreen('view-host-live');
+      switchScreen('view-host-live');
+
+      let remainSec = durationSec;
+      document.getElementById('host-timer-text').innerText = formatTime(remainSec);
 
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(() => {
-        const remainSec = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
-        const formatted = formatTime(remainSec);
-        document.getElementById('host-timer-text').innerText = formatted;
+        remainSec--;
+        document.getElementById('host-timer-text').innerText = formatTime(Math.max(0, remainSec));
+        
+        // จำลองความคืบหน้าของผู้เล่นเพื่อแสดงผลในหน้าจอ Host Monitor
+        Object.keys(allPlayersData).forEach(pid => {
+          if (Math.random() > 0.4) {
+            allPlayersData[pid].height += Math.floor(Math.random() * 3);
+          }
+        });
+        renderHostLiveTable();
 
         if (remainSec <= 0) {
           clearInterval(timerInterval);
-          update(ref(db, `rooms/${currentPin}`), { status: 'ended' });
+          showFinalLeaderboard();
         }
-      }, 500);
+      }, 1000);
     };
 
-    document.getElementById('btn-do-join').onclick = async () => {
+    document.getElementById('btn-do-join').onclick = () => {
       isHost = false;
       const pin = document.getElementById('input-pin').value.trim();
       const name = document.getElementById('input-name').value.trim();
       if (!pin || !name) return alert('กรุณากรอก PIN และชื่อ');
 
-      const btnJoin = document.getElementById('btn-do-join');
-      btnJoin.disabled = true;
-      btnJoin.innerText = "กำลังเชื่อมต่อ...";
+      playerName = name;
+      myStyleIndex = Math.floor(Math.random() * SWEET_PALETTES.length);
+      myPlayerId = "p_me";
 
-      try {
-        await ensureFirebaseReady();
+      document.getElementById('wait-pin').innerText = pin;
+      document.getElementById('wait-name').innerText = name;
+      switchScreen('view-waiting');
 
-        const roomSnap = await get(ref(db, `rooms/${pin}`));
-        const room = roomSnap.val();
-        if (!room) {
-          btnJoin.disabled = false;
-          btnJoin.innerText = "เข้าสู่ห้อง";
-          return alert('ไม่พบห้องนี้ กรุณาตรวจสอบรหัส PIN');
-        }
+      // นับถอยหลังเข้าเกมอัตโนมัติ 1.5 วินาที
+      setTimeout(() => {
+        energy = 5;
+        document.getElementById('ui-energy').innerText = energy;
 
-        if (room.status !== 'waiting') {
-          btnJoin.disabled = false;
-          btnJoin.innerText = "เข้าสู่ห้อง";
-          return alert('การแข่งขันเริ่มต้นไปแล้วหรือสิ้นสุดแล้ว ไม่สามารถเข้าร่วมได้ในขณะนี้');
-        }
+        allPlayersData = {
+          'p_me': { name: playerName, height: 0, correct: 0, wrong: 0, energy: energy, styleIndex: myStyleIndex, quizStats: myQuizAnswers }
+        };
 
-        const existingPlayers = room.players || {};
-        const isNameTaken = Object.values(existingPlayers).some(p => p.name && p.name.trim().toLowerCase() === name.toLowerCase());
-        if (isNameTaken) {
-          btnJoin.disabled = false;
-          btnJoin.innerText = "เข้าสู่ห้อง";
-          return alert('ชื่อนี้มีผู้เล่นคนอื่นใช้ในห้องแล้ว กรุณาตั้งชื่อใหม่');
-        }
-
-        playerName = name;
-        currentPin = pin;
-        myStyleIndex = Math.floor(Math.random() * SWEET_PALETTES.length);
-
-        const pRef = push(ref(db, `rooms/${pin}/players`));
-        myPlayerId = pRef.key;
-
-        await set(pRef, {
-          name: playerName,
-          height: 0,
-          x: 200,
-          y: 400,
-          facing: 'right',
-          styleIndex: myStyleIndex,
-          correct: 0,
-          wrong: 0,
-          quizStats: myQuizAnswers
-        });
-
-        document.getElementById('wait-pin').innerText = pin;
-        document.getElementById('wait-name').innerText = name;
-        window.switchScreen('view-waiting');
-
-        onValue(ref(db, `rooms/${pin}`), (snap) => {
-          const liveRoom = snap.val();
-          if (!liveRoom) return;
-
-          if (myPlayerId && (!liveRoom.players || !liveRoom.players[myPlayerId])) {
-            alert('คุณถูกผู้สอนนำออกจากห้อง');
-            location.reload();
-            return;
-          }
-
-          if (liveRoom.players) {
-            allPlayersData = liveRoom.players;
-          }
-
-          if (liveRoom.status === 'playing' && !isGameOver && !isGameRunning) {
-            isGameRunning = true;
-            energy = liveRoom.initialEnergy !== undefined ? liveRoom.initialEnergy : 5;
-            document.getElementById('ui-energy').innerText = energy;
-
-            window.switchScreen('game-wrapper');
-            initSweetPlatformer();
-            startPlayerTimer(liveRoom.endTime);
-            startBackgroundMusic();
-          }
-
-          if (liveRoom.status === 'ended' && !isGameOver) {
-            endGame();
-          }
-
-          if (liveRoom.status === 'waiting' && isGameOver) {
-            isGameOver = false;
-            isGameRunning = false;
-            currentMeters = 0;
-            correctCount = 0;
-            wrongCount = 0;
-            currentQ = 0;
-            totalAnsweredCount = 0;
-            window.switchScreen('view-waiting');
-          }
-        }, (err) => {
-          console.error("Room listener error:", err);
-          showToast("การเชื่อมต่อห้องขัดข้อง");
-        });
-
-      } catch (err) {
-        console.error("Join/Firebase Error:", err);
-        const code = err?.code || "unknown";
-        const message = err?.message || "ไม่ทราบสาเหตุ";
-        alert(
-          "เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล\\n\\n" +
-          "รหัสข้อผิดพลาด: " + code + "\\n" +
-          "รายละเอียด: " + message + "\\n\\n" +
-          "ถ้าขึ้น PERMISSION_DENIED ให้ตรวจสอบ Firebase Realtime Database Rules"
-        );
-      } finally {
-        btnJoin.disabled = false;
-        btnJoin.innerText = "เข้าสู่ห้อง";
-      }
+        switchScreen('game-wrapper');
+        initSweetPlatformer();
+        startPlayerTimer(Date.now() + 180 * 1000);
+        startBackgroundMusic();
+      }, 1500);
     };
 
-    function exportDataCSV() {
+    window.exportDataCSV = function() {
       const sorted = Object.values(allPlayersData)
         .sort((a,b) => (b.height || 0) - (a.height || 0));
 
@@ -1814,10 +1340,8 @@
 
       let csvContent = "\uFEFF";
       let header = "อันดับ,ชื่อผู้เล่น,ความสูงสูงสุด (เมตร),ตอบถูกรวม (ข้อ),ตอบผิดรวม (ข้อ),ความแม่นยำ (%)";
-      
-      const fixedQuizList = [...quizData].sort((a, b) => a.id - b.id);
-      fixedQuizList.forEach((q, idx) => {
-        header += `,ข้อ ${idx + 1}`;
+      quizData.forEach((q, idx) => {
+        header += `,ข้อ ${idx+1} (ผล/ผิดกี่ครั้ง)`;
       });
       csvContent += header + "\n";
 
@@ -1831,9 +1355,14 @@
         let row = `${idx + 1},${safeName},${p.height || 0},${correct},${wrong},${accuracy}%`;
 
         const pStats = p.quizStats || {};
-        fixedQuizList.forEach(q => {
-          const qStat = pStats[q.id] || { firstResult: null };
-          let resText = qStat.firstResult || "ยังไม่ได้ทำ";
+        quizData.forEach(q => {
+          const qStat = pStats[q.id] || { correct: false, wrongAttempts: 0 };
+          let resText = "";
+          if (qStat.correct) {
+            resText = qStat.wrongAttempts > 0 ? `ผ่าน (ผิด ${qStat.wrongAttempts} ครั้ง)` : "ถูกครั้งแรก";
+          } else {
+            resText = qStat.wrongAttempts > 0 ? `ยังไม่ผ่าน (ผิด ${qStat.wrongAttempts} ครั้ง)` : "ยังไม่ได้ตอบ";
+          }
           row += `,"${resText}"`;
         });
         csvContent += row + "\n";
@@ -1843,36 +1372,28 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `คะแนนเกม_ผลรอบแรก_${currentPin || 'HunterWord'}.csv`);
+      link.setAttribute("download", `คะแนนเกม_พร้อมสถิติรายข้อ_${currentPin || 'SweetWord'}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    }
+    };
 
-    document.getElementById('btn-host-export').onclick = exportDataCSV;
-    document.getElementById('btn-export-excel').onclick = exportDataCSV;
-
+    document.getElementById('btn-export-excel').onclick = window.exportDataCSV;
     document.getElementById('btn-open-quiz').onclick = () => triggerQuizModal(false);
     document.getElementById('btn-close-quiz').onclick = () => {
       if (energy > 0 && !isTrapped) document.getElementById('quiz-modal').classList.add('hidden');
     };
 
-    document.getElementById('btn-play-again').onclick = async () => {
-      totalAnsweredCount = 0;
-      if (isHost && currentPin) {
-        await update(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
-        window.switchScreen('view-host');
-      } else {
-        window.switchScreen('view-waiting');
-      }
+    document.getElementById('btn-play-again').onclick = () => {
+      location.reload();
     };
 
     const urlParams = new URLSearchParams(window.location.search);
     const pinParam = urlParams.get('pin');
     if (pinParam) {
       document.getElementById('input-pin').value = pinParam;
-      window.switchScreen('view-join');
+      switchScreen('view-join');
     }
 
     function renderHostLiveTable() {
@@ -1896,9 +1417,16 @@
         const accuracy = total > 0 ? accuracyNum.toFixed(0) + "%" : "0%";
 
         let rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:#334155; color:#cbd5e1; font-weight:800; font-size:11px;">${idx + 1}</span>`;
+        if (idx === 0) {
+          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #facc15, #ca8a04); color:#78350f; font-weight:900; font-size:12px;">🥇</span>`;
+        } else if (idx === 1) {
+          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #f1f5f9, #94a3b8); color:#1e293b; font-weight:900; font-size:12px;">🥈</span>`;
+        } else if (idx === 2) {
+          rankBadge = `<span style="display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:linear-gradient(135deg, #fdba74, #ea580c); color:#431407; font-weight:900; font-size:12px;">🥉</span>`;
+        }
 
         tbody.innerHTML += `
-          <tr style="transition: transform 0.15s ease;">
+          <tr>
             <td style="text-align: center;">${rankBadge}</td>
             <td style="font-weight: 800; color: white;">${p.name || 'Agent'}</td>
             <td style="text-align: center; font-family: monospace; font-weight: 900; color: #38bdf8; font-size: 14px;">${p.height || 0} m</td>
@@ -1912,7 +1440,7 @@
                 <span style="color: #cbd5e1; font-size: 11px; font-weight: bold; width: 32px;">${accuracy}</span>
               </div>
             </td>
-            <td style="text-align: center; font-weight: 800; color: #fde047;">${p.energy !== undefined ? p.energy : energy}</td>
+            <td style="text-align: center; font-weight: 800; color: #fde047;">⚡ ${p.energy !== undefined ? p.energy : energy}</td>
           </tr>
         `;
       });
@@ -1933,7 +1461,6 @@
 
     function endGame() {
       isGameOver = true;
-      isGameRunning = false;
       if (timerInterval) clearInterval(timerInterval);
       if (musicInterval) clearInterval(musicInterval);
       isMusicPlaying = false;
@@ -1950,10 +1477,14 @@
 
       sorted.forEach((p, idx) => {
         let badge = `#${idx + 1}`;
+        if (idx === 0) badge = "🥇 1";
+        else if (idx === 1) badge = "🥈 2";
+        else if (idx === 2) badge = "🥉 3";
+
         const isMe = (p.name === playerName);
         tbody.innerHTML += `
           <tr style="${isMe ? 'background: #ffe4e6; font-weight:bold;' : ''}">
-            <td>${badge} ${p.name} ${isMe ? '(คุณ)' : ''}</td>
+            <td>${badge} 🍬 ${p.name} ${isMe ? '(คุณ)' : ''}</td>
             <td style="text-align:center; color:#0284c7;">${p.height || 0} m</td>
             <td style="text-align:center; color:#10b981;">${p.correct || 0}</td>
             <td style="text-align:center; color:#ef4444;">${p.wrong || 0}</td>
@@ -1966,28 +1497,28 @@
       let wrongItemsCount = 0;
 
       quizData.forEach((q) => {
-        const stat = myQuizAnswers[q.id] || { firstResult: null };
-        if (stat.firstResult === 'ผิด') {
+        const stat = myQuizAnswers[q.id] || { correct: false, wrongAttempts: 0 };
+        if (stat.wrongAttempts > 0) {
           wrongItemsCount++;
           const div = document.createElement('div');
           div.className = "mb-1.5 pb-1.5 border-b border-slate-200";
-          div.innerHTML = `[ผิด] <b>โจทย์:</b> ${q.q} <br><span style="color: #e11d48; font-weight: 600;">(รอบแรกตอบ: ไม่ถูกต้อง)</span>`;
+          div.innerHTML = `❌ <b>โจทย์:</b> ${q.q} <br><span style="color: #e11d48; font-weight: 600;">ตอบผิดไป ${stat.wrongAttempts} ครั้ง</span>`;
           reviewBox.appendChild(div);
         }
       });
 
       if (wrongItemsCount === 0) {
-        reviewBox.innerHTML = "ยอดเยี่ยมมาก! คุณตอบคำถามถูกต้องหมดทุกข้อโดยไม่มีข้อผิดพลาดเลย";
+        reviewBox.innerHTML = "🎉 สุดยอดมาก! คุณตอบคำถามถูกต้องหมดทุกข้อโดยไม่มีข้อผิดพลาดเลย!";
       }
 
       const myRank = sorted.findIndex(p => p.name === playerName);
       const cheerEl = document.getElementById('cheer-message');
       if (myRank === 0) {
-        cheerEl.innerHTML = "ยอดเยี่ยมที่สุด! คุณคว้าอันดับ 1 มาครองได้อย่างสมบูรณ์แบบ ทั้งทักษะการกระโดดและความรู้ Word สุดยอดมากๆ";
+        cheerEl.innerHTML = "🏆 ยอดเยี่ยมที่สุด! คุณคว้าอันดับ 1 มาครองได้อย่างสง่างาม ทั้งทักษะการกระโดดและความรู้ Word สุดยอดมากๆ! 🌟";
       } else if (myRank >= 1 && myRank <= 2) {
-        cheerEl.innerHTML = "เก่งมากๆ! คุณติด 3 อันดับแรก มีความพยายามและทำคะแนนได้ยอดเยี่ยมมาก";
+        cheerEl.innerHTML = "🎉 เก่งมากๆ! คุณติด Top 3 บนโพเดียม เก่งและมีความพยายามสูงมาก ภูมิใจในตัวเองได้เลย! 💖";
       } else {
-        cheerEl.innerHTML = "ยอดเยี่ยมมาก! ทุกระดับความสูงและทุกคำถามที่ตอบ คือก้าวสำคัญของการเรียนรู้ ฝึกฝนต่อไปเรื่อยๆ นะครับ";
+        cheerEl.innerHTML = "🌟 ยอดเยี่ยมมาก! ทุกความสูงและทุกคำถามที่ตอบ คือก้าวสำคัญของการเรียนรู้ ฝึกฝนต่อไปเรื่อยๆ คุณทำได้ดียิ่งขึ้นแน่นอน สู้ๆ นะ! 💪✨";
       }
 
       const btnExcel = document.getElementById('btn-export-excel');
@@ -1997,7 +1528,7 @@
         btnExcel.classList.add('hidden');
       }
 
-      window.switchScreen('view-result');
+      switchScreen('view-result');
     }
 
     function triggerQuizModal(fromTrap = false) {
@@ -2011,14 +1542,14 @@
       const modalTitle = document.getElementById('quiz-title');
 
       if (fromTrap) {
-        modalTitle.innerText = "ติดกับดัก! ตอบให้ถูกเพื่อปลดล็อก";
+        modalTitle.innerText = "🚨 ติดกับดัก! ตอบให้ถูกเพื่อปลดปล่อย";
         modalTitle.style.color = "#ef4444";
       } else if (energy <= 0) {
-        modalTitle.innerText = "พลังงานหมด! ตอบให้ถูกเพื่อชาร์จ (+5 หน่วย)";
+        modalTitle.innerText = "⚠️ พลังงานหมด! ตอบให้ถูกเพื่อชาร์จ (+5 ⚡)";
         modalTitle.style.color = "#d97706";
       } else {
-        modalTitle.innerText = "ตอบคำถามชาร์จพลังงาน (+5 หน่วย)";
-        modalTitle.style.color = "#0284c7";
+        modalTitle.innerText = "⚡ ตอบคำถามชาร์จพลังงาน (+5 ⚡)";
+        modalTitle.style.color = "#e01e37";
       }
 
       q.c.forEach((choice, idx) => {
@@ -2026,50 +1557,39 @@
         b.className = 'quiz-option';
         b.innerText = `${String.fromCharCode(65 + idx)}. ${choice}`;
         b.onclick = () => {
-          const isCorrect = (idx === q.a);
-
-          if (totalAnsweredCount < 20) {
-            if (!myQuizAnswers[q.id]) {
-              myQuizAnswers[q.id] = { firstResult: null };
-            }
-            if (myQuizAnswers[q.id].firstResult === null) {
-              myQuizAnswers[q.id].firstResult = isCorrect ? 'ถูก' : 'ผิด';
-            }
-            totalAnsweredCount++;
-          }
-
-          if (isCorrect) {
+          if (idx === q.a) {
             document.getElementById('quiz-modal').classList.add('hidden');
             if (fromTrap) {
               isTrapped = false;
               trapImmunity = 100;
               if (releaseFromTrapCallback) releaseFromTrapCallback();
-              showToast('ถูกต้อง! ปลดล็อกกับดักแล้ว');
+              showToast('🔓 ถูกต้อง! ปลดล็อกกับดักแล้ว');
             } else {
               energy += 5;
               correctCount += 1;
               document.getElementById('ui-energy').innerText = energy;
-              showToast('ถูกต้อง! +5 พลังงาน');
+              showToast('🎉 ถูกต้อง! +5 ⚡');
+              
+              if (myQuizAnswers[q.id]) {
+                myQuizAnswers[q.id].correct = true;
+              }
             }
             currentQ++;
 
-            if (currentPin && myPlayerId && !fromTrap) {
-              update(ref(db, `rooms/${currentPin}/players/${myPlayerId}`), {
-                correct: correctCount,
-                wrong: wrongCount,
-                quizStats: myQuizAnswers,
-                energy: energy
-              });
+            if (allPlayersData[myPlayerId]) {
+              allPlayersData[myPlayerId].correct = correctCount;
+              allPlayersData[myPlayerId].wrong = wrongCount;
+              allPlayersData[myPlayerId].energy = energy;
             }
           } else {
-            showToast('คำตอบยังไม่ถูกต้อง ลองข้อถัดไป');
+            showToast('❌ ผิด! ลองตอบข้อนี้ดู');
             if (!fromTrap) {
               wrongCount += 1;
-              if (currentPin && myPlayerId) {
-                update(ref(db, `rooms/${currentPin}/players/${myPlayerId}`), {
-                  wrong: wrongCount,
-                  quizStats: myQuizAnswers
-                });
+              if (myQuizAnswers[q.id]) {
+                myQuizAnswers[q.id].wrongAttempts += 1;
+              }
+              if (allPlayersData[myPlayerId]) {
+                allPlayersData[myPlayerId].wrong = wrongCount;
               }
             }
             currentQ++;
@@ -2201,25 +1721,25 @@
         ctx.fillStyle = '#e01e37';
         ctx.font = 'bold 11px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(charName, cx, cy - r - 8);
+        ctx.fillText(`🍓 ${charName}`, cx, cy - r - 8);
       }
 
       if (charTrapped) {
         ctx.fillStyle = '#ef4444';
         ctx.font = 'bold 10px sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('[ติดกับดัก]', cx, cy - r - 20);
+        ctx.fillText('⚠️ ติดกับดัก!', cx, cy - r - 20);
       }
 
       ctx.restore();
     }
 
-    function drawCutePlatform(ctx, p, dy) {
+    function drawCutePlatform(ctx, p, dy, offsetX) {
       ctx.save();
       ctx.shadowColor = 'rgba(0, 0, 0, 0.06)';
       ctx.shadowOffsetY = 4;
 
-      let px = p.x;
+      let px = p.x + offsetX;
       let py = dy;
 
       if (p.isDisappearing && p.stepped) {
@@ -2315,6 +1835,8 @@
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
 
+      const V_WIDTH = 480;
+
       function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -2324,7 +1846,7 @@
       window.addEventListener('orientationchange', () => setTimeout(resize, 200));
 
       const player = {
-        x: canvas.width / 2 - 17,
+        x: V_WIDTH / 2 - 17,
         y: canvas.height - 120,
         w: 34,
         h: 40,
@@ -2342,16 +1864,14 @@
       };
 
       let cameraY = 0;
-      let lastNetworkSync = 0;
 
       const platforms = [
-        { x: -100, y: canvas.height - 60, w: 2500, h: 100, type: 'cake' }
+        { x: -500, y: canvas.height - 60, w: 2000, h: 100, type: 'cake' }
       ];
       const boosters = [];
       const traps = [];
 
       let lastY = canvas.height - 110;
-      const screenW = Math.max(360, canvas.width);
       const platTypes = ['waffle', 'jelly', 'cake', 'choco', 'ice'];
       const TOTAL_PLATFORMS = 380;
 
@@ -2389,19 +1909,20 @@
         const moveChance = i < 30 ? 0.2 : (i < 100 ? 0.45 : 0.65);
         if (i > 4 && norm1 < moveChance && !isDisappearing) {
           isMoving = true;
-          moveAmplitude = (i < 80 ? 45 : 70) + norm2 * 30;
+          moveAmplitude = (i < 80 ? 40 : 60) + norm2 * 25;
           movePeriod = (i < 80 ? 2400 : 1800) + norm1 * 600;
         }
 
-        const xSpan = screenW - w - 40;
+        const xSpan = V_WIDTH - w - 40;
         const x = (i % 2 === 0) 
           ? (norm2 * (xSpan * 0.45) + 20) 
-          : (screenW - w - 20 - norm2 * (xSpan * 0.45));
+          : (V_WIDTH - w - 20 - norm2 * (xSpan * 0.45));
+        
         baseStartX = x;
 
         platforms.push({ 
           x: x, 
-          baseX: baseStartX,
+          baseX: baseStartX, 
           y: lastY, 
           w: w, 
           h: 22, 
@@ -2532,6 +2053,7 @@
         const W = canvas.width;
         const H = canvas.height;
         const currentTime = Date.now();
+        const offsetX = (W - V_WIDTH) / 2;
 
         if (trapImmunity > 0) trapImmunity--;
 
@@ -2590,7 +2112,7 @@
 
         player.x += player.vx;
         if (player.x < 10) player.x = 10;
-        if (player.x + player.w > W - 10) player.x = W - player.w - 10;
+        if (player.x + player.w > V_WIDTH - 10) player.x = V_WIDTH - player.w - 10;
 
         player.vy += 0.65;
         if (player.vy > 14) player.vy = 14;
@@ -2656,22 +2178,8 @@
         currentMeters = Math.max(0, Math.floor(((canvas.height - 60) - (player.y + player.h)) / 6.5));
         document.getElementById('ui-height').innerText = currentMeters;
 
-        const now = Date.now();
-        if (now - lastNetworkSync > 110) {
-          lastNetworkSync = now;
-          if (currentPin && myPlayerId) {
-            update(ref(db, `rooms/${currentPin}/players/${myPlayerId}`), {
-              x: Math.round(player.x),
-              y: Math.round(player.y),
-              facing: facing,
-              styleIndex: myStyleIndex,
-              height: currentMeters,
-              correct: correctCount,
-              wrong: wrongCount,
-              quizStats: myQuizAnswers,
-              energy: energy
-            });
-          }
+        if (allPlayersData[myPlayerId]) {
+          allPlayersData[myPlayerId].height = currentMeters;
         }
 
         drawSkyBackground(ctx, W, H, cameraY);
@@ -2680,7 +2188,7 @@
           if (p.broken) return;
           const dy = p.y - cameraY;
           if (dy + p.h < -50 || dy > H + 50) return;
-          drawCutePlatform(ctx, p, dy);
+          drawCutePlatform(ctx, p, dy, offsetX);
         });
 
         boosters.forEach(b => {
@@ -2688,8 +2196,10 @@
           if (dy < -40 || dy > H + 40) return;
           ctx.fillStyle = '#10b981';
           ctx.beginPath();
-          ctx.roundRect(b.x, dy, b.w, b.h, 4);
+          ctx.roundRect(b.x + offsetX, dy, b.w, b.h, 4);
           ctx.fill();
+          ctx.fillStyle = '#34d399';
+          ctx.fillRect(b.x + offsetX + 4, dy + 2, b.w - 8, 2);
         });
 
         traps.forEach(t => {
@@ -2697,30 +2207,11 @@
           if (dy < -40 || dy > H + 40) return;
           ctx.fillStyle = '#ef4444';
           ctx.beginPath();
-          ctx.roundRect(t.x, dy, t.w, t.h, 3);
+          ctx.roundRect(t.x + offsetX, dy, t.w, t.h, 3);
           ctx.fill();
         });
 
-        Object.entries(allPlayersData).forEach(([pid, other]) => {
-          if (pid === myPlayerId || other.x === undefined || other.y === undefined) return;
-
-          if (!smoothPositions[pid]) {
-            smoothPositions[pid] = { x: other.x, y: other.y };
-          }
-
-          smoothPositions[pid].x += (other.x - smoothPositions[pid].x) * 0.22;
-          smoothPositions[pid].y += (other.y - smoothPositions[pid].y) * 0.22;
-
-          const ox = smoothPositions[pid].x + 17;
-          const oy = smoothPositions[pid].y + 18 - cameraY;
-
-          if (oy > -60 && oy < H + 60) {
-            const otherColor = SWEET_PALETTES[other.styleIndex || 0];
-            drawCuteCharacter(ctx, ox, oy, 20, false, otherColor, other.facing || 'right', false, other.name || 'Agent', false);
-          }
-        });
-
-        const drawX = player.x + player.w / 2;
+        const drawX = player.x + offsetX + player.w / 2;
         const drawY = player.y + 18 - cameraY;
         const myColor = SWEET_PALETTES[myStyleIndex];
         drawCuteCharacter(ctx, drawX, drawY, 20, isMoving, myColor, facing, isBlinking, playerName, isTrapped);
