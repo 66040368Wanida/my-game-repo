@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Hunter Cyber Mission - Perfect Edition</title>
+  <title>Hunter Cyber Mission - Stable Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@700;800&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
       overflow: hidden;
       background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
       color: #f8fafc;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Kanit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       position: fixed;
     }
     body {
@@ -79,6 +79,7 @@
       align-items: center;
       gap: 8px;
       transition: all 0.15s ease;
+      font-family: inherit;
     }
     .btn:active { transform: scale(0.97); }
     .btn svg { width: 18px; height: 18px; fill: currentColor; }
@@ -98,8 +99,15 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
+      font-family: inherit;
     }
     .btn-sweet-green:active { transform: scale(0.97); }
+    .btn-sweet-green:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
     .btn-sweet-green svg { width: 18px; height: 18px; fill: currentColor; }
 
     input, select {
@@ -117,6 +125,7 @@
       user-select: auto;
       -webkit-user-select: auto;
       transition: all 0.2s;
+      font-family: inherit;
     }
     input:focus, select:focus {
       border-color: #ff4d6d;
@@ -187,7 +196,6 @@
     .badge-kick-btn:active { transform: scale(0.9); }
     .hidden { display: none !important; }
 
-    /* START SCREEN: สไตล์คู่มือสีชมพูแคนดี้ ไม่มีช่องกรอกชื่อ */
     #start-screen {
       position: fixed;
       inset: 0;
@@ -198,7 +206,6 @@
       justify-content: center;
       align-items: center;
       padding: 18px;
-      font-family: 'Kanit', sans-serif;
     }
     .start-modal {
       background: rgba(255, 255, 255, 0.98);
@@ -233,7 +240,7 @@
       letter-spacing: 1px;
       text-shadow: 3px 3px 0px #e01e37, 0 0 18px rgba(250, 204, 21, 0.6);
       line-height: 1.1;
-      font-family: 'Chakra Petch', 'Kanit', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
     }
     .game-sub-badge {
       display: inline-flex;
@@ -279,15 +286,14 @@
     }
     .rule-card .rule-header { color: #e11d48; }
     .rule-card .rule-header svg { width: 18px; height: 18px; fill: #e11d48; flex-shrink: 0; }
-
     .rule-card.points .rule-header { color: #ca8a04; }
     .rule-card.points .rule-header svg { width: 18px; height: 18px; fill: #ca8a04; flex-shrink: 0; }
-
     .rule-card p {
       font-size: 0.8rem;
       color: #475569;
       line-height: 1.45;
       font-weight: 500;
+      margin: 0;
     }
     .rule-banner-single {
       background: #fff5f7;
@@ -322,6 +328,7 @@
       align-items: center;
       gap: 10px;
       transition: transform 0.1s, box-shadow 0.1s;
+      font-family: inherit;
     }
     .start-btn:active {
       transform: translateY(4px);
@@ -442,7 +449,6 @@
       padding: 6px 10px;
       box-shadow: 0 10px 25px rgba(255, 117, 143, 0.18), 0 4px 10px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
-      transition: all 0.3s ease;
     }
     .stat-pill {
       background: #ffffff;
@@ -477,6 +483,7 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      font-family: inherit;
     }
     .btn-top-quiz svg { width: 14px; height: 14px; fill: #ffffff; }
 
@@ -679,6 +686,7 @@
       font-size: 13px;
       font-weight: 600;
       transition: all 0.15s;
+      font-family: inherit;
     }
     .quiz-option:active { background: #ff758f; color: white; border-color: #ff758f; }
 
@@ -768,6 +776,7 @@
       color: #e01e37;
       cursor: pointer;
       transition: all 0.15s;
+      font-family: inherit;
     }
     .qb-tab-btn.active {
       background: #ff4d6d;
@@ -801,6 +810,7 @@
       font-size: 11px;
       cursor: pointer;
       flex-shrink: 0;
+      font-family: inherit;
     }
     .qb-btn-edit:hover { background: #2563eb; color: white; }
     .qb-btn-delete {
@@ -813,6 +823,7 @@
       font-size: 11px;
       cursor: pointer;
       flex-shrink: 0;
+      font-family: inherit;
     }
     .qb-btn-delete:hover { background: #e11d48; color: white; }
     .qb-form-grid {
@@ -825,21 +836,21 @@
     }
   </style>
   <script>
-    function switchScreen(id) {
+    window.switchScreen = function(id) {
       ['start-screen', 'view-mode', 'view-host', 'view-host-live', 'view-join', 'view-waiting', 'game-wrapper', 'view-result'].forEach(function(v) {
         var el = document.getElementById(v);
         if (el) el.classList.add('hidden');
       });
       var target = document.getElementById(id);
       if (target) target.classList.remove('hidden');
-    }
+    };
   </script>
 </head>
 <body>
 
   <div id="toast-msg">แจ้งเตือน</div>
 
-  <!-- START SCREEN: หน้าคู่มือการเล่น สไตล์สีชมพูแคนดี้ ไร้อิโมจิ และไม่มีช่องกรอกชื่อ -->
+  <!-- START SCREEN -->
   <div id="start-screen">
     <div class="start-modal">
       <div class="hero-banner">
@@ -873,7 +884,7 @@
         <div><b>เป้าหมายภารกิจ:</b> กระโดดไต่แผ่นแพลตฟอร์มขึ้นไปให้สูงที่สุด แข่งขันความสูงกับเพื่อนแบบออนไลน์เรียลไทม์!</div>
       </div>
 
-      <button class="start-btn" onclick="switchScreen('view-mode')">
+      <button id="btn-start-mission" class="start-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         เข้าสู่เกม (START MISSION)
       </button>
@@ -891,8 +902,8 @@
       <input type="password" id="input-teacher-pwd" placeholder="รหัสผ่านคุณครู..." maxlength="10" style="margin-bottom: 12px; font-size: 16px;">
       
       <div style="display: flex; gap: 8px;">
-        <button class="btn" style="background: #94a3b8; margin: 0; padding: 10px;" onclick="closeTeacherModal()">ยกเลิก</button>
-        <button class="btn btn-sweet-green" style="margin: 0; padding: 10px;" onclick="verifyTeacherPassword()">เข้าสู่ระบบ</button>
+        <button id="btn-cancel-teacher-modal" class="btn" style="background: #94a3b8; margin: 0; padding: 10px;">ยกเลิก</button>
+        <button id="btn-submit-teacher-modal" class="btn btn-sweet-green" style="margin: 0; padding: 10px;">เข้าสู่ระบบ</button>
       </div>
     </div>
   </div>
@@ -900,11 +911,11 @@
   <div id="view-mode" class="container hidden">
     <h1>HUNTER CYBER MISSION</h1>
     <p style="color: #64748b; font-size:14px; margin-bottom: 20px;">เกมตอบคำถามชิงความสูง (Word Master)</p>
-    <button class="btn" id="btn-mode-host" onclick="openTeacherModal()">
+    <button class="btn" id="btn-mode-host">
       <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
       <span>คุณครู / ผู้สอน (Host)</span>
     </button>
-    <button class="btn" id="btn-mode-join" style="background:#475569;" onclick="switchScreen('view-join')">
+    <button class="btn" id="btn-mode-join" style="background:#475569;">
       <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
       <span>นักเรียน / ผู้เรียน (Join)</span>
     </button>
@@ -956,7 +967,7 @@
   <div id="view-host-live" class="hidden">
     <div class="host-header-card">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <button onclick="location.reload()" style="padding: 7px 12px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer;">
+        <button id="btn-host-exit" style="padding: 7px 12px; background: #334155; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer;">
           ออกจากห้อง
         </button>
         <div style="text-align: left;">
@@ -966,13 +977,13 @@
       </div>
       
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button onclick="openQuestionBankModal()" style="padding: 7px 12px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
+        <button id="btn-host-qb" style="padding: 7px 12px; background: #4f46e5; color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);">
           จัดการคลังคำถาม (<span id="total-q-count">20</span>)
         </button>
         <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 12px; font-family: monospace; font-size: 17px; color: #fde047; font-weight: 900;">
           <span id="host-timer-text">03:00</span>
         </div>
-        <button onclick="exportDataCSV()" class="btn-sweet-green" style="width: auto; padding: 7px 14px; margin: 0; font-size: 11px;">
+        <button id="btn-host-export" class="btn-sweet-green" style="width: auto; padding: 7px 14px; margin: 0; font-size: 11px;">
           Excel (.csv)
         </button>
       </div>
@@ -1019,12 +1030,12 @@
           </h2>
           <p style="font-size: 11px; color: #64748b; margin: 2px 0 0 0;">มีข้อสอบทั้งหมด <b id="bank-q-count" style="color: #e01e37;">20</b> ข้อ</p>
         </div>
-        <button onclick="closeQuestionBankModal()" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">ปิด</button>
+        <button id="btn-close-qb-modal" style="padding: 5px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; font-weight: bold; font-size: 11px; cursor: pointer;">ปิด</button>
       </div>
 
       <div class="qb-tabs">
-        <button id="qb-tab-view" class="qb-tab-btn active" onclick="switchQbTab('view')">รายการข้อสอบ</button>
-        <button id="qb-tab-add" class="qb-tab-btn" onclick="prepareAddQuestion()">เพิ่ม / แก้ไขข้อสอบ</button>
+        <button id="qb-tab-view" class="qb-tab-btn active">รายการข้อสอบ</button>
+        <button id="qb-tab-add" class="qb-tab-btn">เพิ่ม / แก้ไขข้อสอบ</button>
       </div>
 
       <div class="qb-body-scroll">
@@ -1056,7 +1067,7 @@
                   <option value="3">D</option>
                 </select>
               </div>
-              <button onclick="saveQuestionItem()" class="btn-sweet-green" style="width: auto; padding: 8px 18px; margin: 0; font-size: 12px;" id="btn-save-question">
+              <button class="btn-sweet-green" style="width: auto; padding: 8px 18px; margin: 0; font-size: 12px;" id="btn-save-question">
                 บันทึกข้อสอบ
               </button>
             </div>
@@ -1071,7 +1082,7 @@
     <input type="text" id="input-pin" placeholder="รหัสห้อง 6 หลัก" maxlength="6" inputmode="numeric">
     <input type="text" id="input-name" placeholder="ชื่อเล่นของคุณ" maxlength="12">
     <button class="btn" id="btn-do-join">เข้าสู่ห้อง</button>
-    <button class="btn" style="background:#64748b; padding:10px;" onclick="switchScreen('view-mode')">ย้อนกลับ</button>
+    <button class="btn" id="btn-join-back" style="background:#64748b; padding:10px;">ย้อนกลับ</button>
   </div>
 
   <div id="view-waiting" class="container hidden">
@@ -1157,7 +1168,7 @@
       <tbody id="result-leaderboard-body"></tbody>
     </table>
 
-    <button class="btn btn-excel hidden" id="btn-export-excel">บันทึกคะแนนลงใน Excel (.csv)</button>
+    <button class="btn btn-sweet-green hidden" id="btn-export-excel" style="margin-top: 10px;">บันทึกคะแนนลงใน Excel (.csv)</button>
     <button class="btn" id="btn-play-again" style="margin-top:8px; background:#475569;">เริ่มเกมใหม่</button>
   </div>
 
@@ -1181,28 +1192,41 @@
 
     const TEACHER_PASSWORD = "1234";
 
-    window.openTeacherModal = function() {
+    function showToast(text) {
+      const el = document.getElementById('toast-msg');
+      el.innerText = text;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2000);
+    }
+
+    function openTeacherModal() {
       document.getElementById('input-teacher-pwd').value = "";
       document.getElementById('teacher-auth-modal').classList.remove('hidden');
       setTimeout(() => document.getElementById('input-teacher-pwd').focus(), 150);
-    };
+    }
 
-    window.closeTeacherModal = function() {
+    function closeTeacherModal() {
       document.getElementById('teacher-auth-modal').classList.add('hidden');
-    };
+    }
 
-    window.verifyTeacherPassword = function() {
+    function verifyTeacherPassword() {
       const pwd = document.getElementById('input-teacher-pwd').value;
       if (pwd === TEACHER_PASSWORD) {
         closeTeacherModal();
-        window.onHostClick();
+        startHostLobby();
       } else {
         alert("รหัสผ่านไม่ถูกต้อง เฉพาะคุณครูเท่านั้นครับ");
         document.getElementById('input-teacher-pwd').value = "";
         document.getElementById('input-teacher-pwd').focus();
       }
-    };
+    }
 
+    document.getElementById('btn-start-mission').onclick = () => window.switchScreen('view-mode');
+    document.getElementById('btn-mode-host').onclick = openTeacherModal;
+    document.getElementById('btn-mode-join').onclick = () => window.switchScreen('view-join');
+    document.getElementById('btn-join-back').onclick = () => window.switchScreen('view-mode');
+    document.getElementById('btn-cancel-teacher-modal').onclick = closeTeacherModal;
+    document.getElementById('btn-submit-teacher-modal').onclick = verifyTeacherPassword;
     document.getElementById('input-teacher-pwd').addEventListener('keyup', (e) => {
       if (e.key === 'Enter') verifyTeacherPassword();
     });
@@ -1254,6 +1278,7 @@
     let currentQ = 0;
     let totalAnsweredCount = 0;
     let isGameOver = false;
+    let isGameRunning = false;
     let timerInterval = null;
     let allPlayersData = {};
     let isTrapped = false;
@@ -1267,7 +1292,6 @@
     });
 
     const smoothPositions = {};
-
     let walkCycle = 0;
     let blinkTimer = 0;
     let isBlinking = false;
@@ -1312,6 +1336,7 @@
         audioCtx.resume();
       }
       isMusicPlaying = true;
+      document.getElementById('music-svg-icon').style.fill = "#0284c7";
       if (musicInterval) clearInterval(musicInterval);
       musicInterval = setInterval(() => {
         if (!isMusicPlaying) return;
@@ -1329,13 +1354,6 @@
       document.getElementById('music-svg-icon').style.fill = isMusicPlaying ? "#0284c7" : "#94a3b8";
     };
 
-    function showToast(text) {
-      const el = document.getElementById('toast-msg');
-      el.innerText = text;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 2000);
-    }
-
     const clouds = [
       { x: 50,  y: 100, scale: 0.9, speed: 0.3 },
       { x: 220, y: 200, scale: 1.2, speed: 0.4 },
@@ -1349,17 +1367,7 @@
       return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    window.openQuestionBankModal = function() {
-      switchQbTab('view');
-      renderQuestionBankList();
-      document.getElementById('questionBankModal').classList.remove('hidden');
-    };
-
-    window.closeQuestionBankModal = function() {
-      document.getElementById('questionBankModal').classList.add('hidden');
-    };
-
-    window.switchQbTab = function(tab) {
+    function switchQbTab(tab) {
       const tabView = document.getElementById('qb-tab-view');
       const tabAdd = document.getElementById('qb-tab-add');
       const panelView = document.getElementById('qb-panel-view');
@@ -1376,9 +1384,9 @@
         panelAdd.classList.remove('hidden');
         panelView.classList.add('hidden');
       }
-    };
+    }
 
-    window.prepareAddQuestion = function() {
+    function prepareAddQuestion() {
       document.getElementById('edit-q-id').value = "";
       document.getElementById('form-q-title').innerText = "โจทย์คำถามใหม่:";
       document.getElementById('btn-save-question').innerText = "บันทึกข้อสอบ";
@@ -1389,27 +1397,84 @@
       document.getElementById('new-q-a4').value = "";
       document.getElementById('new-q-correct').value = "0";
       switchQbTab('add');
-    };
+    }
 
-    window.editQuestion = function(id) {
+    function prepareEditQuestion(id) {
       const item = quizData.find(q => q.id === id);
       if (!item) return;
 
       document.getElementById('edit-q-id').value = item.id;
       document.getElementById('form-q-title').innerText = `แก้ไขโจทย์คำถาม (ข้อ ID: ${item.id}):`;
       document.getElementById('btn-save-question').innerText = "อัปเดตข้อสอบ";
-
       document.getElementById('new-q-text').value = item.q;
       document.getElementById('new-q-a1').value = item.c[0] || "";
       document.getElementById('new-q-a2').value = item.c[1] || "";
       document.getElementById('new-q-a3').value = item.c[2] || "";
       document.getElementById('new-q-a4').value = item.c[3] || "";
       document.getElementById('new-q-correct').value = item.a;
-
       switchQbTab('add');
-    };
+    }
 
-    window.saveQuestionItem = function() {
+    function deleteQuestion(id) {
+      if (quizData.length <= 3) return alert('ต้องมีข้อสอบอย่างน้อย 3 ข้อครับ');
+      quizData = quizData.filter(q => q.id !== id);
+      renderQuestionBankList();
+      showToast('ลบคำถามเรียบร้อย');
+    }
+
+    function renderQuestionBankList() {
+      const listEl = document.getElementById('questionBankList');
+      document.getElementById('total-q-count').innerText = quizData.length;
+      document.getElementById('bank-q-count').innerText = quizData.length;
+      listEl.innerHTML = "";
+
+      quizData.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = "qb-question-card";
+        div.innerHTML = `
+          <div style="flex: 1;">
+            <div style="font-weight: 800; font-size: 12px; color: #0f172a; line-height: 1.4;">
+              ${index + 1}. ${item.q}
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px; line-height: 1.4;">
+              ${item.c.map((c, i) => `
+                <div style="margin-bottom: 2px;">
+                  <span style="${i === item.a ? 'color: #059669; font-weight: 800; background: #ecfdf5; padding: 1px 6px; border-radius: 6px;' : ''}">
+                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '[ถูกต้อง]' : ''}
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <button class="qb-btn-edit btn-edit-item" data-id="${item.id}">แก้ไข</button>
+            <button class="qb-btn-delete btn-del-item" data-id="${item.id}">ลบ</button>
+          </div>
+        `;
+        listEl.appendChild(div);
+      });
+
+      document.querySelectorAll('.btn-edit-item').forEach(b => {
+        b.onclick = (e) => prepareEditQuestion(parseInt(e.target.dataset.id));
+      });
+      document.querySelectorAll('.btn-del-item').forEach(b => {
+        b.onclick = (e) => deleteQuestion(parseInt(e.target.dataset.id));
+      });
+    }
+
+    document.getElementById('btn-host-qb').onclick = () => {
+      switchQbTab('view');
+      renderQuestionBankList();
+      document.getElementById('questionBankModal').classList.remove('hidden');
+    };
+    document.getElementById('btn-close-qb-modal').onclick = () => {
+      document.getElementById('questionBankModal').classList.add('hidden');
+    };
+    document.getElementById('qb-tab-view').onclick = () => switchQbTab('view');
+    document.getElementById('qb-tab-add').onclick = prepareAddQuestion;
+    document.getElementById('btn-host-exit').onclick = () => location.reload();
+
+    document.getElementById('btn-save-question').onclick = () => {
       const editId = document.getElementById('edit-q-id').value;
       const qText = document.getElementById('new-q-text').value.trim();
       const a1 = document.getElementById('new-q-a1').value.trim();
@@ -1447,57 +1512,38 @@
       switchQbTab('view');
     };
 
-    window.renderQuestionBankList = function() {
-      const listEl = document.getElementById('questionBankList');
-      document.getElementById('total-q-count').innerText = quizData.length;
-      document.getElementById('bank-q-count').innerText = quizData.length;
-      listEl.innerHTML = "";
-
-      quizData.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = "qb-question-card";
-        div.innerHTML = `
-          <div style="flex: 1;">
-            <div style="font-weight: 800; font-size: 12px; color: #0f172a; line-height: 1.4;">
-              ${index + 1}. ${item.q}
-            </div>
-            <div style="font-size: 11px; color: #64748b; margin-top: 4px; line-height: 1.4;">
-              ${item.c.map((c, i) => `
-                <div style="margin-bottom: 2px;">
-                  <span style="${i === item.a ? 'color: #059669; font-weight: 800; background: #ecfdf5; padding: 1px 6px; border-radius: 6px;' : ''}">
-                    (${String.fromCharCode(65+i)}) ${c} ${i === item.a ? '[ถูกต้อง]' : ''}
-                  </span>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <button onclick="editQuestion(${item.id})" class="qb-btn-edit">แก้ไข</button>
-            <button onclick="deleteQuestion(${item.id})" class="qb-btn-delete">ลบ</button>
-          </div>
-        `;
-        listEl.appendChild(div);
-      });
-    };
-
-    window.deleteQuestion = function(id) {
-      if (quizData.length <= 3) {
-        return alert('ต้องมีข้อสอบอย่างน้อย 3 ข้อครับ');
-      }
-      quizData = quizData.filter(q => q.id !== id);
-      renderQuestionBankList();
-      showToast('ลบคำถามเรียบร้อย');
-    };
-
-    window.kickPlayer = function(pid) {
+    function kickPlayer(pid) {
       if (!currentPin || !isHost) return;
       remove(ref(db, `rooms/${currentPin}/players/${pid}`));
       showToast('นำผู้เล่นออกจากห้องแล้ว');
-    };
+    }
 
-    window.onHostClick = function() {
+    function renderHostPlayers() {
+      const keys = Object.keys(allPlayersData);
+      document.getElementById('live-player-count').innerText = keys.length;
+      document.getElementById('player-count').innerText = keys.length;
+      
+      const list = document.getElementById('host-players');
+      list.innerHTML = "";
+      keys.forEach(k => {
+        const b = document.createElement('div');
+        b.className = 'badge-player';
+        b.innerHTML = `<span>${allPlayersData[k].name}</span>`;
+        const kickBtn = document.createElement('button');
+        kickBtn.className = 'badge-kick-btn';
+        kickBtn.innerText = '✕';
+        kickBtn.title = 'ลบออกจากห้อง';
+        kickBtn.onclick = () => kickPlayer(k);
+        b.appendChild(kickBtn);
+        list.appendChild(b);
+      });
+      document.getElementById('btn-start').disabled = keys.length === 0;
+      renderHostLiveTable();
+    }
+
+    function startHostLobby() {
       isHost = true;
-      switchScreen('view-host');
+      window.switchScreen('view-host');
       currentPin = Math.floor(100000 + Math.random() * 900000).toString();
       document.getElementById('host-pin').innerText = currentPin;
 
@@ -1518,20 +1564,7 @@
 
       onValue(ref(db, `rooms/${currentPin}/players`), (snap) => {
         allPlayersData = snap.val() || {};
-        const keys = Object.keys(allPlayersData);
-        document.getElementById('live-player-count').innerText = keys.length;
-        document.getElementById('player-count').innerText = keys.length;
-        
-        const list = document.getElementById('host-players');
-        list.innerHTML = "";
-        keys.forEach(k => {
-          const b = document.createElement('div');
-          b.className = 'badge-player';
-          b.innerHTML = `<span>${allPlayersData[k].name}</span><button class="badge-kick-btn" onclick="kickPlayer('${k}')" title="ลบออกจากห้อง">✕</button>`;
-          list.appendChild(b);
-        });
-        document.getElementById('btn-start').disabled = keys.length === 0;
-        renderHostLiveTable();
+        renderHostPlayers();
       });
 
       onValue(ref(db, `rooms/${currentPin}/status`), (snap) => {
@@ -1540,15 +1573,16 @@
           showFinalLeaderboard();
         } else if (currentStatus === 'waiting' && !isHost) {
           isGameOver = false;
+          isGameRunning = false;
           currentMeters = 0;
           correctCount = 0;
           wrongCount = 0;
           currentQ = 0;
           totalAnsweredCount = 0;
-          switchScreen('view-waiting');
+          window.switchScreen('view-waiting');
         }
       });
-    };
+    }
 
     document.getElementById('btn-start').onclick = async () => {
       const minutes = parseInt(document.getElementById('select-duration').value) || 3;
@@ -1572,17 +1606,13 @@
       });
 
       document.getElementById('live-room-pin').innerText = currentPin;
-      switchScreen('view-host-live');
+      window.switchScreen('view-host-live');
 
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(() => {
         const remainSec = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
         const formatted = formatTime(remainSec);
         document.getElementById('host-timer-text').innerText = formatted;
-        
-        if (currentPin) {
-          update(ref(db, `rooms/${currentPin}`), { timerText: formatted });
-        }
 
         if (remainSec <= 0) {
           clearInterval(timerInterval);
@@ -1597,84 +1627,105 @@
       const name = document.getElementById('input-name').value.trim();
       if (!pin || !name) return alert('กรุณากรอก PIN และชื่อ');
 
-      const roomSnap = await get(ref(db, `rooms/${pin}`));
-      const room = roomSnap.val();
-      if (!room) return alert('ไม่พบห้องนี้');
+      const btnJoin = document.getElementById('btn-do-join');
+      btnJoin.disabled = true;
+      btnJoin.innerText = "กำลังเชื่อมต่อ...";
 
-      if (room.status !== 'waiting') {
-        return alert('การแข่งขันเริ่มต้นไปแล้วหรือสิ้นสุดแล้ว ไม่สามารถเข้าร่วมได้ในขณะนี้');
+      try {
+        const roomSnap = await get(ref(db, `rooms/${pin}`));
+        const room = roomSnap.val();
+        if (!room) {
+          btnJoin.disabled = false;
+          btnJoin.innerText = "เข้าสู่ห้อง";
+          return alert('ไม่พบห้องนี้ กรุณาตรวจสอบรหัส PIN');
+        }
+
+        if (room.status !== 'waiting') {
+          btnJoin.disabled = false;
+          btnJoin.innerText = "เข้าสู่ห้อง";
+          return alert('การแข่งขันเริ่มต้นไปแล้วหรือสิ้นสุดแล้ว ไม่สามารถเข้าร่วมได้ในขณะนี้');
+        }
+
+        const existingPlayers = room.players || {};
+        const isNameTaken = Object.values(existingPlayers).some(p => p.name && p.name.trim().toLowerCase() === name.toLowerCase());
+        if (isNameTaken) {
+          btnJoin.disabled = false;
+          btnJoin.innerText = "เข้าสู่ห้อง";
+          return alert('ชื่อนี้มีผู้เล่นคนอื่นใช้ในห้องแล้ว กรุณาตั้งชื่อใหม่');
+        }
+
+        playerName = name;
+        currentPin = pin;
+        myStyleIndex = Math.floor(Math.random() * SWEET_PALETTES.length);
+
+        const pRef = push(ref(db, `rooms/${pin}/players`));
+        myPlayerId = pRef.key;
+
+        await set(pRef, {
+          name: playerName,
+          height: 0,
+          x: 200,
+          y: 400,
+          facing: 'right',
+          styleIndex: myStyleIndex,
+          correct: 0,
+          wrong: 0,
+          quizStats: myQuizAnswers
+        });
+
+        document.getElementById('wait-pin').innerText = pin;
+        document.getElementById('wait-name').innerText = name;
+        window.switchScreen('view-waiting');
+
+        onValue(ref(db, `rooms/${pin}`), (snap) => {
+          const liveRoom = snap.val();
+          if (!liveRoom) return;
+
+          if (myPlayerId && (!liveRoom.players || !liveRoom.players[myPlayerId])) {
+            alert('คุณถูกผู้สอนนำออกจากห้อง');
+            location.reload();
+            return;
+          }
+
+          if (liveRoom.players) {
+            allPlayersData = liveRoom.players;
+          }
+
+          if (liveRoom.status === 'playing' && !isGameOver && !isGameRunning) {
+            isGameRunning = true;
+            energy = liveRoom.initialEnergy !== undefined ? liveRoom.initialEnergy : 5;
+            document.getElementById('ui-energy').innerText = energy;
+
+            window.switchScreen('game-wrapper');
+            initSweetPlatformer();
+            startPlayerTimer(liveRoom.endTime);
+            startBackgroundMusic();
+          }
+
+          if (liveRoom.status === 'ended' && !isGameOver) {
+            endGame();
+          }
+
+          if (liveRoom.status === 'waiting' && isGameOver) {
+            isGameOver = false;
+            isGameRunning = false;
+            currentMeters = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            currentQ = 0;
+            totalAnsweredCount = 0;
+            window.switchScreen('view-waiting');
+          }
+        });
+
+      } catch (err) {
+        console.error(err);
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล');
+      } finally {
+        btnJoin.disabled = false;
+        btnJoin.innerText = "เข้าสู่ห้อง";
       }
-
-      const existingPlayers = room.players || {};
-      const isNameTaken = Object.values(existingPlayers).some(p => p.name && p.name.trim().toLowerCase() === name.toLowerCase());
-      if (isNameTaken) {
-        return alert('ชื่อนี้มีผู้เล่นคนอื่นใช้ในห้องแล้ว กรุณาตั้งชื่อใหม่');
-      }
-
-      playerName = name;
-      myStyleIndex = Math.floor(Math.random() * SWEET_PALETTES.length);
-
-      onValue(ref(db, `rooms/${pin}`), (snap) => {
-        const liveRoom = snap.val();
-        if (!liveRoom) return;
-
-        if (myPlayerId && liveRoom.players && !liveRoom.players[myPlayerId]) {
-          alert('คุณถูกผู้สอนนำออกจากห้อง');
-          location.reload();
-          return;
-        }
-
-        if (!myPlayerId) {
-          currentPin = pin;
-          const pRef = push(ref(db, `rooms/${pin}/players`));
-          myPlayerId = pRef.key;
-          set(pRef, {
-            name: playerName,
-            height: 0,
-            x: 200,
-            y: 400,
-            facing: 'right',
-            styleIndex: myStyleIndex,
-            correct: 0,
-            wrong: 0,
-            quizStats: myQuizAnswers
-          });
-          document.getElementById('wait-pin').innerText = pin;
-          document.getElementById('wait-name').innerText = name;
-          switchScreen('view-waiting');
-
-          onValue(ref(db, `rooms/${pin}/players`), (pSnap) => {
-            allPlayersData = pSnap.val() || {};
-          });
-        }
-
-        if (liveRoom.status === 'playing' && !isGameOver && document.getElementById('game-wrapper').classList.contains('hidden')) {
-          energy = liveRoom.initialEnergy !== undefined ? liveRoom.initialEnergy : 5;
-          document.getElementById('ui-energy').innerText = energy;
-
-          switchScreen('game-wrapper');
-          initSweetPlatformer();
-          startPlayerTimer(liveRoom.endTime);
-          startBackgroundMusic();
-        }
-
-        if (liveRoom.status === 'ended' && !isGameOver) {
-          endGame();
-        }
-
-        if (liveRoom.status === 'waiting' && isGameOver) {
-          isGameOver = false;
-          currentMeters = 0;
-          correctCount = 0;
-          wrongCount = 0;
-          currentQ = 0;
-          totalAnsweredCount = 0;
-          switchScreen('view-waiting');
-        }
-      });
     };
-
-    document.getElementById('btn-export-excel').onclick = exportDataCSV;
 
     function exportDataCSV() {
       const sorted = Object.values(allPlayersData)
@@ -1720,6 +1771,9 @@
       URL.revokeObjectURL(url);
     }
 
+    document.getElementById('btn-host-export').onclick = exportDataCSV;
+    document.getElementById('btn-export-excel').onclick = exportDataCSV;
+
     document.getElementById('btn-open-quiz').onclick = () => triggerQuizModal(false);
     document.getElementById('btn-close-quiz').onclick = () => {
       if (energy > 0 && !isTrapped) document.getElementById('quiz-modal').classList.add('hidden');
@@ -1728,12 +1782,10 @@
     document.getElementById('btn-play-again').onclick = async () => {
       totalAnsweredCount = 0;
       if (isHost && currentPin) {
-        await update(ref(db, `rooms/${currentPin}`), {
-          status: 'waiting'
-        });
-        switchScreen('view-host');
+        await update(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
+        window.switchScreen('view-host');
       } else {
-        switchScreen('view-waiting');
+        window.switchScreen('view-waiting');
       }
     };
 
@@ -1741,7 +1793,7 @@
     const pinParam = urlParams.get('pin');
     if (pinParam) {
       document.getElementById('input-pin').value = pinParam;
-      switchScreen('view-join');
+      window.switchScreen('view-join');
     }
 
     function renderHostLiveTable() {
@@ -1802,6 +1854,7 @@
 
     function endGame() {
       isGameOver = true;
+      isGameRunning = false;
       if (timerInterval) clearInterval(timerInterval);
       if (musicInterval) clearInterval(musicInterval);
       isMusicPlaying = false;
@@ -1865,7 +1918,7 @@
         btnExcel.classList.add('hidden');
       }
 
-      switchScreen('view-result');
+      window.switchScreen('view-result');
     }
 
     function triggerQuizModal(fromTrap = false) {
