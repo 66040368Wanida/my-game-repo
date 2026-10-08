@@ -1174,7 +1174,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-    import { getDatabase, ref, set, update, onValue, push, remove, get, onDisconnect } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    import { getDatabase, ref, set, update, onValue, push, remove, get } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA9RMnSd0hFU1g3dySplJI1wEkKZxERsc0",
@@ -1188,7 +1189,37 @@
     };
 
     const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     const db = getDatabase(app);
+
+    // GitHub Pages ใช้ Firebase แบบ Client-side จึงให้ผู้เล่นยืนยันตัวตนแบบ Anonymous
+    // ก่อนอ่าน/เขียน Realtime Database เพื่อป้องกันปัญหา PERMISSION_DENIED
+    const firebaseReady = signInAnonymously(auth)
+      .then(() => {
+        console.log("Firebase Anonymous Authentication: OK");
+        return true;
+      })
+      .catch((err) => {
+        console.error("Firebase Authentication Error:", err);
+        throw err;
+      });
+
+    async function ensureFirebaseReady() {
+      try {
+        await firebaseReady;
+        return true;
+      } catch (err) {
+        const code = err?.code || "unknown";
+        const message = err?.message || "ไม่ทราบสาเหตุ";
+        alert(
+          "เชื่อมต่อ Firebase ไม่สำเร็จ\\n\\n" +
+          "รหัสข้อผิดพลาด: " + code + "\\n" +
+          "รายละเอียด: " + message + "\\n\\n" +
+          "กรุณาตรวจสอบ Firebase Authentication > Sign-in method > Anonymous"
+        );
+        throw err;
+      }
+    }
 
     const TEACHER_PASSWORD = "1234";
 
@@ -1542,19 +1573,16 @@
     }
 
     async function startHostLobby() {
-      isHost = true;
-      currentPin = Math.floor(100000 + Math.random() * 900000).toString();
-      document.getElementById('host-pin').innerText = currentPin;
-
       try {
-        await set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
+        await ensureFirebaseReady();
       } catch (err) {
-        console.error("Firebase Room Create Error:", err);
-        alert(`ไม่สามารถสร้างห้องบน Firebase ได้ (${err.message})\nกรุณาตรวจ Rules ใน Firebase Console ว่าเปิดให้อ่านเขียนหรือยัง`);
         return;
       }
 
+      isHost = true;
       window.switchScreen('view-host');
+      currentPin = Math.floor(100000 + Math.random() * 900000).toString();
+      document.getElementById('host-pin').innerText = currentPin;
 
       const joinUrl = window.location.origin + window.location.pathname + '?pin=' + currentPin;
       document.getElementById('qrcode').innerHTML = "";
@@ -1569,9 +1597,25 @@
         showToast('คัดลอกลิงก์เรียบร้อย');
       };
 
+      try {
+        await set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
+      } catch (err) {
+        console.error("สร้างห้องไม่สำเร็จ:", err);
+        alert(
+          "สร้างห้องไม่สำเร็จ\\n\\n" +
+          "รหัสข้อผิดพลาด: " + (err?.code || "unknown") + "\\n" +
+          "รายละเอียด: " + (err?.message || "ไม่ทราบสาเหตุ") +
+          "\\n\\nตรวจสอบ Realtime Database Rules ว่าอนุญาต auth != null"
+        );
+        return;
+      }
+
       onValue(ref(db, `rooms/${currentPin}/players`), (snap) => {
         allPlayersData = snap.val() || {};
         renderHostPlayers();
+      }, (err) => {
+        console.error("อ่านรายชื่อผู้เล่นไม่สำเร็จ:", err);
+        showToast("อ่านข้อมูลผู้เล่นไม่สำเร็จ");
       });
 
       onValue(ref(db, `rooms/${currentPin}/status`), (snap) => {
@@ -1592,6 +1636,12 @@
     }
 
     document.getElementById('btn-start').onclick = async () => {
+      try {
+        await ensureFirebaseReady();
+      } catch (err) {
+        return;
+      }
+
       const minutes = parseInt(document.getElementById('select-duration').value) || 3;
       const initialEnergy = parseInt(document.getElementById('select-energy').value) || 5;
       const endTime = Date.now() + (minutes * 60 * 1000);
@@ -1605,12 +1655,22 @@
         playerUpdates[`players/${pid}/wrong`] = 0;
       });
 
-      await update(ref(db, `rooms/${currentPin}`), {
-        status: 'playing',
-        endTime: endTime,
-        initialEnergy: initialEnergy,
-        ...playerUpdates
-      });
+      try {
+        await update(ref(db, `rooms/${currentPin}`), {
+          status: 'playing',
+          endTime: endTime,
+          initialEnergy: initialEnergy,
+          ...playerUpdates
+        });
+      } catch (err) {
+        console.error("เริ่มการแข่งขันไม่สำเร็จ:", err);
+        alert(
+          "เริ่มการแข่งขันไม่สำเร็จ\\n\\n" +
+          "รหัสข้อผิดพลาด: " + (err?.code || "unknown") + "\\n" +
+          "รายละเอียด: " + (err?.message || "ไม่ทราบสาเหตุ")
+        );
+        return;
+      }
 
       document.getElementById('live-room-pin').innerText = currentPin;
       window.switchScreen('view-host-live');
@@ -1639,6 +1699,8 @@
       btnJoin.innerText = "กำลังเชื่อมต่อ...";
 
       try {
+        await ensureFirebaseReady();
+
         const roomSnap = await get(ref(db, `rooms/${pin}`));
         const room = roomSnap.val();
         if (!room) {
@@ -1679,9 +1741,6 @@
           wrong: 0,
           quizStats: myQuizAnswers
         });
-
-        // ลบข้อมูลออกเมื่อผู้เล่นหลุดจากการเชื่อมต่อ
-        onDisconnect(pRef).remove();
 
         document.getElementById('wait-pin').innerText = pin;
         document.getElementById('wait-name').innerText = name;
@@ -1726,11 +1785,21 @@
             totalAnsweredCount = 0;
             window.switchScreen('view-waiting');
           }
+        }, (err) => {
+          console.error("Room listener error:", err);
+          showToast("การเชื่อมต่อห้องขัดข้อง");
         });
 
       } catch (err) {
-        console.error("Firebase Connect Error:", err);
-        alert(`เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล: ${err.message}\n(กรุณาตรวจการตั้งค่า Firebase Rules ในคอนโซล)`);
+        console.error("Join/Firebase Error:", err);
+        const code = err?.code || "unknown";
+        const message = err?.message || "ไม่ทราบสาเหตุ";
+        alert(
+          "เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล\\n\\n" +
+          "รหัสข้อผิดพลาด: " + code + "\\n" +
+          "รายละเอียด: " + message + "\\n\\n" +
+          "ถ้าขึ้น PERMISSION_DENIED ให้ตรวจสอบ Firebase Realtime Database Rules"
+        );
       } finally {
         btnJoin.disabled = false;
         btnJoin.innerText = "เข้าสู่ห้อง";
@@ -2332,7 +2401,7 @@
 
         platforms.push({ 
           x: x, 
-          baseX: baseStartX, 
+          baseX: baseStartX,
           y: lastY, 
           w: w, 
           h: 22, 
