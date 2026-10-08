@@ -221,52 +221,129 @@
     .badge-kick-btn:active { transform: scale(0.9); }
     .hidden { display: none !important; }
 
-    /* --- สไตล์กล่องคู่มือ & กติกา (สไตล์ตกแต่งโทนชมพูหวาน) --- */
-    .rule-grid {
+    /* ========================================================
+       MODAL / CONTAINER สไตล์คู่มือแบบภาพอ้างอิง (โทนชมพูหวาน)
+       ======================================================== */
+    .guide-modal-container {
+      background: #ffffff;
+      border: 4px solid #fecdd3;
+      outline: 5px solid rgba(255, 117, 143, 0.35);
+      border-radius: 32px;
+      padding: 0 0 20px 0;
+      max-width: 490px;
+      width: min(92%, 490px);
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      max-height: 88dvh;
+      overflow-y: auto;
+      z-index: 100;
+      position: relative;
+      color: #0f172a;
+    }
+    .guide-header-banner {
+      background: linear-gradient(180deg, #fb7185 0%, #e11d48 100%);
+      padding: 22px 18px 18px 18px;
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      border-bottom: 4px solid #fecdd3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .guide-header-title {
+      color: #ffffff;
+      font-size: clamp(24px, 6vw, 30px);
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-shadow: 0 3px 6px rgba(159, 18, 57, 0.6);
+      margin: 0;
+      text-transform: uppercase;
+      font-family: inherit;
+    }
+    .guide-header-pill {
+      background: #facc15;
+      color: #713f12;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 16px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    .guide-header-pill svg {
+      width: 15px;
+      height: 15px;
+      fill: #713f12;
+    }
+    .guide-body-content {
+      padding: 16px 18px 0 18px;
+    }
+    .guide-grid-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 12px;
       text-align: left;
     }
-    .rule-card {
-      background: #fff1f2;
-      border: 2px solid #fecdd3;
-      border-radius: 16px;
-      padding: 11px 12px;
+    .guide-card-left {
+      background: #fdf2f8;
+      border: 2px solid #fbcfe8;
+      border-radius: 18px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
-    .rule-card.points {
-      background: #fdf2f8;
-      border-color: #fbcfe8;
+    .guide-card-right {
+      background: #fffbeb;
+      border: 2px solid #fde68a;
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-    .rule-header {
-      font-size: 0.88rem;
+    .guide-card-title {
+      font-size: 12.5px;
       font-weight: 800;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .rule-card .rule-header { color: #e11d48; }
-    .rule-card .rule-header svg { width: 17px; height: 17px; fill: #e11d48; flex-shrink: 0; }
-    .rule-card.points .rule-header { color: #db2777; }
-    .rule-card.points .rule-header svg { width: 17px; height: 17px; fill: #db2777; flex-shrink: 0; }
-    .rule-card p {
-      font-size: 0.76rem;
-      color: #475569;
-      line-height: 1.4;
-      font-weight: 500;
+    .guide-card-left .guide-card-title { color: #db2777; }
+    .guide-card-left .guide-card-title svg { width: 16px; height: 16px; fill: #db2777; flex-shrink: 0; }
+    .guide-card-right .guide-card-title { color: #b45309; }
+    .guide-card-right .guide-card-title svg { width: 16px; height: 16px; fill: #b45309; flex-shrink: 0; }
+    .guide-card-list {
       margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.45;
+      font-weight: 600;
     }
-    .rule-banner-single {
+    .guide-card-list li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .guide-card-list li::before {
+      content: "•";
+      font-weight: bold;
+      color: currentColor;
+    }
+    .guide-dashed-banner {
       background: #fff5f7;
       border: 2px dashed #fda4af;
-      border-radius: 14px;
-      padding: 10px 13px;
-      font-size: 0.8rem;
-      color: #881337;
+      border-radius: 16px;
+      padding: 11px 14px;
+      font-size: 11.5px;
+      color: #475569;
       margin-bottom: 14px;
       text-align: left;
       display: flex;
@@ -274,7 +351,40 @@
       gap: 8px;
       line-height: 1.45;
     }
-    .rule-banner-single svg { width: 18px; height: 18px; fill: #e11d48; flex-shrink: 0; margin-top: 2px; }
+    .guide-dashed-banner svg {
+      width: 17px;
+      height: 17px;
+      fill: #e11d48;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .btn-guide-start {
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 18px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(16, 185, 129, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.1s ease;
+    }
+    .btn-guide-start:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #047857, 0 5px 10px rgba(16, 185, 129, 0.4);
+    }
+    .btn-guide-start svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+    }
 
     #view-host-live {
       position: fixed;
@@ -709,56 +819,59 @@
 
   <div id="toast-msg">แจ้งเตือน</div>
 
-  <!-- 0. หน้าคู่มือและกติกา (แสดงเป็นหน้าแรกก่อนเข้าเลือกบทบาท) -->
-  <div id="view-rules" class="container">
-    <h1>คู่มือการเล่นเกม</h1>
-    <p style="color: #64748b; font-size:13px; margin: 0 0 14px 0;">HUNTER CYBER MISSION (Word Master)</p>
-
-    <div class="rule-grid">
-      <div class="rule-card">
-        <div class="rule-header">
-          <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
-          การเคลื่อนที่ & กระโดด
-        </div>
-        <p>ใช้ปุ่มลูกศร ซ้าย-ขวา เพื่อวิ่ง และกดปุ่มกระโดดไต่ระดับชั้นหอคอยขึ้นไปให้สูงที่สุด</p>
-      </div>
-
-      <div class="rule-card points">
-        <div class="rule-header">
-          <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-          พลังงาน (Energy)
-        </div>
-        <p>การกระโดดแต่ละครั้งจะใช้ 1 Energy เมื่อพลังงานหมดต้องตอบคำถามเพื่อชาร์จพลังงาน</p>
-      </div>
-
-      <div class="rule-card points">
-        <div class="rule-header">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
-          ตอบคำถาม (+5)
-        </div>
-        <p>กดปุ่มคำถามหรือเมื่อพลังงานหมด ตอบข้อสอบ Word ถูกต้องจะได้รับพลังงานฟื้นคืนทันที +5</p>
-      </div>
-
-      <div class="rule-card">
-        <div class="rule-header">
-          <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-          ระวังกับดักและพื้นพิเศษ
-        </div>
-        <p>ระวังแท่นเหยียบสีแดงติดกับดัก, แท่นน้ำแข็งลื่น และแท่นเค้กที่จะสลายตัวเมื่อเหยียบแช่</p>
+  <!-- 0. หน้าคู่มือและกติกา (ดีไซน์เป๊ะตามภาพต้นฉบับ ในธีมสีชมพูพาสเทล) -->
+  <div id="view-rules" class="guide-modal-container">
+    <div class="guide-header-banner">
+      <h1 class="guide-header-title">HUNTER CYBER</h1>
+      <div class="guide-header-pill">
+        <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+        ภารกิจพิชิต Microsoft Word (20 ข้อ)
       </div>
     </div>
 
-    <div class="rule-banner-single">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-      <div>
-        <b>เป้าหมายชัยชนะ:</b> แข่งขันไต่ความสูงให้ได้ระยะทางมากที่สุดก่อนหมดเวลา พร้อมสะสมสถิติการตอบคำถาม Microsoft Word ให้แม่นยำที่สุด
-      </div>
-    </div>
+    <div class="guide-body-content">
+      <div class="guide-grid-2col">
+        <!-- การ์ดซ้าย: วิธีควบคุม -->
+        <div class="guide-card-left">
+          <div class="guide-card-title">
+            <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            วิธีการควบคุม
+          </div>
+          <ul class="guide-card-list">
+            <li>ใช้ปุ่มลูกศร / A-D วิ่งซ้ายขวา</li>
+            <li>กดกระโดดไต่ระดับชิงความสูง</li>
+            <li>กระโดด 1 ครั้งใช้ 1 พลังงาน</li>
+          </ul>
+        </div>
 
-    <button class="btn" onclick="switchScreen('view-mode')">
-      <svg class="svg-ic" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-      เข้าใจแล้ว เข้าสู่หน้าเลือกบทบาท
-    </button>
+        <!-- การ์ดขวา: ระบบคิดคะแนน -->
+        <div class="guide-card-right">
+          <div class="guide-card-title">
+            <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c1.9-.4 3.38-1.92 3.61-3.96C19.08 11.63 21 9.55 21 7V5h-2zm-14 3V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+            ระบบคิดคะแนน (20 ข้อ)
+          </div>
+          <ul class="guide-card-list">
+            <li>คำถามทดสอบ Microsoft Word</li>
+            <li>ตอบถูกแต่ละข้อ ฟื้นฟู +5 Energy</li>
+            <li>จัดอันดับตามความสูงและความแม่นยำ</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- แบนเนอร์เส้นประคำแนะนำ -->
+      <div class="guide-dashed-banner">
+        <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-1.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+        <div>
+          <b style="color:#e11d48;">วิธีปลดล็อกพลังงาน:</b> เมื่อพลังงานหมดหรือติดกับดัก ตอบคำถามให้ถูกต้องเพื่อฟื้นฟูพลังงานและเปิดทางกระโดดต่อ!
+        </div>
+      </div>
+
+      <!-- ปุ่มเข้าสู่เกม -->
+      <button class="btn-guide-start" onclick="switchScreen('view-mode')">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        เข้าสู่สนามแข่งขัน (START MISSION)
+      </button>
+    </div>
   </div>
 
   <!-- 1. หน้าแรก (เลือกบทบาทครู / นักเรียน) -->
@@ -1251,7 +1364,7 @@
         tabAdd.classList.add('active');
         tabView.classList.remove('active');
         panelAdd.classList.remove('hidden');
-        panelView.classList.add('hidden');
+        panelAdd.classList.add('hidden');
       }
     }
 
