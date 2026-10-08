@@ -36,33 +36,33 @@
       width: 100% !important; height: 100% !important; display: block;
     }
 
-    /* ปรับแต่ง Top HUD แก้ชื่อเบียดและทับซ้อน */
+    /* Top HUD ปรับปรุงเพิ่ม Progress % */
     #top-hud {
       position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(14px);
       border: 2px solid var(--border);
       border-radius: 24px; padding: 8px 24px;
       display: flex; align-items: center; justify-content: center;
-      gap: 16px; color: #fff; z-index: 45;
+      gap: 14px; color: #fff; z-index: 45;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      max-width: 94vw;
+      max-width: 95vw;
       white-space: nowrap;
     }
     .hud-chip { 
       display: flex; 
       align-items: center; 
       gap: 8px; 
-      font-size: 0.95rem; 
+      font-size: 0.92rem; 
       font-weight: 700;
       flex-shrink: 0;
     }
     .hud-chip.player-chip {
-      max-width: 220px;
+      max-width: 180px;
       overflow: hidden;
     }
     #hud-name {
       display: inline-block;
-      max-width: 170px;
+      max-width: 130px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -75,6 +75,11 @@
       background: linear-gradient(135deg, #f59e0b, #d97706);
       padding: 4px 12px; border-radius: 999px; font-weight: 800; font-family: 'Chakra Petch', sans-serif;
       font-size: 0.88rem;
+    }
+    .hud-progress-pill {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      padding: 4px 12px; border-radius: 999px; font-weight: 800; font-family: 'Chakra Petch', sans-serif;
+      font-size: 0.88rem; color: #fff;
     }
 
     #minimap-card {
@@ -359,7 +364,7 @@
     }
     .badge-cp svg { width: 16px; height: 16px; fill: #854d0e; }
     .q-statement {
-      font-size: 1.18rem; font-weight: 600; margin-bottom: 14px; line-height: 1.5; color: #0f172a;
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; line-height: 1.5; color: #0f172a;
     }
 
     .minigame-stage {
@@ -402,13 +407,13 @@
     .ribbon-bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
     .ribbon-btn {
       padding: 10px 16px; border-radius: 10px; border: 2px solid #cbd5e1;
-      background: #ffffff; font-family: 'Kanit'; cursor: pointer; font-weight: 500;
+      background: #ffffff; font-family: 'Kanit'; cursor: pointer; font-weight: 600;
       font-size: 0.95rem; color: #1e293b; transition: 0.15s;
     }
     .ribbon-btn:hover { background: #e0f2fe; border-color: #38bdf8; }
 
     .doc-preview-box {
-      width: 220px; height: 85px; background: #ffffff;
+      width: 240px; height: 90px; background: #ffffff;
       border: 2px solid #cbd5e1; border-radius: 8px; padding: 10px;
       display: flex; flex-direction: column; justify-content: center;
     }
@@ -420,6 +425,24 @@
       background: #e2e8f0; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer;
     }
     .table-cell.selected { background: #38bdf8; border-color: #0284c7; }
+
+    /* UI สไตล์ใหม่สำหรับคำถามรูปภาพ */
+    .image-q-preview {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: #ffffff; border: 2px solid #cbd5e1; border-radius: 14px;
+      padding: 14px 20px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .image-choices-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%;
+    }
+    .img-choice-btn {
+      background: #ffffff; border: 2px solid #cbd5e1; border-radius: 14px;
+      padding: 14px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; cursor: pointer; transition: 0.15s ease;
+    }
+    .img-choice-btn:hover { border-color: #0284c7; background: #f0f9ff; transform: translateY(-2px); }
+    .img-choice-btn svg { width: 44px; height: 44px; }
+    .img-choice-btn span { font-size: 0.88rem; font-weight: 700; color: #334155; }
 
     #knowledge-modal {
       position: fixed; inset: 0;
@@ -472,6 +495,10 @@
       <span class="hud-pill" id="hud-stage">ด่าน 1 / 12</span>
     </div>
     <div class="hud-chip">
+      <svg class="hud-icon" style="fill:#818cf8;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-6h2v6zm0-8h-2V7h2v1z"/></svg>
+      <span class="hud-progress-pill" id="hud-progress">0% (ข้อ 0/20)</span>
+    </div>
+    <div class="hud-chip">
       <svg class="hud-icon" style="fill:#10b981;" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
       <span class="hud-pill" style="background: linear-gradient(135deg, #10b981, #059669);" id="hud-score">0 / 20</span>
     </div>
@@ -520,7 +547,7 @@
         <div class="game-logo-title">WORD ROAD 3D</div>
         <div class="game-sub-badge">
           <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-          <span>ภารกิจขับรถซิ่ง พิชิต Microsoft Word ม.1</span>
+          <span>ภารกิจซิ่งพิชิต Microsoft Word ม.1 (20 ข้อ 12 ด่าน)</span>
         </div>
       </div>
 
@@ -536,15 +563,15 @@
         <div class="rule-card points">
           <div class="rule-header">
             <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
-            <span>ระบบคิดคะแนน</span>
+            <span>ระบบคิดคะแนน (20 ข้อ)</span>
           </div>
-          <p>• ตอบถูกครั้งแรก รับคะแนนทันที (เต็ม 20)<br>• ตอบผิด จะต้องเปิด <b>ใบความรู้</b> เพื่อทำข้อแก้ตัว</p>
+          <p>• รวม 20 ข้อ คะแนนเต็ม 20 คะแนน<br>• มีคำถามรูปภาพไอคอนและสถานการณ์จำลอง</p>
         </div>
       </div>
 
       <div class="rule-banner-single">
         <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
-        <div><b>วิธีปลดม่านเลเซอร์:</b> ขับรถชนม่านพลังงานแต่ละด่าน ทำภารกิจจับคู่และตอบคำถามให้ถูกต้องเพื่อเปิดทางไปต่อ!</div>
+        <div><b>วิธีปลดม่านเลเซอร์:</b> ขับรถชนม่านพลังงานแต่ละด่าน พิชิตคำถามทั้ง 20 ข้อเพื่อเปิดทางเข้าสู่เส้นชัย!</div>
       </div>
 
       <input type="text" id="player-input" class="start-input" placeholder="พิมพ์ชื่อ - นามสกุล หรือ เลขที่..." autocomplete="off" />
@@ -610,7 +637,7 @@
   <div id="finish-screen" class="overlay-screen" style="display:none;">
     <div class="modal-card">
       <div class="game-h1" style="-webkit-text-fill-color: #4ade80;">VICTORY LAP!</div>
-      <p style="color: #cbd5e1; font-size: 0.95rem;">คุณพิชิตเส้นทาง Word Road ครบถ้วนทั้ง 12 สถานี</p>
+      <p style="color: #cbd5e1; font-size: 0.95rem;">คุณพิชิตเส้นทาง Word Road ครบถ้วนทั้ง 12 สถานี 20 ภารกิจ</p>
 
       <div style="background: #030712; border: 2px dashed #facc15; border-radius: 18px; padding: 20px; margin: 18px 0;">
         <div style="font-size: 0.85rem; color: #94a3b8;">คะแนนรวมทั้งสิ้น</div>
@@ -631,115 +658,209 @@
   </div>
 
   <script>
-    const missions = [
+    // รวม 20 ข้อใน 12 ด่าน (รวม 20 คะแนนเต็ม)
+    const questionsPool = [
+      // ด่าน 1 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
       {
-        id: 1, title: "Checkpoint 1: แถบ Ribbon", badge: "Word Beginner", pts: 1.0,
-        mode: "ribbon",
-        q: "ภารกิจ: เลือกแท็บเมนู Ribbon ที่ใช้เปลี่ยนแบบฟอนต์และขนาดตัวอักษร:",
+        qId: 1, stage: 1, pts: 1.0, mode: "ribbon",
+        q: "ข้อที่ 1/20: เลือกแท็บเมนู Ribbon ที่ใช้เปลี่ยนแบบฟอนต์และขนาดตัวอักษร:",
         target: "Home",
         knTitle: "แถบเมนู Ribbon ใน Microsoft Word",
-        knText: "แถบ <b>หน้าแรก (Home)</b> เป็นศูนย์รวมคำสั่งพื้นฐานที่ใช้บ่อยที่สุด ได้แก่ การเปลี่ยนฟอนต์, ปรับขนาดอักษร, ทำตัวหนา/เอียง/ขีดเส้นใต้, และการจัดตำแหน่งย่อหน้า"
+        knText: "แถบ <b>หน้าแรก (Home)</b> เป็นศูนย์รวมคำสั่งพื้นฐานที่ใช้บ่อยที่สุด เช่น เปลี่ยนฟอนต์, ปรับขนาดอักษร, ทำตัวหนา/เอียง/ขีดเส้นใต้, และการจัดตำแหน่งย่อหน้า"
       },
       {
-        id: 2, title: "Checkpoint 2: ภารกิจจับคู่คีย์ลัดงานเอกสาร", badge: "Shortcut Master", pts: 1.0,
-        mode: "matching",
-        q: "ภารกิจ: แตะจับคู่ 'คำสั่งจัดการเอกสาร' กับ 'คีย์ลัด' ให้ถูกต้องทั้ง 2 คู่:",
+        qId: 2, stage: 1, pts: 1.0, mode: "image_choice",
+        q: "ข้อที่ 2/20: ภาพไอคอนใดต่อไปนี้คือคำสั่ง 'ตัวคัดวางรูปแบบ (Format Painter)' ใช้คัดลอกสไตล์ข้อความ?",
+        target: "brush",
+        options: [
+          { id: "brush", label: "แปรงทาสี", svg: `<svg viewBox="0 0 24 24" fill="#0284c7"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.71l-1.42-1.42a1 1 0 0 0-1.41 0L10.5 10.25 13.75 13.5l7.38-7.38a1 1 0 0 0-.42-1.83z"/></svg>` },
+          { id: "cut", label: "กรรไกร", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm16-16h-3l-5 5 2 2 6-6V4z"/></svg>` },
+          { id: "copy", label: "กระดาษซ้อน", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>` },
+          { id: "save", label: "แผ่นดิสก์", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>` }
+        ],
+        knTitle: "เครื่องมือ Format Painter (ตัวคัดวางรูปแบบ)",
+        knText: "ไอคอนรูป <b>แปรงทาสี (Format Painter)</b> ใช้คัดลอกรูปแบบฟอนต์ ขนาด และสีจากข้อความต้นแบบ ไปทาใส่ข้อความอื่นได้อย่างรวดเร็ว"
+      },
+
+      // ด่าน 2 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      {
+        qId: 3, stage: 2, pts: 1.0, mode: "matching",
+        q: "ข้อที่ 3/20: แตะจับคู่ 'คำสั่งจัดการเอกสาร' กับ 'คีย์ลัด' ให้ถูกต้องทั้ง 2 คู่:",
         pairs: [
           { action: "บันทึกเอกสาร", key: "Ctrl + S" },
           { action: "สร้างเอกสารใหม่", key: "Ctrl + N" }
         ],
         knTitle: "คีย์ลัดการจัดการไฟล์เอกสาร",
-        knText: "<b>Ctrl + S</b> ใช้บันทึกเอกสารด่วนเพื่อกันข้อมูลสูญหาย และ <b>Ctrl + N</b> ใช้สร้างหน้าต่างเอกสารเปล่าแผ่นใหม่"
+        knText: "<b>Ctrl + S</b> บันทึกไฟล์ และ <b>Ctrl + N</b> สร้างเอกสารใหม่"
       },
       {
-        id: 3, title: "Checkpoint 3: กู้คืนข้อความผิดพลาด", badge: "Text Specialist", pts: 1.0,
-        mode: "choice",
-        q: "ภารกิจ: ขณะพิมพ์รายงาน เผลอกดลบข้อความสำคัญหายไปทั้งย่อหน้า จะต้องกดคีย์ลัดคู่ใดเพื่อดึงข้อมูลกลับคืนมาทันที:",
+        qId: 4, stage: 2, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 4/20: หากต้องการเปิดเอกสารเก่าที่เคยบันทึกไว้ขึ้นมาใช้งาน ต้องกดคีย์ลัดใด:",
+        target: "Ctrl + O",
+        opts: ["Ctrl + P", "Ctrl + O", "Ctrl + W", "Ctrl + F"],
+        knTitle: "คีย์ลัดเปิดไฟล์ (Open)",
+        knText: "<b>Ctrl + O (Open)</b> ใช้เปิดไฟล์เอกสารเดิมที่บันทึกไว้ในคอมพิวเตอร์"
+      },
+
+      // ด่าน 3 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      {
+        qId: 5, stage: 3, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 5/20: พิมพ์ข้อความผิดแล้วเผลอลบหายไป จะกดคีย์ลัดใดเพื่อกู้คืนข้อความกลับมาทันที (Undo):",
         target: "Ctrl + Z",
-        opts: ["Ctrl + X", "Ctrl + Z", "Ctrl + Y", "Ctrl + A"],
+        opts: ["Ctrl + X", "Ctrl + Z", "Ctrl + Y", "Ctrl + C"],
         knTitle: "การยกเลิกคำสั่งล่าสุด (Undo)",
-        knText: "เมื่อทำงานพลาดหรือเผลอลบข้อความ ให้ใช้คีย์ลัด <b>Ctrl + Z</b> เพื่อดึงข้อมูลเดิมกลับคืนมาทันที แต่หากต้องการทำซ้ำคำสั่งให้กด <b>Ctrl + Y (Redo)</b>"
+        knText: "<b>Ctrl + Z (Undo)</b> ใช้ยกเลิกคำสั่งล่าสุดหรือดึงข้อมูลที่เผลอลบกลับคืนมา"
       },
       {
-        id: 4, title: "Checkpoint 4: ภารกิจจับคู่สไตล์ตัวอักษร", badge: "Font Styler", pts: 1.0,
-        mode: "matching",
-        q: "ภารกิจ: แตะจับคู่ 'รูปแบบตัวอักษร' กับ 'คีย์ลัดคำสั่ง' ให้ถูกต้องครบทั้ง 2 คู่:",
+        qId: 6, stage: 3, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 6/20: หากต้องการ 'ทำซ้ำคำสั่งล่าสุด' (Redo) ที่เพิ่งยกเลิกไป ต้องกดปุ่มใด:",
+        target: "Ctrl + Y",
+        opts: ["Ctrl + R", "Ctrl + Y", "Ctrl + U", "Ctrl + V"],
+        knTitle: "การทำซ้ำคำสั่ง (Redo)",
+        knText: "<b>Ctrl + Y (Redo)</b> ใช้ทำซ้ำคำสั่งล่าสุด หรือดึงการกระทำที่กด Undo ผิดกลับคืนมา"
+      },
+
+      // ด่าน 4 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      {
+        qId: 7, stage: 4, pts: 1.0, mode: "matching",
+        q: "ข้อที่ 7/20: แตะจับคู่ 'สไตล์ฟอนต์' กับ 'คีย์ลัดคำสั่ง' ให้ถูกต้องครบทั้ง 2 คู่:",
         pairs: [
           { action: "ตัวหนา", key: "Ctrl + B" },
           { action: "ตัวเอียง", key: "Ctrl + I" }
         ],
-        knTitle: "คีย์ลัดปรับแต่งลักษณะตัวอักษร",
-        knText: "<b>Ctrl + B</b> ย่อมาจาก Bold ใช้ทำตัวหนาเพื่อเน้นหัวข้อ และ <b>Ctrl + I</b> ย่อมาจาก Italic ใช้ทำตัวเอียงสำหรับคำศัพท์เฉพาะ"
+        knTitle: "คีย์ลัดรูปแบบตัวอักษร",
+        knText: "<b>Ctrl + B (Bold)</b> คือตัวหนา และ <b>Ctrl + I (Italic)</b> คือตัวเอียง"
       },
       {
-        id: 5, title: "Checkpoint 5: จัดตำแหน่งย่อหน้า", badge: "Paragraph Pro", pts: 1.5,
-        mode: "align",
-        q: "ภารกิจ: ทดลองกดปุ่มจัดตำแหน่งเอกสาร เพื่อวางข้อความให้อยู่ 'กึ่งกลางหน้ากระดาษ':",
+        qId: 8, stage: 4, pts: 1.0, mode: "image_query",
+        q: "ข้อที่ 8/20: จากรูปภาพไอคอนด้านล่างนี้ มีหน้าที่สั่งการทำงานใดใน Word?",
+        imageSvg: `<svg viewBox="0 0 24 24" width="70" height="70" fill="#0284c7"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>`,
+        target: "ขีดเส้นใต้ข้อความ (Underline)",
+        opts: ["ขีดเส้นใต้ข้อความ (Underline)", "ตัวเอียง (Italic)", "ตัวยก (Superscript)", "เน้นสีข้อความ (Highlight)"],
+        knTitle: "คำสั่งขีดเส้นใต้ (Underline)",
+        knText: "ไอคอนรูปตัว <b>U ขีดเส้นใต้</b> คือคำสั่ง Underline (Ctrl + U) ใช้ขีดเส้นใต้ข้อความ"
+      },
+
+      // ด่าน 5 (1 ข้อ, 1.5 คะแนน)
+      {
+        qId: 9, stage: 5, pts: 1.5, mode: "align",
+        q: "ข้อที่ 9/20: กดปุ่มจัดตำแหน่งเอกสาร เพื่อวางข้อความให้อยู่ 'กึ่งกลางหน้ากระดาษ':",
         target: "center",
         knTitle: "การจัดแนวย่อหน้า (Paragraph Alignment)",
-        knText: "การจัดข้อความให้อยู่ตรงกลางหน้ากระดาษพอดีให้ใช้คำสั่ง <b>Center</b> (หรือกด Ctrl + E) ซึ่งเหมาะสำหรับการจัดชื่อเรื่องหรือหัวข้อรายงาน"
+        knText: "ปุ่ม <b>กึ่งกลาง (Center)</b> หรือ Ctrl + E ใช้วางข้อความตรงกลางกระดาษ"
       },
+
+      // ด่าน 6 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
       {
-        id: 6, title: "Checkpoint 6: ลำดับขั้นตอน", badge: "List Architect", pts: 1.5,
-        mode: "choice",
-        q: "ภารกิจ: เครื่องมือใดใช้สำหรับสร้างรายการข้อความที่มีลำดับ 1, 2, 3 ก่อนหลัง:",
+        qId: 10, stage: 6, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 10/20: เครื่องมือใดใช้สร้างรายการที่มีลำดับ 1, 2, 3 ตามลำดับก่อนหลัง:",
         target: "Numbering",
         opts: ["Bullets", "Numbering", "Multilevel List"],
         knTitle: "เครื่องมือลำดับเลข (Numbering)",
-        knText: "เมื่อข้อความมีขั้นตอนที่ต้องทำตามลำดับก่อนหลัง ให้ใช้คำสั่ง <b>Numbering (ลำดับเลข)</b> แต่หากเป็นรายการทั่วไปที่สลับลำดับได้ ให้ใช้ <b>Bullets (สัญลักษณ์จุด)</b>"
+        knText: "ขั้นตอนที่มีลำดับแน่นอน 1, 2, 3 ให้ใช้คำสั่ง <b>Numbering</b>"
       },
       {
-        id: 7, title: "Checkpoint 7: การตัดข้อความรูปภาพ", badge: "Media Specialist", pts: 1.5,
-        mode: "choice",
-        q: "ภารกิจ: คำสั่ง Wrap Text รูปแบบใดทำให้ข้อความไหลล้อมรอบกรอบรูปภาพอย่างอิสระ:",
+        qId: 11, stage: 6, pts: 1.0, mode: "image_choice",
+        q: "ข้อที่ 11/20: สัญลักษณ์ภาพใดคือ 'สัญลักษณ์แสดงหัวข้อย่อย (Bullets)' ที่ใช้ทำรายการแบบไม่มีลำดับเลข?",
+        target: "bullets",
+        options: [
+          { id: "bullets", label: "จุด Bullet", svg: `<svg viewBox="0 0 24 24" fill="#0284c7"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/></svg>` },
+          { id: "num", label: "เลข 1 2 3", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"/></svg>` },
+          { id: "align_just", label: "กระจายข้อความ", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M3 3h18v2H3V3zm0 4h18v2H3V7zm0 4h18v2H3v-2zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"/></svg>` },
+          { id: "sort", label: "เรียง A-Z", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>` }
+        ],
+        knTitle: "สัญลักษณ์หัวข้อย่อย (Bullets)",
+        knText: "คำสั่ง <b>Bullets</b> จะแสดงสัญลักษณ์จุดนำหน้าข้อความ เหมาะสำหรับรายการที่ไม่จำเป็นต้องเรียงลำดับ"
+      },
+
+      // ด่าน 7 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      {
+        qId: 12, stage: 7, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 12/20: คำสั่ง Wrap Text รูปแบบใดทำให้ข้อความไหลล้อมรอบกรอบรูปภาพเป็นสี่เหลี่ยมพอดี:",
         target: "Square",
         opts: ["In Line with Text", "Square", "Behind Text"],
         knTitle: "การตัดข้อความล้อมรูปภาพ (Wrap Text)",
-        knText: "การตั้งค่า <b>Wrap Text</b> เป็น <b>Square</b> จะช่วยให้ข้อความไหลล้อมรอบกรอบสี่เหลี่ยมของภาพ และทำให้สามารถเลื่อนตำแหน่งภาพได้อย่างอิสระ"
+        knText: "การเลือก <b>Square</b> จะทำให้ข้อความเรียงตัวล้อมรอบกรอบภาพทรงสี่เหลี่ยมอย่างสวยงาม"
       },
       {
-        id: 8, title: "Checkpoint 8: โครงสร้างตาราง", badge: "Table Builder", pts: 1.5,
-        mode: "table_grid",
-        q: "ภารกิจ: กำหนดขนาดสร้างตารางข้อมูลจำนวน '3 คอลัมน์ x 2 แถว' ให้ถูกต้อง:",
+        qId: 13, stage: 7, pts: 1.0, mode: "image_query",
+        q: "ข้อที่ 13/20: ภาพการจัดวางภาพซ้อนอยู่ใต้ตัวหนังสือแบบนี้ ตรงกับการตัดข้อความ (Wrap Text) ชนิดใด?",
+        imageSvg: `<svg viewBox="0 0 160 80"><rect width="160" height="80" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/><rect x="45" y="15" width="70" height="50" rx="6" fill="#fde047" opacity="0.6"/><text x="80" y="45" font-family="Kanit" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle">ข้อความทับรูปภาพ</text></svg>`,
+        target: "Behind Text (อยู่ข้างหลังข้อความ)",
+        opts: ["In Front of Text (ข้างหน้าข้อความ)", "Behind Text (อยู่ข้างหลังข้อความ)", "Top and Bottom (บนและล่าง)", "Through (ทะลุผ่าน)"],
+        knTitle: "Behind Text (อยู่ข้างหลังข้อความ)",
+        knText: "คำสั่ง <b>Behind Text</b> จะส่งรูปภาพลงไปอยู่ชั้นล่างสุด ทำให้ข้อความลอยทับอยู่บนรูปภาพได้"
+      },
+
+      // ด่าน 8 (1 ข้อ, 1.5 คะแนน)
+      {
+        qId: 14, stage: 8, pts: 1.5, mode: "table_grid",
+        q: "ข้อที่ 14/20: กำหนดขนาดสร้างตารางข้อมูลจำนวน '3 คอลัมน์ x 2 แถว' ให้ถูกต้อง:",
         targetCols: 3, targetRows: 2,
         knTitle: "โครงสร้างตาราง (Table Dimension)",
-        knText: "การสร้างตารางใน Word จะนับตาม <b>คอลัมน์ (แนวตั้ง)</b> x <b>แถว (แนวนอน)</b> ตารางขนาด 3 x 2 จึงหมายถึง มี 3 ช่องแนวตั้ง และ 2 แถวแนวนอน"
+        knText: "การสร้างตารางนับจาก <b>คอลัมน์ (แนวตั้ง)</b> x <b>แถว (แนวนอน)</b> ตารางขนาด 3 x 2 จึงมี 3 คอลัมน์ และ 2 แถว"
       },
+
+      // ด่าน 9 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
       {
-        id: 9, title: "Checkpoint 9: การวางแนวกระดาษ", badge: "Layout Pilot", pts: 2.5,
-        mode: "choice",
-        q: "ภารกิจ: หากต้องการพิมพ์เอกสารที่มีตารางกว้าง ต้องตั้งค่าหน้ากระดาษแบบใดในเมนู Orientation:",
-        target: "Landscape",
-        opts: ["Portrait", "Landscape", "Columns"],
+        qId: 15, stage: 9, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 15/20: พิมพ์ตารางกว้าง ต้องตั้งค่าหน้ากระดาษแบบใดในเมนู Orientation:",
+        target: "Landscape (แนวนอน)",
+        opts: ["Portrait (แนวตั้ง)", "Landscape (แนวนอน)", "Columns (คอลัมน์)"],
         knTitle: "การวางแนวกระดาษ (Page Orientation)",
-        knText: "ในแท็บ <b>Layout (เค้าโครง)</b> คำสั่ง <b>Orientation</b> มี 2 แบบ: <b>Portrait (แนวตั้ง)</b> สำหรับเอกสารทั่วไป และ <b>Landscape (แนวนอน)</b> สำหรับตารางหรือรูปภาพขนาดกว้าง"
+        knText: "เอกสารที่มีตารางหรือแผนภูมิกว้าง ให้ตั้งเป็น <b>Landscape (แนวนอน)</b>"
       },
       {
-        id: 10, title: "Checkpoint 10: สัญลักษณ์ตรวจคำผิด", badge: "Doc Inspector", pts: 2.5,
-        mode: "choice",
-        q: "ภารกิจ: ในโปรแกรม Word การตรวจพบคำที่อาจสะกดผิดจะแจ้งเตือนด้วยสัญลักษณ์ใดใต้คำ:",
+        qId: 16, stage: 9, pts: 1.0, mode: "image_choice",
+        q: "ข้อที่ 16/20: ไอคอนใดคือคำสั่ง 'ระยะขอบกระดาษ (Margins)' ในแท็บ Layout?",
+        target: "margin",
+        options: [
+          { id: "margin", label: "ขอบกระดาษ", svg: `<svg viewBox="0 0 24 24" fill="#0284c7"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h10v10H7z"/></svg>` },
+          { id: "size", label: "ขนาดกระดาษ", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>` },
+          { id: "cols", label: "แบ่งคอลัมน์", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M10 18h5V5h-5v13zm-6 0h5V5H4v13zm12 0h5V5h-5v13z"/></svg>` },
+          { id: "break", label: "ตัวแบ่งหน้า", svg: `<svg viewBox="0 0 24 24" fill="#64748b"><path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.98l-2.83-2.83c-.97-.97-2.33-1.53-3.77-1.53-2.93 0-5.4 2.47-5.4 5.4 0 2.93 2.47 5.4 5.4 5.4 1.44 0 2.8-.56 3.77-1.53L12 13.02l2.83 2.83c.97.97 2.33 1.53 3.77 1.53 2.93 0 5.4-2.47 5.4-5.4 0-2.93-2.47-5.36-5.4-5.36z"/></svg>` }
+        ],
+        knTitle: "คำสั่ง Margins (ระยะขอบกระดาษ)",
+        knText: "<b>Margins</b> ใช้กำหนดระยะเว้นว่างรอบขอบกระดาษ เช่น ปกติ แคบ หรือกว้าง"
+      },
+
+      // ด่าน 10 (2 ข้อ, 1.0 + 1.0 = 2 คะแนน)
+      {
+        qId: 17, stage: 10, pts: 1.0, mode: "choice",
+        q: "ข้อที่ 17/20: ในโปรแกรม Word การตรวจพบคำที่สะกดผิดจะแจ้งเตือนด้วยสัญลักษณ์ใดใต้คำ:",
         target: "เส้นใต้หยักสีแดง",
         opts: ["เส้นใต้ขีดทึบสีดำ", "เส้นใต้หยักสีแดง", "เส้นใต้เส้นคู่สีเขียว"],
         knTitle: "การตรวจสอบคำสะกดผิด (Proofing)",
-        knText: "ใน Microsoft Word เส้นหยักใต้ข้อความมีความหมายเฉพาะ: <b>เส้นหยักสีแดง</b> หมายถึงสะกดคำผิด ส่วน <b>เส้นหยักสีฟ้า</b> หมายถึงไวยากรณ์หรือการเว้นวรรคผิดพลาด"
+        knText: "<b>เส้นใต้หยักสีแดง</b> หมายถึง โปรแกรมตรวจพบคำที่สะกดผิดจากพจนานุกรม"
       },
       {
-        id: 11, title: "Checkpoint 11: การทำสารบัญ", badge: "Style Maestro", pts: 2.5,
-        mode: "choice",
-        q: "ภารกิจ: การเตรียมข้อความเพื่อดึงทำสารบัญอัตโนมัติ (Table of Contents) ต้องกำหนดสไตล์ใดให้กับหัวข้อหลัก:",
-        target: "Heading 1",
-        opts: ["Title", "Heading 1", "Normal"],
-        knTitle: "การใช้ Heading สร้างสารบัญ (Table of Contents)",
-        knText: "การจะให้โปรแกรม Word ดึงสารบัญอัตโนมัติได้ ผู้พิมพ์จะต้องกำหนดรูปแบบหัวข้อรายงานด้วยสไตล์ <b>Heading 1 (หัวเรื่อง 1)</b> หรือ Heading 2 ก่อนเสมอ"
+        qId: 18, stage: 10, pts: 1.0, mode: "image_query",
+        q: "ข้อที่ 18/20: เส้นหยักสีน้ำเงิน/ฟ้าใต้ข้อความดังภาพ บ่งบอกถึงข้อผิดพลาดประเภทใด?",
+        imageSvg: `<svg viewBox="0 0 180 60"><text x="90" y="32" font-family="Kanit" font-size="20" font-weight="700" fill="#0f172a" text-anchor="middle">สวัสดี  ครับผม</text><path d="M 30 42 Q 35 38 40 42 T 50 42 T 60 42 T 70 42 T 80 42 T 90 42 T 100 42 T 110 42 T 120 42 T 130 42 T 140 42 T 150 42" fill="none" stroke="#0284c7" stroke-width="2.5"/></svg>`,
+        target: "ไวยากรณ์หรือการเคาะเว้นวรรคผิดพลาด",
+        opts: ["สะกดคำผิด", "ไวยากรณ์หรือการเคาะเว้นวรรคผิดพลาด", "ไม่ได้บันทึกไฟล์", "ฟอนต์ไม่รองรับภาษาไทย"],
+        knTitle: "เส้นหยักสีฟ้า (Grammar & Spacing)",
+        knText: "เส้นหยักสีฟ้าแสดงถึง <b>ข้อผิดพลาดด้านไวยากรณ์ การใช้คำ หรือการเคาะเว้นวรรคซ้ำซ้อน</b>"
       },
+
+      // ด่าน 11 (1 ข้อ, 1.5 คะแนน)
       {
-        id: 12, title: "Checkpoint 12: การบันทึกส่งออกไฟล์", badge: "Word Grand Master", pts: 2.5,
-        mode: "choice",
-        q: "ภารกิจ: การส่งออกไฟล์เอกสารชนิดใดที่คงสภาพหน้ากระดาษและฟอนต์ได้แน่นอนที่สุดสำหรับนำไปพิมพ์งาน:",
+        qId: 19, stage: 11, pts: 1.5, mode: "choice",
+        q: "ข้อที่ 19/20: การเตรียมหัวข้อเพื่อสร้างสารบัญอัตโนมัติ (Table of Contents) ต้องกำหนดสไตล์ใดให้กับหัวข้อหลัก:",
+        target: "Heading 1 (หัวเรื่อง 1)",
+        opts: ["Title (ชื่อเรื่อง)", "Heading 1 (หัวเรื่อง 1)", "Normal (ปกติ)"],
+        knTitle: "การใช้ Heading สร้างสารบัญ",
+        knText: "โปรแกรม Word จะดึงรายการสารบัญจากข้อความที่กำหนดสไตล์เป็น <b>Heading 1</b> หรือ Heading 2"
+      },
+
+      // ด่าน 12 (1 ข้อ, 1.5 คะแนน)
+      {
+        qId: 20, stage: 12, pts: 1.5, mode: "choice",
+        q: "ข้อที่ 20/20: ส่งออกไฟล์ชนิดใดที่ล็อกการจัดหน้ากระดาษและฟอนต์ได้แน่นอนที่สุดเมื่อนำไปพิมพ์งาน:",
         target: ".pdf",
         opts: [".docx", ".txt", ".pdf"],
         knTitle: "การส่งออกไฟล์เป็น PDF",
-        knText: "ไฟล์สกุล <b>.pdf (Portable Document Format)</b> จะทำการล็อกการจัดวางหน้ากระดาษ ตำแหน่งภาพ และฟอนต์ไว้อย่างถาวร ทำให้ส่งไปเปิดเครื่องอื่นแล้วไม่เคลื่อนเพี้ยน"
+        knText: "ไฟล์สกุล <b>.pdf</b> จะล็อกฟอนต์และรูปภาพให้คงที่ ไม่เคลื่อนเมื่อเปิดเครื่องอื่น"
       }
     ];
 
@@ -874,11 +995,12 @@
     let obstacles = [];
     let playerName = "Player";
     let score = 0;
-    let currentStage = 0;
+    let currentStage = 0; // 0 to 11 (ด่าน 1 ถึง 12)
+    let solvedQuestionsCount = 0; // 0 ถึง 20
     let isModalOpen = false;
     let isGameOver = false;
 
-    let checkpointFailedAttempts = {};
+    let questionFailedAttempts = {};
     let keys = { up: false, down: false, left: false, right: false };
 
     let carPhysics = {
@@ -907,6 +1029,13 @@
       { x: 0, z: -2350, stage: 12 }
     ];
 
+    function updateProgressHUD() {
+      const pct = Math.round((solvedQuestionsCount / 20) * 100);
+      document.getElementById("hud-progress").innerText = `${pct}% (ข้อ ${solvedQuestionsCount}/20)`;
+      document.getElementById("hud-score").innerText = `${Number(score.toFixed(1))} / 20`;
+      document.getElementById("hud-stage").innerText = `ด่าน ${Math.min(currentStage + 1, 12)} / 12`;
+    }
+
     function startGame() {
       const nameVal = document.getElementById("player-input").value.trim();
       if (!nameVal) { alert("กรุณาพิมพ์ชื่อหรือเลขที่ก่อนเริ่มเล่นครับ!"); return; }
@@ -918,6 +1047,7 @@
       initAudio();
       init3DWorld();
       setupInputListeners();
+      updateProgressHUD();
       animate();
     }
 
@@ -1247,7 +1377,7 @@
           if (carPhysics.z > cp.z && nextZ <= cp.z + 1.5) {
             laserBlocked = true;
             carPhysics.speed = 0;
-            openCheckpointModal(idx);
+            startStageSequence(idx);
           }
         }
       });
@@ -1280,28 +1410,44 @@
     }
 
     let activeStageIdx = 0;
+    let stageQuestionsQueue = [];
+    let currentQuestion = null;
     let selectedMatchAction = null;
     let currentPairsSolved = 0;
 
-    function openCheckpointModal(idx) {
+    function startStageSequence(stageIdx) {
+      activeStageIdx = stageIdx;
+      stageQuestionsQueue = questionsPool.filter(q => q.stage === (stageIdx + 1));
+      loadNextQuestionInStage();
+    }
+
+    function loadNextQuestionInStage() {
+      if (stageQuestionsQueue.length === 0) {
+        finishStage(activeStageIdx);
+        return;
+      }
+
+      currentQuestion = stageQuestionsQueue.shift();
+      openCheckpointModal(currentQuestion);
+    }
+
+    function openCheckpointModal(qObj) {
       isModalOpen = true;
-      activeStageIdx = idx;
-      const m = missions[idx];
 
       document.getElementById("cp-badge").innerHTML = `
         <svg viewBox="0 0 24 24" width="16" height="16" fill="#854d0e"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-        CHECKPOINT ${idx + 1}
+        CHECKPOINT ${qObj.stage} (ข้อที่ ${qObj.qId}/20)
       `;
-      document.getElementById("cp-pts").innerText = `+${m.pts} คะแนน`;
-      document.getElementById("cp-q").innerText = m.q;
+      document.getElementById("cp-pts").innerText = `+${qObj.pts} คะแนน`;
+      document.getElementById("cp-q").innerText = qObj.q;
 
-      renderCheckpointTask(m, idx);
+      renderCheckpointTask(qObj);
 
       document.getElementById("checkpoint-modal").style.display = "flex";
       document.getElementById("knowledge-modal").style.display = "none";
     }
 
-    function renderCheckpointTask(m, stageIdx) {
+    function renderCheckpointTask(m) {
       const stageBox = document.getElementById("cp-minigame-area");
       stageBox.innerHTML = "";
 
@@ -1356,12 +1502,12 @@
               currentPairsSolved++;
 
               if (currentPairsSolved === m.pairs.length) {
-                setTimeout(() => submitCorrectTask(stageIdx), 300);
+                setTimeout(() => submitCorrectTask(m), 300);
               }
             } else {
               selectedMatchAction.classList.remove("selected");
               selectedMatchAction = null;
-              submitWrongTask(stageIdx);
+              submitWrongTask(m);
             }
           };
           colRight.appendChild(btnKey);
@@ -1380,8 +1526,8 @@
           btn.className = "ribbon-btn";
           btn.innerText = t;
           btn.onclick = () => {
-            if (t.includes(m.target)) submitCorrectTask(stageIdx);
-            else submitWrongTask(stageIdx);
+            if (t.includes(m.target)) submitCorrectTask(m);
+            else submitWrongTask(m);
           };
           ribbonDiv.appendChild(btn);
         });
@@ -1394,9 +1540,9 @@
             <div style="height:5px; background:#e2e8f0; width:100%; border-radius:4px; margin-top:6px;"></div>
           </div>
           <div style="display:flex; gap:8px;">
-            <button class="ribbon-btn" onclick="applyAlignment('left', ${stageIdx})">ชิดซ้าย</button>
-            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center', ${stageIdx})">กึ่งกลาง</button>
-            <button class="ribbon-btn" onclick="applyAlignment('right', ${stageIdx})">ชิดขวา</button>
+            <button class="ribbon-btn" onclick="applyAlignment('left')">ชิดซ้าย</button>
+            <button class="ribbon-btn" style="background:#e0f2fe; border-color:#38bdf8;" onclick="applyAlignment('center')">กึ่งกลาง</button>
+            <button class="ribbon-btn" onclick="applyAlignment('right')">ชิดขวา</button>
           </div>
         `;
       }
@@ -1412,9 +1558,9 @@
             cell.onclick = () => {
               highlightGrid(c, r);
               if (c === m.targetCols && r === m.targetRows) {
-                setTimeout(() => submitCorrectTask(stageIdx), 200);
+                setTimeout(() => submitCorrectTask(m), 200);
               } else {
-                setTimeout(() => submitWrongTask(stageIdx), 200);
+                setTimeout(() => submitWrongTask(m), 200);
               }
             };
             grid.appendChild(cell);
@@ -1437,8 +1583,52 @@
           btn.style.padding = "12px 18px";
           btn.innerText = opt;
           btn.onclick = () => {
-            if (opt.trim() === m.target.trim()) submitCorrectTask(stageIdx);
-            else submitWrongTask(stageIdx);
+            if (opt.trim() === m.target.trim()) submitCorrectTask(m);
+            else submitWrongTask(m);
+          };
+          choiceDiv.appendChild(btn);
+        });
+        stageBox.appendChild(choiceDiv);
+      }
+      else if (m.mode === "image_choice") {
+        // ตัวเลือกเป็นรูปภาพ
+        const imgGrid = document.createElement("div");
+        imgGrid.className = "image-choices-grid";
+
+        m.options.forEach(opt => {
+          const btn = document.createElement("div");
+          btn.className = "img-choice-btn";
+          btn.innerHTML = `${opt.svg}<span>${opt.label}</span>`;
+          btn.onclick = () => {
+            if (opt.id === m.target) submitCorrectTask(m);
+            else submitWrongTask(m);
+          };
+          imgGrid.appendChild(btn);
+        });
+        stageBox.appendChild(imgGrid);
+      }
+      else if (m.mode === "image_query") {
+        // โจทย์เป็นรูปภาพ และมีตัวเลือกข้อความ
+        const imgPreview = document.createElement("div");
+        imgPreview.className = "image-q-preview";
+        imgPreview.innerHTML = m.imageSvg;
+        stageBox.appendChild(imgPreview);
+
+        const choiceDiv = document.createElement("div");
+        choiceDiv.style.display = "flex";
+        choiceDiv.style.flexDirection = "column";
+        choiceDiv.style.gap = "10px";
+        choiceDiv.style.width = "100%";
+
+        m.opts.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "ribbon-btn";
+          btn.style.textAlign = "left";
+          btn.style.padding = "12px 18px";
+          btn.innerText = opt;
+          btn.onclick = () => {
+            if (opt.trim() === m.target.trim()) submitCorrectTask(m);
+            else submitWrongTask(m);
           };
           choiceDiv.appendChild(btn);
         });
@@ -1455,30 +1645,53 @@
       });
     }
 
-    function applyAlignment(type, stageIdx) {
+    function applyAlignment(type) {
       document.getElementById("sample-text").style.textAlign = type;
       if (type === "center") {
-        setTimeout(() => submitCorrectTask(stageIdx), 250);
+        setTimeout(() => submitCorrectTask(currentQuestion), 250);
       } else {
-        setTimeout(() => submitWrongTask(stageIdx), 250);
+        setTimeout(() => submitWrongTask(currentQuestion), 250);
       }
     }
 
-    function submitCorrectTask(stageIdx) {
-      const m = missions[stageIdx];
-
-      if (!checkpointFailedAttempts[stageIdx]) {
+    function submitCorrectTask(m) {
+      if (!questionFailedAttempts[m.qId]) {
         score += m.pts;
       }
+      solvedQuestionsCount++;
       playSuccessSound();
+      updateProgressHUD();
 
+      document.getElementById("checkpoint-modal").style.display = "none";
+      loadNextQuestionInStage();
+    }
+
+    function submitWrongTask(m) {
+      questionFailedAttempts[m.qId] = true;
+      playWrongSound();
+      showKnowledgeSheet(m);
+    }
+
+    function showKnowledgeSheet(m) {
+      document.getElementById("checkpoint-modal").style.display = "none";
+      document.getElementById("kn-subject").innerText = m.knTitle;
+      document.getElementById("kn-text").innerHTML = m.knText;
+      document.getElementById("knowledge-modal").style.display = "flex";
+    }
+
+    function retryMission() {
+      document.getElementById("knowledge-modal").style.display = "none";
+      openCheckpointModal(currentQuestion);
+    }
+
+    function finishStage(stageIdx) {
       checkpoints[stageIdx].passed = true;
       checkpoints[stageIdx].laser.material.color.setHex(0x10b981);
       checkpoints[stageIdx].laser.material.opacity = 0.15;
 
       currentStage = stageIdx + 1;
-      document.getElementById("hud-stage").innerText = `ด่าน ${Math.min(currentStage + 1, 12)} / 12`;
-      document.getElementById("hud-score").innerText = `${Number(score.toFixed(1))} / 20`;
+      updateProgressHUD();
+
       document.getElementById("checkpoint-modal").style.display = "none";
       isModalOpen = false;
 
@@ -1487,27 +1700,6 @@
       if (currentStage >= 12) {
         finishGame();
       }
-    }
-
-    function submitWrongTask(stageIdx) {
-      checkpointFailedAttempts[stageIdx] = true;
-      playWrongSound();
-      showKnowledgeSheet(stageIdx);
-    }
-
-    function showKnowledgeSheet(stageIdx) {
-      const m = missions[stageIdx];
-      document.getElementById("checkpoint-modal").style.display = "none";
-
-      document.getElementById("kn-subject").innerText = m.knTitle;
-      document.getElementById("kn-text").innerHTML = m.knText;
-
-      document.getElementById("knowledge-modal").style.display = "flex";
-    }
-
-    function retryMission() {
-      document.getElementById("knowledge-modal").style.display = "none";
-      openCheckpointModal(activeStageIdx);
     }
 
     function renderMinimap() {
