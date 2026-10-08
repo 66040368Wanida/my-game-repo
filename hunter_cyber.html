@@ -1174,7 +1174,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-    import { getDatabase, ref, set, update, onValue, push, remove, get } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+    import { getDatabase, ref, set, update, onValue, push, remove, get, onDisconnect } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA9RMnSd0hFU1g3dySplJI1wEkKZxERsc0",
@@ -1541,11 +1541,20 @@
       renderHostLiveTable();
     }
 
-    function startHostLobby() {
+    async function startHostLobby() {
       isHost = true;
-      window.switchScreen('view-host');
       currentPin = Math.floor(100000 + Math.random() * 900000).toString();
       document.getElementById('host-pin').innerText = currentPin;
+
+      try {
+        await set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
+      } catch (err) {
+        console.error("Firebase Room Create Error:", err);
+        alert(`ไม่สามารถสร้างห้องบน Firebase ได้ (${err.message})\nกรุณาตรวจ Rules ใน Firebase Console ว่าเปิดให้อ่านเขียนหรือยัง`);
+        return;
+      }
+
+      window.switchScreen('view-host');
 
       const joinUrl = window.location.origin + window.location.pathname + '?pin=' + currentPin;
       document.getElementById('qrcode').innerHTML = "";
@@ -1559,8 +1568,6 @@
         navigator.clipboard.writeText(joinUrl);
         showToast('คัดลอกลิงก์เรียบร้อย');
       };
-
-      set(ref(db, `rooms/${currentPin}`), { status: 'waiting' });
 
       onValue(ref(db, `rooms/${currentPin}/players`), (snap) => {
         allPlayersData = snap.val() || {};
@@ -1673,6 +1680,9 @@
           quizStats: myQuizAnswers
         });
 
+        // ลบข้อมูลออกเมื่อผู้เล่นหลุดจากการเชื่อมต่อ
+        onDisconnect(pRef).remove();
+
         document.getElementById('wait-pin').innerText = pin;
         document.getElementById('wait-name').innerText = name;
         window.switchScreen('view-waiting');
@@ -1719,8 +1729,8 @@
         });
 
       } catch (err) {
-        console.error(err);
-        alert('เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล');
+        console.error("Firebase Connect Error:", err);
+        alert(`เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล: ${err.message}\n(กรุณาตรวจการตั้งค่า Firebase Rules ในคอนโซล)`);
       } finally {
         btnJoin.disabled = false;
         btnJoin.innerText = "เข้าสู่ห้อง";
@@ -2322,7 +2332,7 @@
 
         platforms.push({ 
           x: x, 
-          baseX: baseStartX,
+          baseX: baseStartX, 
           y: lastY, 
           w: w, 
           h: 22, 
